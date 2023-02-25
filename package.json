@@ -32,7 +32,9 @@
     "singleQuote": true,
     "tabWidth": 2,
     "printWidth": 120,
-    "trailingComma": "all"
+    "trailingComma": "all",
+    "importOrderSeparation": true,
+    "importOrderSortSpecifiers": true
   },
   "name": "former",
   "author": "Valerio Ageno",
