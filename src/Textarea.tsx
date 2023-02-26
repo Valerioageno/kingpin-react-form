@@ -4,18 +4,16 @@ import React from 'react'
 
 const Textarea = forwardRef<InputEffect, TextareaHTMLAttributes<HTMLTextAreaElement>>(
   (props, ref): JSX.Element => {
-    const [state, setState] = useState<string>('')
+    const [state, setState] = useState<string | number | readonly string[]>(props.defaultValue || '')
 
     useImperativeHandle(ref, () => ({
       sendData(): Result {
-        return { name: props?.name || 'unset', value: state }
+        return { name: props?.name || 'former-textarea', value: state }
       },
     }))
 
     return (
-      <textarea {...props} value={state} onChange={(e): void => setState(e.target.value)}>
-        {props.children}
-      </textarea>
+      <textarea name="former-textarea" {...props} onChange={(e): void => setState(e.target.value)} />
     )
   },
 )

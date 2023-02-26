@@ -7,12 +7,11 @@ const Input = forwardRef<InputEffect,InputHTMLAttributes<HTMLInputElement>>((pro
 
     useImperativeHandle(ref, () => ({
         sendData(): {name: string, value: string } {
-            return {name: props?.name || 'unset', value: state}
+            return {name: props?.name || 'former-input', value: state}
         }
     }))
 
-    return <input {...props} value={state} onChange={(e): void=> setState(e.target.value)} />
-
+    return <input name="former-input" {...props} value={state} onChange={(e): void=> setState(e.target.value)} />
 })
 
 Input.displayName = 'FormerInput'

@@ -1,11 +1,11 @@
 import * as React from 'react'
 import * as ReactDOM from 'react-dom'
-import { Thing } from '../src'
+import { Form } from '../src'
 
-describe('it', () => {
-  it('renders without crashing', () => {
+describe('Form', () => {
+  it('render without crashing', () => {
     const div = document.createElement('div')
-    ReactDOM.render(<Thing />, div)
+    ReactDOM.render(<Form />, div)
     ReactDOM.unmountComponentAtNode(div)
   })
 })
