@@ -1,6 +1,6 @@
 import Form from './Form'
 import Input from './Input'
-import Textarea from './Textarea'
 import Select from './Select'
+import Textarea from './Textarea'
 
-export { Form, Input, Textarea, Select }
+export { Form, Input, Select, Textarea }

@@ -1,5 +1,5 @@
-import { SelectHTMLAttributes, forwardRef, useImperativeHandle, useState } from 'react'
 import type { InputEffect } from './types'
+import { SelectHTMLAttributes, forwardRef, useImperativeHandle, useState } from 'react'
 import React from 'react'
 
 const Select = forwardRef<InputEffect, SelectHTMLAttributes<HTMLSelectElement>>((props, ref): JSX.Element => {

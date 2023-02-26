@@ -1,5 +1,5 @@
-import { TextareaHTMLAttributes, forwardRef, useState, useImperativeHandle } from 'react'
-import { InputEffect, Result } from './types'
+import type { InputEffect, Result } from './types'
+import { TextareaHTMLAttributes, forwardRef, useImperativeHandle, useState } from 'react'
 import React from 'react'
 
 const Textarea = forwardRef<InputEffect, TextareaHTMLAttributes<HTMLTextAreaElement>>((props, ref): JSX.Element => {

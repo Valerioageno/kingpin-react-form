@@ -1,15 +1,15 @@
+import type { InputEffect, Value } from './types'
 import {
   Children,
-  cloneElement,
-  useRef,
-  HTMLAttributes,
   FormEvent,
-  ReactElement,
+  HTMLAttributes,
   JSXElementConstructor,
-  isValidElement,
+  ReactElement,
   ReactNode,
+  cloneElement,
+  isValidElement,
+  useRef,
 } from 'react'
-import type { InputEffect, Value } from './types'
 import React from 'react'
 
 type FormProps = Omit<HTMLAttributes<HTMLFormElement>, 'onSubmit'> & {
@@ -36,6 +36,7 @@ const FormerForm = (props: FormProps): JSX.Element => {
       // equal to (if (child == null || typeof child == 'string'))
       if (!isValidElement(child)) return child
 
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       return cloneElement(child as ReactElement<any, string | JSXElementConstructor<any>>, {
         ...child.props,
         // you can alse read child original className by child.props.className

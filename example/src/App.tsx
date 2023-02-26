@@ -1,5 +1,6 @@
-import { FormEvent } from 'react'
 import { Form, Input, Select, Textarea } from '../../.'
+import { FormEvent } from 'react'
+
 function App(): JSX.Element {
   const submit = (e: FormEvent<HTMLFormElement>, data: Record<string, string>) => {
     e.preventDefault()
