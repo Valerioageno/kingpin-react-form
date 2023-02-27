@@ -19,7 +19,8 @@
     "size": "size-limit",
     "analyze": "size-limit --why",
     "format": "prettier --write .",
-    "lint-staged": "lint-staged"
+    "lint-staged": "lint-staged",
+    "markdownlint": "markdownlint"
   },
   "peerDependencies": {
     "react": ">=16"
@@ -31,13 +32,13 @@
   },
   "lint-staged": {
     "*.@(ts|tsx|md|js)": [
-      "npm run format"
+      "yarn format"
     ],
     "*.@(ts|tsx|js)": [
-      "npm run eslint"
+      "yarn lint"
     ],
     "!(CHANGELOG).md": [
-      "npm run markdownlint"
+      "yarn markdownlint"
     ]
   },
   "name": "former",

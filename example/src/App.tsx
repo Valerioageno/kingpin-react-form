@@ -1,4 +1,4 @@
-import { Form, Input, Select, Textarea, Value } from '../../.'
+import { Form, Input, Radio, RadioGroup, Select, Textarea, Value } from '../../.'
 import { FormEvent } from 'react'
 
 function App(): JSX.Element {
@@ -38,6 +38,20 @@ function App(): JSX.Element {
           <option value="2">Two</option>
           <option value="3">Three</option>
         </Select>
+        <RadioGroup>
+          <div className="form-check">
+            <Radio className="form-check-input" type="radio" name="flexRadioDefault1" id="flexRadioDefault1" />
+            <label className="form-check-label" htmlFor="flexRadioDefault1">
+              Default radio
+            </label>
+          </div>
+          <div className="form-check">
+            <Radio className="form-check-input" type="radio" name="flexRadioDefault2" id="flexRadioDefault2" checked />
+            <label className="form-check-label" htmlFor="flexRadioDefault2">
+              Default checked radio
+            </label>
+          </div>
+        </RadioGroup>
         <button type="submit" className="btn btn-primary">
           Submit
         </button>

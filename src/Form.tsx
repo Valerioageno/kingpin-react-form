@@ -1,15 +1,6 @@
+import { iterateOverChildren } from './helpers'
 import type { InputEffect, Value } from './types'
-import {
-  Children,
-  FormEvent,
-  HTMLAttributes,
-  JSXElementConstructor,
-  ReactElement,
-  ReactNode,
-  cloneElement,
-  isValidElement,
-  useRef,
-} from 'react'
+import { FormEvent, HTMLAttributes, useRef } from 'react'
 import React from 'react'
 
 type FormProps = Omit<HTMLAttributes<HTMLFormElement>, 'onSubmit'> & {
@@ -31,24 +22,12 @@ const FormerForm = (props: FormProps): JSX.Element => {
     props?.onSubmit?.(e, data)
   }
 
-  const iterateOverChildren = (children: ReactNode): ReactNode => {
-    return Children.map(children, (child) => {
-      // equal to (if (child == null || typeof child == 'string'))
-      if (!isValidElement(child)) return child
-
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      return cloneElement(child as ReactElement<any, string | JSXElementConstructor<any>>, {
-        ...child.props,
-        // you can alse read child original className by child.props.className
-        ref: (ref: InputEffect) => (childrenRef.current[childrenRef.current.length] = ref),
-        children: iterateOverChildren(child.props.children),
-      })
-    })
-  }
-
   return (
     <form {...props} onSubmit={submitFunction}>
-      {iterateOverChildren(props.children)}
+      {iterateOverChildren(props.children, {
+        // TODO: Avoid ref on non-library elements
+        ref: (ref: InputEffect) => (childrenRef.current[childrenRef.current.length] = ref),
+      })}
     </form>
   )
 }

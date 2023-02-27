@@ -1,8 +1,7 @@
 {
-    "line-length": {
-      "line_length": 120
-    },
-    "ol-prefix": false,
-    "ignores": ["**/node_modules/*", "**/example/*", "**/test/*"]
-  }
-  
+  "line-length": {
+    "line_length": 120
+  },
+  "ol-prefix": false,
+  "ignores": ["**/node_modules/*", "**/example/*", "**/test/*"]
+}
