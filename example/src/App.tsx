@@ -1,8 +1,8 @@
-import { Form, Input, Select, Textarea } from '../../.'
+import { Form, Input, Select, Textarea, Value } from '../../.'
 import { FormEvent } from 'react'
 
 function App(): JSX.Element {
-  const submit = (e: FormEvent<HTMLFormElement>, data: Record<string, string>) => {
+  const submit = (e: FormEvent<HTMLFormElement>, data: Record<string, Value>) => {
     e.preventDefault()
     console.log(data)
   }
