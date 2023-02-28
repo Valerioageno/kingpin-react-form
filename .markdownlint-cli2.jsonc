@@ -1,0 +1,11 @@
+{
+  "config": {
+    "line-length": {
+      "line_length": 120
+    },
+    "single-title": false,
+    "ol-prefix": false
+  },
+  "fix": true,
+  "ignores": ["**/node_modules/*", "**/example/*", "**/test/*"]
+}

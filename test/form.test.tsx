@@ -1,4 +1,4 @@
-import { Form, Input, Select, Textarea, Value } from '../src'
+import { Form, Input, Radio, RadioGroup, Select, Textarea, Value } from '../src'
 import '@testing-library/jest-dom'
 import { fireEvent, render, screen } from '@testing-library/react'
 import * as React from 'react'
@@ -11,9 +11,8 @@ describe('Form', () => {
     expect(screen.getByTestId('form')).toBeVisible()
   })
 
-  it('Correct submit payload', () => {
+  it('Correct submit payload', async () => {
     let payload: Record<string, Value> = {}
-
     const submitFn = (e: React.FormEvent<HTMLFormElement>, data: Record<string, Value>): void => {
       e.preventDefault()
       payload = data
@@ -37,6 +36,14 @@ describe('Form', () => {
           <option value="2">Two</option>
           <option value="3">Three</option>
         </Select>
+        <RadioGroup>
+          <Radio name="radio1" data-testid="radio1" />
+          <Radio checked name="radio2" />
+        </RadioGroup>
+        <RadioGroup>
+          <Radio checked name="radio3" />
+          <Radio name="radio4" />
+        </RadioGroup>
         <button type="submit" data-testid="submit">
           submit
         </button>
@@ -52,6 +59,10 @@ describe('Form', () => {
       textarea2: '',
       select1: '',
       select2: '',
+      radio1: false,
+      radio2: true,
+      radio3: true,
+      radio4: false,
     })
 
     fireEvent.change(screen.getByTestId('email'), { target: { value: 'hey@former.com' } })
@@ -60,6 +71,8 @@ describe('Form', () => {
     fireEvent.change(screen.getByTestId('textarea2'), { target: { value: 'test textarea 2' } })
     fireEvent.change(screen.getByTestId('select1'), { target: { value: '1' } })
     fireEvent.change(screen.getByTestId('select2'), { target: { value: '3' } })
+
+    fireEvent.click(screen.getByTestId('radio1'))
 
     fireEvent.click(screen.getByTestId('submit'))
 
@@ -70,6 +83,10 @@ describe('Form', () => {
       textarea2: 'test textarea 2',
       select1: '1',
       select2: '3',
+      radio1: true,
+      radio2: false,
+      radio3: true,
+      radio4: false,
     })
   })
 })

@@ -20,7 +20,7 @@
     "analyze": "size-limit --why",
     "format": "prettier --write .",
     "lint-staged": "lint-staged",
-    "markdownlint": "markdownlint"
+    "markdownlint": "markdownlint-cli2"
   },
   "peerDependencies": {
     "react": ">=16"
@@ -73,7 +73,7 @@
     "eslint-plugin-unused-imports": "^2.0.0",
     "husky": "^8.0.3",
     "lint-staged": "^13.1.2",
-    "markdownlint": "^0.27.0",
+    "markdownlint-cli2": "^0.6.0",
     "prettier": "^2.8.4",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
