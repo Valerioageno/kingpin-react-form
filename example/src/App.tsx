@@ -38,7 +38,7 @@ function App(): JSX.Element {
           <option value="2">Two</option>
           <option value="3">Three</option>
         </Select>
-        <RadioGroup>
+        <RadioGroup name="radio-group">
           <div className="form-check">
             <Radio className="form-check-input" type="radio" name="flexRadioDefault1" id="flexRadioDefault1" />
             <label className="form-check-label" htmlFor="flexRadioDefault1">

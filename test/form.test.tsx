@@ -36,11 +36,11 @@ describe('Form', () => {
           <option value="2">Two</option>
           <option value="3">Three</option>
         </Select>
-        <RadioGroup>
+        <RadioGroup name="radio-group-1">
           <Radio name="radio1" data-testid="radio1" />
           <Radio checked name="radio2" />
         </RadioGroup>
-        <RadioGroup>
+        <RadioGroup name="radio-group-2">
           <Radio checked name="radio3" />
           <Radio name="radio4" />
         </RadioGroup>
@@ -59,10 +59,8 @@ describe('Form', () => {
       textarea2: '',
       select1: '',
       select2: '',
-      radio1: false,
-      radio2: true,
-      radio3: true,
-      radio4: false,
+      'radio-group-1': 'radio2',
+      'radio-group-2': 'radio3',
     })
 
     fireEvent.change(screen.getByTestId('email'), { target: { value: 'hey@former.com' } })
@@ -72,7 +70,7 @@ describe('Form', () => {
     fireEvent.change(screen.getByTestId('select1'), { target: { value: '1' } })
     fireEvent.change(screen.getByTestId('select2'), { target: { value: '3' } })
 
-    fireEvent.click(screen.getByTestId('radio1'))
+    fireEvent.change(screen.getByTestId('radio1'), { target: { value: 'a' } })
 
     fireEvent.click(screen.getByTestId('submit'))
 
@@ -83,10 +81,8 @@ describe('Form', () => {
       textarea2: 'test textarea 2',
       select1: '1',
       select2: '3',
-      radio1: true,
-      radio2: false,
-      radio3: true,
-      radio4: false,
+      'radio-group-1': 'radio1',
+      'radio-group-2': 'radio3',
     })
   })
 })
