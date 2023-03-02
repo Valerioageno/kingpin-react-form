@@ -1,6 +1,6 @@
 import { iterateOverChildren } from './helpers'
 import type { InputEffect, Value } from './types'
-import { FormEvent, HTMLAttributes, useRef } from 'react'
+import { FormEvent, HTMLAttributes, PropsWithRef, useRef } from 'react'
 import React from 'react'
 
 type FormProps = Omit<HTMLAttributes<HTMLFormElement>, 'onSubmit'> & {
@@ -22,12 +22,18 @@ const FormerForm = (props: FormProps): JSX.Element => {
     props?.onSubmit?.(e, data)
   }
 
+  const customProps = (componentName: string): PropsWithRef<unknown> => {
+    if (componentName.startsWith('Former')) {
+      return {
+        ref: (ref: InputEffect) => (childrenRef.current[childrenRef.current.length] = ref),
+      }
+    }
+    return {}
+  }
+
   return (
     <form {...props} onSubmit={submitFunction}>
-      {iterateOverChildren(props.children, {
-        // TODO: Avoid ref on non-library elements
-        ref: (ref: InputEffect) => (childrenRef.current[childrenRef.current.length] = ref),
-      })}
+      {iterateOverChildren(props.children, customProps)}
     </form>
   )
 }

@@ -12,20 +12,22 @@ import {
   useLayoutEffect,
 } from 'react'
 
-export const iterateOverChildren = <T,>(children: ReactNode, customProps: PropsWithRef<T>): ReactNode => {
+export const iterateOverChildren = <T,>(
+  children: ReactNode,
+  customProps: (componentName: string) => PropsWithRef<T>,
+): ReactNode => {
   return Children.map(children, (child) => {
     // equal to (if (child == null || typeof child == 'string'))
     if (!isValidElement(child)) return child
 
     // TODO: fix this crap
-    const displayName: string | undefined = (child.type as unknown as { render: { displayName: '' } })?.render
-      ?.displayName
+    const displayName: string | undefined =
+      (child.type as unknown as { render: { displayName: '' } })?.render?.displayName || ''
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     return cloneElement(child as ReactElement<any, string | JSXElementConstructor<any>>, {
       ...child.props,
-      ...customProps,
-      // TODO: Avoid propagation on RadioGroup children
+      ...customProps(displayName),
       children: displayName?.startsWith('Former')
         ? child.props.children
         : iterateOverChildren(child.props.children, customProps),
