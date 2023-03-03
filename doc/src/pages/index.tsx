@@ -6,6 +6,7 @@ import Layout from '@theme/Layout'
 import clsx from 'clsx'
 import React from 'react'
 
+// TODO: make website available for different translations
 function HomepageHeader(): JSX.Element {
   const { siteConfig } = useDocusaurusContext()
   return (
