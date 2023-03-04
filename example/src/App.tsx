@@ -1,4 +1,4 @@
-import { Form, Input, Radio, RadioGroup, Select, Textarea, Value } from '../../.'
+import { Checkbox, Form, Input, Radio, RadioGroup, Select, Textarea, Value } from '../../.'
 import { FormEvent } from 'react'
 
 function App(): JSX.Element {
@@ -10,6 +10,7 @@ function App(): JSX.Element {
     <div className="container py-4 px-3 mx-auto">
       <h1 className="text-primary">Form Example</h1>
       <Form onSubmit={submit}>
+        <h3>Inputs</h3>
         <div className="mb-3">
           <label htmlFor="exampleInputEmail1" className="form-label">
             Email address
@@ -28,16 +29,19 @@ function App(): JSX.Element {
           </label>
           <Input name="password" type="password" className="form-control" id="exampleInputPassword1" />
         </div>
+        <h3>Textarea</h3>
         <div className="form-floating mb-3">
           <Textarea name="comments" className="form-control" placeholder="Leave a comment here" id="floatingTextarea" />
           <label htmlFor="floatingTextarea">Comments</label>
         </div>
+        <h3>Select</h3>
         <Select name="number-selector" className="form-select mb-3" value="0" aria-label="Default select example">
           <option value="0">Open this select menu</option>
           <option value="1">One</option>
           <option value="2">Two</option>
           <option value="3">Three</option>
         </Select>
+        <h3>Radios</h3>
         <RadioGroup name="radio-group">
           <div className="form-check">
             <Radio className="form-check-input" type="radio" name="flexRadioDefault1" id="flexRadioDefault1" />
@@ -52,7 +56,14 @@ function App(): JSX.Element {
             </label>
           </div>
         </RadioGroup>
-        <button type="submit" className="btn btn-primary">
+        <h3>Checkboxes</h3>
+        <div className="form-check">
+          <Checkbox className="form-check-input" type="checkbox" name="checkbox" id="flexCheckDefault" />
+          <label className="form-check-label" htmlFor="flexCheckDefault">
+            Default checkbox
+          </label>
+        </div>
+        <button type="submit" className="btn btn-primary mt-3">
           Submit
         </button>
       </Form>

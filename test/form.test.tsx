@@ -1,4 +1,4 @@
-import { Form, Input, Radio, RadioGroup, Select, Textarea, Value } from '../src'
+import { Checkbox, Form, Input, Radio, RadioGroup, Select, Textarea, Value } from '../src'
 import '@testing-library/jest-dom'
 import { fireEvent, render, screen } from '@testing-library/react'
 import * as React from 'react'
@@ -44,6 +44,8 @@ describe('Form', () => {
           <Radio checked name="radio3" />
           <Radio name="radio4" />
         </RadioGroup>
+        <Checkbox name="checkbox1" checked data-testid="checkbox1" />
+        <Checkbox name="checkbox2" data-testid="checkbox2" />
         <button type="submit" data-testid="submit">
           submit
         </button>
@@ -61,6 +63,8 @@ describe('Form', () => {
       select2: '',
       'radio-group-1': 'radio2',
       'radio-group-2': 'radio3',
+      checkbox1: true,
+      checkbox2: false,
     })
 
     fireEvent.change(screen.getByTestId('email'), { target: { value: 'hey@former.com' } })
@@ -71,6 +75,8 @@ describe('Form', () => {
     fireEvent.change(screen.getByTestId('select2'), { target: { value: '3' } })
 
     fireEvent.change(screen.getByTestId('radio1'), { target: { value: 'a' } })
+    fireEvent.change(screen.getByTestId('checkbox1'), { target: { value: 'a' } })
+    fireEvent.change(screen.getByTestId('checkbox2'), { target: { value: 'a' } })
 
     fireEvent.click(screen.getByTestId('submit'))
 
@@ -83,6 +89,8 @@ describe('Form', () => {
       select2: '3',
       'radio-group-1': 'radio1',
       'radio-group-2': 'radio3',
+      checkbox1: false,
+      checkbox2: true,
     })
   })
 })
