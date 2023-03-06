@@ -14,6 +14,7 @@ Super fast forms on react with almost null overhead.
 - 😎 Declarative and easy to read
 - 🔫 Battle tested
 - 🔌 Pluggable
+- 🔖 Design System ready
 
 ## In few lines
 
