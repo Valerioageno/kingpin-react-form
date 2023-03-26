@@ -6,7 +6,7 @@ import React from 'react'
 
 type InputProps = InputHTMLAttributes<HTMLInputElement>
 
-const Radio = forwardRef<InputEffect, InputProps>((props, ref): JSX.Element => {
+const Radio = forwardRef<InputEffect<boolean>, InputProps>((props, ref): JSX.Element => {
   const { selected, setSelected } = useRadioGroupContext()
 
   useIsomorphicEffect(() => {
@@ -22,7 +22,7 @@ const Radio = forwardRef<InputEffect, InputProps>((props, ref): JSX.Element => {
   useImperativeHandle(
     ref,
     () => ({
-      sendData(): Result {
+      sendData(): Result<boolean> {
         return { name: props?.name || 'former-radio', value: selected === props.name }
       },
     }),

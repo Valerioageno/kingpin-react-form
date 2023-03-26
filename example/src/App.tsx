@@ -21,13 +21,14 @@ function App(): JSX.Element {
             className="form-control"
             id="exampleInputEmail1"
             aria-describedby="emailHelp"
+            defaultValue=""
           />
         </div>
         <div className="mb-3">
           <label htmlFor="exampleInputPassword1" className="form-label">
             Password
           </label>
-          <Input name="password" type="password" className="form-control" id="exampleInputPassword1" />
+          <Input name="password" type="password" className="form-control" id="exampleInputPassword1" defaultValue="" />
         </div>
         <h3>Textarea</h3>
         <div className="form-floating mb-3">

@@ -14,13 +14,13 @@ type ContextType = {
 
 const RadioGroup = createContext<ContextType>({})
 
-const RadioGroupContext = forwardRef<InputEffect, RadioGroupProps>((props, ref): JSX.Element => {
+const RadioGroupContext = forwardRef<InputEffect<string>, RadioGroupProps>((props, ref): JSX.Element => {
   const [selected, setSelected] = useState<string>('')
 
   useImperativeHandle(
     ref,
     () => ({
-      sendData(): Result {
+      sendData(): Result<string> {
         return { name: props.name || 'former-radio-group', value: selected }
       },
     }),

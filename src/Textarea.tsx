@@ -2,13 +2,16 @@ import type { InputEffect, Result } from './types'
 import { TextareaHTMLAttributes, forwardRef, useImperativeHandle, useState } from 'react'
 import React from 'react'
 
-const Textarea = forwardRef<InputEffect, TextareaHTMLAttributes<HTMLTextAreaElement>>((props, ref): JSX.Element => {
+const Textarea = forwardRef<
+  InputEffect<string | number | readonly string[]>,
+  TextareaHTMLAttributes<HTMLTextAreaElement>
+>((props, ref): JSX.Element => {
   const [state, setState] = useState<string | number | readonly string[]>(props.defaultValue || '')
 
   useImperativeHandle(
     ref,
     () => ({
-      sendData(): Result {
+      sendData(): Result<string | number | readonly string[]> {
         return { name: props?.name || 'former-textarea', value: state }
       },
     }),

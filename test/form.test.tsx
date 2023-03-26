@@ -20,8 +20,8 @@ describe('Form', () => {
 
     render(
       <Form onSubmit={submitFn}>
-        <Input name="email" type="email" data-testid="email" />
-        <Input name="password" type="password" data-testid="password" />
+        <Input name="email" type="email" data-testid="email" defaultValue="" />
+        <Input name="password" type="password" data-testid="password" defaultValue="" />
         <Textarea name="textarea1" data-testid="textarea1" />
         <Textarea name="textarea2" data-testid="textarea2" />
         <Select name="select1" data-testid="select1">
