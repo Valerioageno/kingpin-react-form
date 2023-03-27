@@ -7,8 +7,9 @@ export type WithFormerType<T> = {
 
 type WithFormerProps<T> = {
   name: string
-  defaultValue: T
+  initialValue: T
 }
+
 export default function withFormer<T, State>(
   WrappedComponent: ComponentType<T>,
 ): ForwardRefExoticComponent<
@@ -17,7 +18,7 @@ export default function withFormer<T, State>(
   const displayName = WrappedComponent?.displayName || WrappedComponent?.name || 'Component'
 
   const ComponentWithFormer = forwardRef<InputEffect<State>, T & WithFormerProps<State>>((props, ref) => {
-    const [state, setState] = useState<State>(props.defaultValue)
+    const [state, setState] = useState<State>(props.initialValue)
 
     useImperativeHandle(ref, () => ({
       sendData(): Result<State> {
