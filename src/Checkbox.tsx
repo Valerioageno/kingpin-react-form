@@ -19,7 +19,7 @@ const Checkbox = forwardRef<InputEffect<boolean>, InputProps>((props, ref): JSX.
 
   return (
     <input
-      name="former-radio"
+      name="former-checkbox"
       {...props}
       checked={value}
       onChange={(e): void => {
