@@ -21,22 +21,34 @@ function App(): JSX.Element {
             className="form-control"
             id="exampleInputEmail1"
             aria-describedby="emailHelp"
-            defaultValue=""
+            initialValue=""
           />
         </div>
         <div className="mb-3">
           <label htmlFor="exampleInputPassword1" className="form-label">
             Password
           </label>
-          <Input name="password" type="password" className="form-control" id="exampleInputPassword1" defaultValue="" />
+          <Input name="password" type="password" className="form-control" id="exampleInputPassword1" initialValue="" />
         </div>
         <h3>Textarea</h3>
         <div className="form-floating mb-3">
-          <Textarea name="comments" className="form-control" placeholder="Leave a comment here" id="floatingTextarea" />
+          <Textarea
+            name="comments"
+            className="form-control"
+            placeholder="Leave a comment here"
+            id="floatingTextarea"
+            initialValue=""
+          />
           <label htmlFor="floatingTextarea">Comments</label>
         </div>
         <h3>Select</h3>
-        <Select name="number-selector" className="form-select mb-3" value="0" aria-label="Default select example">
+        <Select
+          name="number-selector"
+          className="form-select mb-3"
+          value="0"
+          aria-label="Default select example"
+          initialValue=""
+        >
           <option value="0">Open this select menu</option>
           <option value="1">One</option>
           <option value="2">Two</option>
