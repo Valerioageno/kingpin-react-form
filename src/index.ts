@@ -6,6 +6,7 @@ import RadioGroup from './RadioGroup'
 import Select from './Select'
 import Textarea from './Textarea'
 import type { Value } from './types'
+import withFormer from './withFormer'
 
 export type { Value }
-export { Checkbox, Form, Input, Radio, RadioGroup, Select, Textarea }
+export { Checkbox, Form, Input, Radio, RadioGroup, Select, Textarea, withFormer }

@@ -1,4 +1,5 @@
 import { Checkbox, Form, Input, Radio, RadioGroup, Select, Textarea, Value } from '../../.'
+import WithHOCSelect from './select'
 import { FormEvent } from 'react'
 
 function App(): JSX.Element {
@@ -30,6 +31,7 @@ function App(): JSX.Element {
           </label>
           <Input name="password" type="password" className="form-control" id="exampleInputPassword1" initialValue="" />
         </div>
+        <WithHOCSelect name="with-former-select" initialValue={null} />
         <h3>Textarea</h3>
         <div className="form-floating mb-3">
           <Textarea

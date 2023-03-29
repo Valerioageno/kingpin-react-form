@@ -1,0 +1,164 @@
+---
+sidebar_position: 3
+---
+
+import TabItem from '@theme/TabItem'
+import Tabs from '@theme/Tabs'
+
+# withFormer
+
+Modern forms require more than just `<input />` and `<textarea />` components.
+
+Former plan is to add pluggable external components like `Typeaheads`, `Slider`, `Dropdown` ecc.
+specifically desinged and developed to work within a Former `Form`.
+
+Since it's basically impossible cover all the cases Former allows the creation of custom
+components with the `withFormer` HOC.
+
+Follow the next example to learn how to use the `withFormer` HOC.
+
+## Example: Former and react-select
+
+Let's say that for our form we need an "enhanced" select component (compared to the plain HTML `<select />`)
+and for this reason we decide to use [react-select](https://github.com/jedwatson/react-select) (you can use
+whatever third part component or event build your own).
+
+After having installed react-select with your favourite package manager let's create the new custom component.
+
+<Tabs>
+<TabItem value="typescript" label="Typescript">
+
+```tsx
+import { useState } from 'react'
+import { withFormer } from 'react-former'
+import Select, { SingleValue } from 'react-select'
+
+type Option = { value: string; label: string }
+
+const options: Option[] = [
+  { value: 'chocolate', label: 'Chocolate' },
+  { value: 'strawberry', label: 'Strawberry' },
+  { value: 'vanilla', label: 'Vanilla' },
+]
+
+type CustomSelectProps = {
+  updateState: (val: SingleValue<Option>) => void
+  initialValue: SingleValue<Option>
+}
+
+function CustomSelect({ updateState, initialValue }: CustomSelectProps): JSX.Element {
+  const [selectedOption, setSelectedOption] = useState<SingleValue<Option>>(initialValue)
+
+  return (
+    <div className="App">
+      <Select
+        defaultValue={selectedOption}
+        onChange={(val) => {
+          setSelectedOption(val)
+          updateState(val)
+        }}
+        options={options}
+      />
+    </div>
+  )
+}
+
+export default withFormer<CustomSelectProps, SingleValue<Option>>(CustomSelect)
+```
+
+</TabItem>
+<TabItem value="javascript" label="Javascript">
+
+```jsx
+import { useState } from 'react'
+import { withFormer } from 'react-former'
+import Select from 'react-select'
+
+const options = [
+  { value: 'chocolate', label: 'Chocolate' },
+  { value: 'strawberry', label: 'Strawberry' },
+  { value: 'vanilla', label: 'Vanilla' },
+]
+
+function CustomSelect({ updateState, initialValue }) {
+  const [selectedOption, setSelectedOption] = useState(initialValue)
+
+  return (
+    <div className="App">
+      <Select
+        defaultValue={selectedOption}
+        onChange={(val) => {
+          setSelectedOption(val)
+          updateState(val)
+        }}
+        options={options}
+      />
+    </div>
+  )
+}
+
+export default withFormer(CustomSelect)
+```
+
+</TabItem>
+</Tabs>
+
+Now we are ready to use our new component within our `Form` component.
+
+<Tabs>
+<TabItem value="typescript" label="Typescript">
+
+```tsx
+import CustomSelect './Select'
+import type { FormEvent } from 'react'
+import { Form, Value } from 'react-former'
+
+function App(): JSX.Element {
+  const submit = (e: FormEvent<HTMLFormElement>, data: Record<string, Value>) => {
+    e.preventDefault()
+    console.log(data)
+
+    // data: {
+    //     hoc-select: null
+    // }
+  }
+
+  return (
+    <Form onSubmit={submit}>
+      <Select name="hoc-select" initialValue={null} />
+      <button type="submit">Submit</button>
+    </Form>
+  )
+}
+
+```
+
+</TabItem>
+<TabItem value="javascript" label="Javascript">
+
+```jsx
+import CustomSelect './Select'
+import { Form } from 'react-former'
+
+
+function App(): JSX.Element {
+  const submit = (e, data) => {
+    e.preventDefault()
+    console.log(data)
+
+    // data: {
+    //     hoc-select: null
+    // }
+  }
+
+  return (
+    <Form onSubmit={submit}>
+      <Select name="hoc-select" initialValue={null} />
+      <button type="submit">Submit</button>
+    </Form>
+  )
+}
+```
+
+</TabItem>
+</Tabs>
