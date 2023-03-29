@@ -13,6 +13,7 @@ const options: Option[] = [
 type CustomSelectProps = {
   updateState: (val: SingleValue<Option>) => void
   initialValue: SingleValue<Option>
+  randomProp: number
 }
 
 function CustomSelect({ updateState, initialValue }: CustomSelectProps): JSX.Element {

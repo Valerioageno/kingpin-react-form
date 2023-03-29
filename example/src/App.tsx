@@ -31,7 +31,7 @@ function App(): JSX.Element {
           </label>
           <Input name="password" type="password" className="form-control" id="exampleInputPassword1" initialValue="" />
         </div>
-        <WithHOCSelect name="with-former-select" initialValue={null} />
+        <WithHOCSelect name="with-former-select" initialValue={null} randomProp={10} />
         <h3>Textarea</h3>
         <div className="form-floating mb-3">
           <Textarea

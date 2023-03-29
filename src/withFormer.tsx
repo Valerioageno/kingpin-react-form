@@ -27,7 +27,13 @@ export default function withFormer<T, State>(
         },
       }))
 
-      return <WrappedComponent {...(props as T)} value={state} updateState={(val: State): void => setState(val)} />
+      return (
+        <WrappedComponent
+          {...(props as unknown as T)}
+          value={state}
+          updateState={(val: State): void => setState(val)}
+        />
+      )
     },
   )
 
