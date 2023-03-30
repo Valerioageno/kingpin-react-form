@@ -3,7 +3,7 @@
 ![ts](https://badgen.net/badge/-/TypeScript/blue?icon=typescript&label)
 ![CI](https://github.com/Valerioageno/former/actions/workflows/main.yml/badge.svg)
 
-Super fast ReactJS forms on react with almost null overhead.
+Super fast ReactJS forms with almost null overhead.
 
 ## Features
 
