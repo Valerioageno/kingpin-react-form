@@ -1,4 +1,4 @@
-import { Checkbox, Form, Input, Radio, RadioGroup, Select, Textarea, Value } from '../../.'
+import { Form, Input, Radio, RadioGroup, Select, Textarea, Value } from '../../.'
 import WithHOCSelect from './select'
 import { FormEvent } from 'react'
 
@@ -73,7 +73,13 @@ function App(): JSX.Element {
         </RadioGroup>
         <h3>Checkboxes</h3>
         <div className="form-check">
-          <Checkbox className="form-check-input" type="checkbox" name="checkbox" id="flexCheckDefault" />
+          <Input
+            className="form-check-input"
+            type="checkbox"
+            name="checkbox"
+            id="flexCheckDefault"
+            initialValue={true}
+          />
           <label className="form-check-label" htmlFor="flexCheckDefault">
             Default checkbox
           </label>

@@ -1,8 +1,33 @@
 import withFormer, { WithFormerType } from './withFormer'
-import React, { InputHTMLAttributes } from 'react'
+import React, { ChangeEvent, InputHTMLAttributes } from 'react'
 
-const FormerInput = (props: InputHTMLAttributes<HTMLInputElement> & WithFormerType<string>): JSX.Element => (
-  <input name="former-input" {...props} onChange={(e): void => props?.updateState?.(e.target.value)} />
-)
+type ReturnTypes = string | number | boolean
 
-export default withFormer<InputHTMLAttributes<HTMLInputElement> & WithFormerType<string>, string>(FormerInput)
+const FormerInput = (props: InputHTMLAttributes<HTMLInputElement> & WithFormerType<ReturnTypes>): JSX.Element => {
+  const onChange = (e: ChangeEvent<HTMLInputElement>): void => {
+    props.onChange?.(e)
+
+    switch (props.type) {
+      case 'number':
+        props.updateState?.(+e.target.value)
+        break
+      case 'checkbox':
+        props.updateState?.(!props.value)
+        break
+      default:
+        props.updateState?.(e.target.value)
+    }
+  }
+
+  return (
+    <input
+      name="former-input"
+      {...props}
+      value={props.value}
+      checked={props.type === 'checkbox' ? (props.value as unknown as boolean) : undefined}
+      onChange={onChange}
+    />
+  )
+}
+
+export default withFormer<InputHTMLAttributes<HTMLInputElement> & WithFormerType<ReturnTypes>, ReturnTypes>(FormerInput)

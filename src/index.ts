@@ -1,4 +1,3 @@
-import Checkbox from './Checkbox'
 import Form from './Form'
 import Input from './Input'
 import Radio from './Radio'
@@ -9,4 +8,4 @@ import type { Value } from './types'
 import withFormer from './withFormer'
 
 export type { Value }
-export { Checkbox, Form, Input, Radio, RadioGroup, Select, Textarea, withFormer }
+export { Form, Input, Radio, RadioGroup, Select, Textarea, withFormer }
