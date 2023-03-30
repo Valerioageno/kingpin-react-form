@@ -12,7 +12,7 @@ Modern forms require more than just `<input />` and `<textarea />` components.
 Former plan is to add pluggable external components like `Typeaheads`, `Slider`, `Dropdown` ecc.
 specifically desinged and developed to work within a Former `Form`.
 
-Since it's basically impossible cover all the cases Former allows the creation of custom
+In order to make Former extensible by anyone it's possible create custom
 components with the `withFormer` HOC.
 
 Follow the next example to learn how to use the `withFormer` HOC.
@@ -29,6 +29,7 @@ After having installed react-select with your favourite package manager let's cr
 <TabItem value="typescript" label="Typescript">
 
 ```tsx
+// File: ./Select.tsx
 import { useState } from 'react'
 import { withFormer } from 'react-former'
 import Select, { SingleValue } from 'react-select'
@@ -70,6 +71,7 @@ export default withFormer<CustomSelectProps, SingleValue<Option>>(CustomSelect)
 <TabItem value="javascript" label="Javascript">
 
 ```jsx
+// File: ./Select.tsx
 import { useState } from 'react'
 import { withFormer } from 'react-former'
 import Select from 'react-select'
@@ -109,6 +111,7 @@ Now we are ready to use our new component within our `Form` component.
 <TabItem value="typescript" label="Typescript">
 
 ```tsx
+// File: ./App.tsx
 import CustomSelect './Select'
 import type { FormEvent } from 'react'
 import { Form, Value } from 'react-former'
@@ -125,7 +128,7 @@ function App(): JSX.Element {
 
   return (
     <Form onSubmit={submit}>
-      <Select name="hoc-select" initialValue={null} />
+      <CustomSelect name="hoc-select" initialValue={null} />
       <button type="submit">Submit</button>
     </Form>
   )
@@ -137,6 +140,7 @@ function App(): JSX.Element {
 <TabItem value="javascript" label="Javascript">
 
 ```jsx
+// File: ./App.tsx
 import CustomSelect './Select'
 import { Form } from 'react-former'
 
@@ -153,7 +157,7 @@ function App(): JSX.Element {
 
   return (
     <Form onSubmit={submit}>
-      <Select name="hoc-select" initialValue={null} />
+      <CustomSelect name="hoc-select" initialValue={null} />
       <button type="submit">Submit</button>
     </Form>
   )

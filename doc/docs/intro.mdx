@@ -1,3 +1,10 @@
+---
+sidebar_position: 1
+---
+
+import TabItem from '@theme/TabItem'
+import Tabs from '@theme/Tabs'
+
 # Former
 
 Super fast ReactJS forms on react with almost null overhead.
@@ -26,38 +33,34 @@ The SRP let each field to render independently without causing unhandled re-rend
 The main `<Form />` component is the **only** interface for managing user set data, this choice in order to
 lead to a better forms develop and managing all the data in a single place.
 
-Read more in the documentation.
+By the nature of Former this library is useful for sharing a components in a desing systems that includes also the
+inputs elements.
 
-## Getting started
+## Why a new form library?
 
-Install the package with your favourite package manager.
+Currently implementations are quite verbose causing a confusing DX and in
+some case they use uncontrolled components which is the
+[unrecommended](https://reactjs.org/docs/uncontrolled-components.html)
+way to handle forms in React.
 
-```bash
-npm i react-former
-```
+In most cases using uncontrolled components causes re-renders in unexpected
+actions like the submit (?).
 
-```bash
-yarn add react-former
-```
+Among the other reasons Former wants to let the developer to write forms in the
+better React way possible handling the re-renders in a declarative way.
 
-Then create your form.
+## How hard is writing Former's forms?
+
+In short... easy like a pie.
+
+<Tabs>
+<TabItem value="typescript" label="Typescript">
 
 ```tsx
 import { FormEvent } from 'react'
 import { Form, Input, Value } from 'react-former'
 
 function App(): JSX.Element {
-  const submit = (e: FormEvent<HTMLFormElement>, data: Record<string, Value>) => {
-    e.preventDefault()
-    console.log(data)
-
-    // data: {
-    //     email: "",
-    //     password: ""
-    //     terms-acceptance: true
-    // }
-  }
-
   return (
     <Form onSubmit={submit}>
       <Input name="email" type="email" initialValue="" />
@@ -69,7 +72,28 @@ function App(): JSX.Element {
 }
 ```
 
-Easy like a pie.
+</TabItem>
+<TabItem value="javascript" label="Javascript">
+
+```jsx
+import { Form, Input } from 'react-former'
+
+function App() {
+  return (
+    <Form onSubmit={submit}>
+      <Input name="email" type="email" initialValue="" />
+      <Input name="password" type="password" initialValue="" />
+      <Input name="terms-acceptance" type="checkbox" initialValue={true} />
+      <button type="submit">Submit</button>
+    </Form>
+  )
+}
+```
+
+</TabItem>
+</Tabs>
+
+Check the next page for more details.
 
 ## Key concept
 
@@ -86,15 +110,3 @@ Thanks to them the `<Form />` is now able to easily handle the internal state, b
 `<Form />` is "**just**" a simple html `<form>`, so you can use it as usual. The most important
 difference is that the `onSubmit` event now has to function arguments: the "classic" event and an object
 which is the `key:value` representation of its content.
-
-## Extend Former inputs
-
-Modern forms require more than just `<input />` and `<textarea />` components.
-
-Former plan is to add pluggable external components like `Typeaheads`, `Slider`, `Dropdown` ecc.
-specifically desinged and developed to work within a Former `Form`.
-
-In order to make Former extensible by anyone it's possible create custom
-components with the `withFormer` HOC.
-
-To see how it works with a real example check the documentation.
