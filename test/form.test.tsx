@@ -37,12 +37,12 @@ describe('Form', () => {
           <option value="3">Three</option>
         </Select>
         <RadioGroup name="radio-group-1">
-          <Radio name="radio1" data-testid="radio1" />
-          <Radio checked name="radio2" />
+          <Radio name="radio1" data-testid="radio1" initialValue={false} />
+          <Radio name="radio2" initialValue={true} />
         </RadioGroup>
         <RadioGroup name="radio-group-2">
-          <Radio checked name="radio3" />
-          <Radio name="radio4" />
+          <Radio name="radio3" initialValue={true} />
+          <Radio name="radio4" initialValue={false} />
         </RadioGroup>
         <Input name="checkbox1" type="checkbox" data-testid="checkbox1" initialValue />
         <Input name="checkbox2" type="checkbox" data-testid="checkbox2" initialValue={false} />
@@ -78,7 +78,7 @@ describe('Form', () => {
     fireEvent.change(screen.getByTestId('select1'), { target: { value: '1' } })
     fireEvent.change(screen.getByTestId('select2'), { target: { value: '3' } })
 
-    fireEvent.change(screen.getByTestId('radio1'), { target: { value: 'a' } })
+    fireEvent.click(screen.getByTestId('radio1'))
     fireEvent.click(screen.getByTestId('checkbox1'))
     fireEvent.click(screen.getByTestId('checkbox2'))
     fireEvent.change(screen.getByTestId('number1'), { target: { value: '40' } })
