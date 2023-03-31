@@ -5,7 +5,6 @@ sidebar_position: 3
 import TabItem from '@theme/TabItem'
 import Tabs from '@theme/Tabs'
 
-
 # Radio
 
 Radio buttons differ from other inputs because they need a wrapper which keeps the state.
@@ -17,7 +16,7 @@ prop it takes is the `name: string`
 <TabItem value="typescript" label="Typescript">
 
 ```tsx
-import { Form, Radio, RadioGroup, Value} from 'react-former'
+import { Form, Radio, RadioGroup, Value } from 'react-former'
 
 function App(): JSX.Element {
   const submit = (e: FormEvent<HTMLFormElement>, data: Record<string, Value>): void => {
@@ -42,7 +41,7 @@ function App(): JSX.Element {
 ```jsx
 import { Form, Radio, RadioGroup } from 'react-former'
 
-function App(){
+function App() {
   const submit = (e, data) => {
     e.preventDefault()
   }
@@ -62,6 +61,6 @@ function App(){
 </TabItem>
 </Tabs>
 
-The `<Radio />` component takes all the basic HTMLInputAttributes. 
+The `<Radio />` component takes all the basic HTMLInputAttributes.
 
-Setting the `type` attribute won't have any effect as well as the `checked` attribute which will be overrided by the `initialValue`. 
+Setting the `type` attribute won't have any effect as well as the `checked` attribute which will be overrided by the `initialValue`.
