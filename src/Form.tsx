@@ -8,7 +8,8 @@ type FormProps = Omit<HTMLAttributes<HTMLFormElement>, 'onSubmit'> & {
 }
 
 const FormerForm = (props: FormProps): JSX.Element => {
-  const childrenRef = useRef<InputEffect[]>([])
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const childrenRef = useRef<InputEffect<any>[]>([])
 
   const submitFunction = (e: FormEvent<HTMLFormElement>): void => {
     const data: Record<string, Value> = {}
@@ -23,9 +24,9 @@ const FormerForm = (props: FormProps): JSX.Element => {
   }
 
   const customProps = (componentName: string): PropsWithRef<unknown> => {
-    if (componentName.startsWith('Former')) {
+    if (componentName.startsWith('Former') || componentName.startsWith('withFormer')) {
       return {
-        ref: (ref: InputEffect) => (childrenRef.current[childrenRef.current.length] = ref),
+        ref: (ref: InputEffect<unknown>) => (childrenRef.current[childrenRef.current.length] = ref),
       }
     }
     return {}

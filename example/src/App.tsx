@@ -1,4 +1,5 @@
-import { Checkbox, Form, Input, Radio, RadioGroup, Select, Textarea, Value } from '../../.'
+import { Form, Input, Radio, RadioGroup, Select, Textarea, Value } from '../../.'
+import WithHOCSelect from './select'
 import { FormEvent } from 'react'
 
 function App(): JSX.Element {
@@ -21,21 +22,35 @@ function App(): JSX.Element {
             className="form-control"
             id="exampleInputEmail1"
             aria-describedby="emailHelp"
+            initialValue=""
           />
         </div>
         <div className="mb-3">
           <label htmlFor="exampleInputPassword1" className="form-label">
             Password
           </label>
-          <Input name="password" type="password" className="form-control" id="exampleInputPassword1" />
+          <Input name="password" type="password" className="form-control" id="exampleInputPassword1" initialValue="" />
         </div>
+        <WithHOCSelect name="with-former-select" initialValue={null} randomProp={10} />
         <h3>Textarea</h3>
         <div className="form-floating mb-3">
-          <Textarea name="comments" className="form-control" placeholder="Leave a comment here" id="floatingTextarea" />
+          <Textarea
+            name="comments"
+            className="form-control"
+            placeholder="Leave a comment here"
+            id="floatingTextarea"
+            initialValue=""
+          />
           <label htmlFor="floatingTextarea">Comments</label>
         </div>
         <h3>Select</h3>
-        <Select name="number-selector" className="form-select mb-3" value="0" aria-label="Default select example">
+        <Select
+          name="number-selector"
+          className="form-select mb-3"
+          value="0"
+          aria-label="Default select example"
+          initialValue=""
+        >
           <option value="0">Open this select menu</option>
           <option value="1">One</option>
           <option value="2">Two</option>
@@ -44,13 +59,13 @@ function App(): JSX.Element {
         <h3>Radios</h3>
         <RadioGroup name="radio-group">
           <div className="form-check">
-            <Radio className="form-check-input" type="radio" name="flexRadioDefault1" id="flexRadioDefault1" />
+            <Radio className="form-check-input" name="flexRadioDefault1" id="flexRadioDefault1" initialValue={false} />
             <label className="form-check-label" htmlFor="flexRadioDefault1">
               Default radio
             </label>
           </div>
           <div className="form-check">
-            <Radio className="form-check-input" type="radio" name="flexRadioDefault2" id="flexRadioDefault2" checked />
+            <Radio className="form-check-input" name="flexRadioDefault2" id="flexRadioDefault2" initialValue={true} />
             <label className="form-check-label" htmlFor="flexRadioDefault2">
               Default checked radio
             </label>
@@ -58,7 +73,13 @@ function App(): JSX.Element {
         </RadioGroup>
         <h3>Checkboxes</h3>
         <div className="form-check">
-          <Checkbox className="form-check-input" type="checkbox" name="checkbox" id="flexCheckDefault" />
+          <Input
+            className="form-check-input"
+            type="checkbox"
+            name="checkbox"
+            id="flexCheckDefault"
+            initialValue={true}
+          />
           <label className="form-check-label" htmlFor="flexCheckDefault">
             Default checkbox
           </label>

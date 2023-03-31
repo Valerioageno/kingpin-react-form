@@ -1,35 +1,33 @@
-import type { InputEffect, Result } from './types'
-import { InputHTMLAttributes, forwardRef, useImperativeHandle, useState } from 'react'
-import React from 'react'
+import withFormer, { WithFormerType } from './withFormer'
+import React, { ChangeEvent, InputHTMLAttributes } from 'react'
 
-type InputProps = InputHTMLAttributes<HTMLInputElement>
+type ReturnTypes = string | number | boolean
 
-const Input = forwardRef<InputEffect, InputProps>((props, ref): JSX.Element => {
-  // Boolean with radio an checkbox
-  const [state, setState] = useState<string | boolean>('')
+const FormerInput = (props: InputHTMLAttributes<HTMLInputElement> & WithFormerType<ReturnTypes>): JSX.Element => {
+  const onChange = (e: ChangeEvent<HTMLInputElement>): void => {
+    props.onChange?.(e)
 
-  useImperativeHandle(
-    ref,
-    () => ({
-      sendData(): Result {
-        return { name: props?.name || 'former-input', value: state }
-      },
-    }),
-    [props.name, state],
-  )
+    switch (props.type) {
+      case 'number':
+        props.updateState?.(+e.target.value)
+        break
+      case 'checkbox':
+        props.updateState?.(!props.value)
+        break
+      default:
+        props.updateState?.(e.target.value)
+    }
+  }
 
   return (
     <input
       name="former-input"
       {...props}
-      value={state as string}
-      onChange={(e): void => {
-        props.onChange?.(e)
-        setState(e.target.value)
-      }}
+      value={props.value}
+      checked={props.type === 'checkbox' ? (props.value as unknown as boolean) : undefined}
+      onChange={onChange}
     />
   )
-})
+}
 
-Input.displayName = 'FormerInput'
-export default Input
+export default withFormer<InputHTMLAttributes<HTMLInputElement> & WithFormerType<ReturnTypes>, ReturnTypes>(FormerInput)

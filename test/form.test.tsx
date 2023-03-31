@@ -1,4 +1,4 @@
-import { Checkbox, Form, Input, Radio, RadioGroup, Select, Textarea, Value } from '../src'
+import { Form, Input, Radio, RadioGroup, Select, Textarea, Value } from '../src'
 import '@testing-library/jest-dom'
 import { fireEvent, render, screen } from '@testing-library/react'
 import * as React from 'react'
@@ -20,32 +20,34 @@ describe('Form', () => {
 
     render(
       <Form onSubmit={submitFn}>
-        <Input name="email" type="email" data-testid="email" />
-        <Input name="password" type="password" data-testid="password" />
-        <Textarea name="textarea1" data-testid="textarea1" />
-        <Textarea name="textarea2" data-testid="textarea2" />
-        <Select name="select1" data-testid="select1">
+        <Input name="email" type="email" data-testid="email" initialValue="" />
+        <Input name="password" type="password" data-testid="password" initialValue="" />
+        <Textarea name="textarea1" data-testid="textarea1" initialValue="" />
+        <Textarea name="textarea2" data-testid="textarea2" initialValue="" />
+        <Select name="select1" data-testid="select1" initialValue="">
           <option value="0">Open this select menu</option>
           <option value="1">One</option>
           <option value="2">Two</option>
           <option value="3">Three</option>
         </Select>
-        <Select name="select2" data-testid="select2">
+        <Select name="select2" data-testid="select2" initialValue="">
           <option value="0">Open this select menu</option>
           <option value="1">One</option>
           <option value="2">Two</option>
           <option value="3">Three</option>
         </Select>
         <RadioGroup name="radio-group-1">
-          <Radio name="radio1" data-testid="radio1" />
-          <Radio checked name="radio2" />
+          <Radio name="radio1" data-testid="radio1" initialValue={false} />
+          <Radio name="radio2" initialValue={true} />
         </RadioGroup>
         <RadioGroup name="radio-group-2">
-          <Radio checked name="radio3" />
-          <Radio name="radio4" />
+          <Radio name="radio3" initialValue={true} />
+          <Radio name="radio4" initialValue={false} />
         </RadioGroup>
-        <Checkbox name="checkbox1" checked data-testid="checkbox1" />
-        <Checkbox name="checkbox2" data-testid="checkbox2" />
+        <Input name="checkbox1" type="checkbox" data-testid="checkbox1" initialValue />
+        <Input name="checkbox2" type="checkbox" data-testid="checkbox2" initialValue={false} />
+        <Input name="number1" type="number" data-testid="number1" initialValue={0} />
+        <Input name="number2" type="number" data-testid="number2" initialValue={80} />
         <button type="submit" data-testid="submit">
           submit
         </button>
@@ -65,6 +67,8 @@ describe('Form', () => {
       'radio-group-2': 'radio3',
       checkbox1: true,
       checkbox2: false,
+      number1: 0,
+      number2: 80,
     })
 
     fireEvent.change(screen.getByTestId('email'), { target: { value: 'hey@former.com' } })
@@ -74,9 +78,11 @@ describe('Form', () => {
     fireEvent.change(screen.getByTestId('select1'), { target: { value: '1' } })
     fireEvent.change(screen.getByTestId('select2'), { target: { value: '3' } })
 
-    fireEvent.change(screen.getByTestId('radio1'), { target: { value: 'a' } })
-    fireEvent.change(screen.getByTestId('checkbox1'), { target: { value: 'a' } })
-    fireEvent.change(screen.getByTestId('checkbox2'), { target: { value: 'a' } })
+    fireEvent.click(screen.getByTestId('radio1'))
+    fireEvent.click(screen.getByTestId('checkbox1'))
+    fireEvent.click(screen.getByTestId('checkbox2'))
+    fireEvent.change(screen.getByTestId('number1'), { target: { value: '40' } })
+    fireEvent.change(screen.getByTestId('number2'), { target: { value: '10' } })
 
     fireEvent.click(screen.getByTestId('submit'))
 
@@ -91,6 +97,8 @@ describe('Form', () => {
       'radio-group-2': 'radio3',
       checkbox1: false,
       checkbox2: true,
+      number1: 40,
+      number2: 10,
     })
   })
 })

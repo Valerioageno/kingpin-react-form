@@ -1,22 +1,8 @@
-import type { InputEffect } from './types'
-import { SelectHTMLAttributes, forwardRef, useImperativeHandle, useState } from 'react'
-import React from 'react'
+import withFormer, { WithFormerType } from './withFormer'
+import React, { SelectHTMLAttributes } from 'react'
 
-const Select = forwardRef<InputEffect, SelectHTMLAttributes<HTMLSelectElement>>((props, ref): JSX.Element => {
-  const [state, setState] = useState<string>('')
+const FormerSelect = (props: SelectHTMLAttributes<HTMLSelectElement> & WithFormerType<string>): JSX.Element => (
+  <select name="former-select" {...props} onChange={(e): void => props?.updateState?.(e.target.value)} />
+)
 
-  useImperativeHandle(
-    ref,
-    () => ({
-      sendData(): { name: string; value: string } {
-        return { name: props?.name || 'former-select', value: state }
-      },
-    }),
-    [props.name, state],
-  )
-
-  return <select name="former-select" {...props} value={state} onChange={(e): void => setState(e.target.value)} />
-})
-
-Select.displayName = 'FormerSelect'
-export default Select
+export default withFormer<SelectHTMLAttributes<HTMLSelectElement> & WithFormerType<string>, string>(FormerSelect)
