@@ -9,6 +9,7 @@ const FormerInput = (props: InputHTMLAttributes<HTMLInputElement> & WithFormerTy
 
     switch (props.type) {
       case 'number':
+      case 'range':
         props.updateState?.(+e.target.value)
         break
       case 'checkbox':
