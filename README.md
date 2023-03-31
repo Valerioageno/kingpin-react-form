@@ -101,3 +101,8 @@ In order to make Former extensible by anyone it's possible create custom
 components with the `withFormer` HOC.
 
 To see how it works with a real example check the documentation.
+
+## License
+
+This project is licensed under the MIT License - see the
+[LICENSE](https://github.com/Valerioageno/former/blob/main/LICENSE) file.
