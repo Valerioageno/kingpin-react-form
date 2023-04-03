@@ -1,3 +1,4 @@
+/* eslint-disable jsdoc/check-param-names */
 import type { InputEffect, Result } from './types'
 import { ReactNode, createContext, forwardRef, useContext, useImperativeHandle, useState } from 'react'
 import React from 'react'
@@ -14,6 +15,13 @@ type ContextType = {
 
 const RadioGroup = createContext<ContextType>({})
 
+/**
+ * @name FormerRadioGroup
+ * @description This is the controller for radio buttons. In order to make a group of radio buttons working you have to wrap them using this component.
+ * @param selected the name of the selected radio button
+ * @param name The RadioGroup identifier
+ * @returns JSX.Element
+ */
 const RadioGroupContext = forwardRef<InputEffect<string>, RadioGroupProps>((props, ref): JSX.Element => {
   const [selected, setSelected] = useState<string>('')
 
@@ -30,6 +38,12 @@ const RadioGroupContext = forwardRef<InputEffect<string>, RadioGroupProps>((prop
   return <RadioGroup.Provider value={{ selected, setSelected }}>{props.children}</RadioGroup.Provider>
 })
 
+/**
+ * @name useRadioGroupContext
+ * @access private
+ * @description Access the RadioGroupContext in the radio buttons.
+ * @returns JSX.Element
+ */
 export function useRadioGroupContext(): ContextType {
   return useContext<ContextType>(RadioGroup)
 }

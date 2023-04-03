@@ -1,6 +1,13 @@
 {
-  "extends": ["eslint:recommended", "plugin:react/recommended", "prettier", "plugin:@typescript-eslint/recommended"],
-  "plugins": ["react", "sort-exports", "unused-imports", "prettier", "react-hooks", "import"],
+  "extends": [
+    "eslint:recommended",
+    "plugin:react/recommended",
+    "prettier",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:jsdoc/recommended-error",
+    "plugin:jsdoc/recommended-typescript-error"
+  ],
+  "plugins": ["react", "sort-exports", "unused-imports", "prettier", "react-hooks", "import", "jsdoc"],
   "rules": {
     "no-console": "error",
     "no-param-reassign": ["error", { "props": false }],
