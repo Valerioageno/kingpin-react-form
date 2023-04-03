@@ -14,7 +14,8 @@
     "url": "https://github.com/Valerioageno/former"
   },
   "files": [
-    "dist"
+    "dist",
+    "src"
   ],
   "engines": {
     "node": ">=14"
