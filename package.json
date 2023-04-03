@@ -3,9 +3,18 @@
   "license": "MIT",
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
+  "description": "Super fast ReactJS forms with almost null overhead.",
+  "keywords": [
+    "ReactJS",
+    "form"
+  ],
+  "homepage": "https://github.com/Valerioageno/former",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Valerioageno/former"
+  },
   "files": [
-    "dist",
-    "src"
+    "dist"
   ],
   "engines": {
     "node": ">=14"
@@ -41,7 +50,7 @@
       "yarn markdownlint"
     ]
   },
-  "name": "former",
+  "name": "react-former",
   "author": "Valerio Ageno",
   "module": "dist/former.esm.js",
   "size-limit": [
