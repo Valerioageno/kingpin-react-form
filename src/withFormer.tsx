@@ -10,6 +10,19 @@ type WithFormerProps<T> = {
   initialValue: T
 }
 
+/**
+ * @name withFormer HOC.
+ * @description Trasnform the passed WrappedComponent into an input usable by the Former form component.
+ * The new Component will have two new mandatory props:
+ * - name: string
+ * - initialValue: T
+ *
+ * In order to make it usable with Former it passes as props the updateState method which has
+ * to be used as state setter.
+ * Check the documentation for more details.
+ * @param WrappedComponent ComponentType T
+ * @returns JSX.Element
+ */
 export default function withFormer<T, State>(
   WrappedComponent: ComponentType<T>,
 ): ForwardRefExoticComponent<

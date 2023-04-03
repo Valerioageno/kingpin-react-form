@@ -7,6 +7,13 @@ type FormProps = Omit<HTMLAttributes<HTMLFormElement>, 'onSubmit'> & {
   onSubmit?: (e: FormEvent<HTMLFormElement>, data: Record<string, Value>) => void
 }
 
+/**
+ * @name FormerForm
+ * @description This is the main element Former has. It's just a simple HTML form element which handle the logic of each Former element set as child element.
+ * It takes as props all the HTML form attributes. The onSubmit event is extended with a second arguments which includes all the values set in the within Former elements.
+ * @param props FormHTMLAttributes
+ * @returns JSX.Element
+ */
 const FormerForm = (props: FormProps): JSX.Element => {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const childrenRef = useRef<InputEffect<any>[]>([])
