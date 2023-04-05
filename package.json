@@ -34,7 +34,8 @@
     "format": "prettier --write .",
     "lint-staged": "lint-staged",
     "markdownlint": "markdownlint-cli2",
-    "prepublish": "rm -rf ./dist && npm run build"
+    "prepublish": "yarn clean && yarn build",
+    "clean": "rm -rf ./dist"
   },
   "peerDependencies": {
     "react": ">=16"
