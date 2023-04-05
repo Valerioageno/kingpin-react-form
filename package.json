@@ -1,8 +1,21 @@
 {
+  "name": "react-former",
   "version": "0.1.0",
+  "author": "Valerio Ageno <valerioageno@yahoo.it>",
+  "module": "dist/former.esm.js",
   "license": "MIT",
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
+  "description": "Super fast ReactJS forms with almost null overhead.",
+  "keywords": [
+    "ReactJS",
+    "form"
+  ],
+  "homepage": "https://github.com/Valerioageno/former",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Valerioageno/former"
+  },
   "files": [
     "dist",
     "src"
@@ -17,10 +30,12 @@
     "lint": "eslint . --ext ts --ext tsx -c .eslintrc",
     "prepare": "tsdx build",
     "size": "size-limit",
-    "analyze": "size-limit --why",
+    "analyze": "size-limit -- --why",
     "format": "prettier --write .",
     "lint-staged": "lint-staged",
-    "markdownlint": "markdownlint-cli2"
+    "markdownlint": "markdownlint-cli2",
+    "prepublish": "yarn clean && yarn build",
+    "clean": "rm -rf ./dist"
   },
   "peerDependencies": {
     "react": ">=16"
@@ -41,9 +56,6 @@
       "yarn markdownlint"
     ]
   },
-  "name": "former",
-  "author": "Valerio Ageno",
-  "module": "dist/former.esm.js",
   "size-limit": [
     {
       "path": "dist/former.cjs.production.min.js",

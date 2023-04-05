@@ -5364,42 +5364,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"former@workspace:.":
-  version: 0.0.0-use.local
-  resolution: "former@workspace:."
-  dependencies:
-    "@size-limit/preset-small-lib": ^8.2.4
-    "@testing-library/jest-dom": ^5.16.5
-    "@testing-library/react": ^14.0.0
-    "@trivago/prettier-plugin-sort-imports": ^4.1.1
-    "@types/react": ^18.0.28
-    "@types/react-dom": ^18.0.11
-    "@typescript-eslint/eslint-plugin": ^5.53.0
-    "@typescript-eslint/parser": ^5.53.0
-    eslint: ^8.35.0
-    eslint-config-prettier: ^8.6.0
-    eslint-plugin-import: ^2.27.5
-    eslint-plugin-jsdoc: ^40.1.1
-    eslint-plugin-prettier: ^4.2.1
-    eslint-plugin-react: ^7.32.2
-    eslint-plugin-react-hooks: ^4.6.0
-    eslint-plugin-sort-exports: ^0.8.0
-    eslint-plugin-unused-imports: ^2.0.0
-    husky: ^8.0.3
-    lint-staged: ^13.1.2
-    markdownlint-cli2: ^0.6.0
-    prettier: ^2.8.4
-    react: ^18.2.0
-    react-dom: ^18.2.0
-    size-limit: ^8.2.4
-    tsdx: ^0.14.1
-    tslib: ^2.5.0
-    typescript: ^4.9.5
-  peerDependencies:
-    react: ">=16"
-  languageName: unknown
-  linkType: soft
-
 "fragment-cache@npm:^0.2.1":
   version: 0.2.1
   resolution: "fragment-cache@npm:0.2.1"
@@ -8935,6 +8899,42 @@ __metadata:
   checksum: 7d323310bea3a91be2965f9468d552f201b1c27891e45ddc2d6b8f717680c95a75ae0bc1e3f5cf41472446a2589a75aed4483aee8169287909fcd59ad149e8cc
   languageName: node
   linkType: hard
+
+"react-former@workspace:.":
+  version: 0.0.0-use.local
+  resolution: "react-former@workspace:."
+  dependencies:
+    "@size-limit/preset-small-lib": ^8.2.4
+    "@testing-library/jest-dom": ^5.16.5
+    "@testing-library/react": ^14.0.0
+    "@trivago/prettier-plugin-sort-imports": ^4.1.1
+    "@types/react": ^18.0.28
+    "@types/react-dom": ^18.0.11
+    "@typescript-eslint/eslint-plugin": ^5.53.0
+    "@typescript-eslint/parser": ^5.53.0
+    eslint: ^8.35.0
+    eslint-config-prettier: ^8.6.0
+    eslint-plugin-import: ^2.27.5
+    eslint-plugin-jsdoc: ^40.1.1
+    eslint-plugin-prettier: ^4.2.1
+    eslint-plugin-react: ^7.32.2
+    eslint-plugin-react-hooks: ^4.6.0
+    eslint-plugin-sort-exports: ^0.8.0
+    eslint-plugin-unused-imports: ^2.0.0
+    husky: ^8.0.3
+    lint-staged: ^13.1.2
+    markdownlint-cli2: ^0.6.0
+    prettier: ^2.8.4
+    react: ^18.2.0
+    react-dom: ^18.2.0
+    size-limit: ^8.2.4
+    tsdx: ^0.14.1
+    tslib: ^2.5.0
+    typescript: ^4.9.5
+  peerDependencies:
+    react: ">=16"
+  languageName: unknown
+  linkType: soft
 
 "react-is@npm:^16.12.0, react-is@npm:^16.13.1":
   version: 16.13.1
