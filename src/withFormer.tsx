@@ -11,7 +11,6 @@ type WithFormerProps<T> = {
 }
 
 /**
- * @name withFormer HOC.
  * @description Trasnform the passed WrappedComponent into an input usable by the Former form component.
  * The new Component will have two new mandatory props:
  * - name: string

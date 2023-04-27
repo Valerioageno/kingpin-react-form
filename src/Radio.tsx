@@ -7,7 +7,6 @@ import React from 'react'
 type InputProps = InputHTMLAttributes<HTMLInputElement>
 
 /**
- * @name FormerRadio
  * @description This is just a simple HTML input (type="radio") element which works within the Former form component out of the box. It takes whatever input HTML attribute as prop. To work properly it has to be wrapped by the RadioGroup component.
  * @param props InputHTMLAttributes & initialValue
  * @returns JSX.Element

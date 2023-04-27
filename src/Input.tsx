@@ -4,7 +4,6 @@ import React, { ChangeEvent, InputHTMLAttributes } from 'react'
 type ReturnTypes = string | number | boolean
 
 /**
- * @name FormerInput
  * @description This is just a simple HTML input element which works within the Former form  component out of the box. It takes whatever input HTML attribute as prop.
  * @param props InputHTMLAttributes & initialValue
  * @returns JSX.Element
