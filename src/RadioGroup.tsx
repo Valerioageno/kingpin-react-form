@@ -38,7 +38,6 @@ const FormerRadioGroup = forwardRef<InputEffect<string>, RadioGroupProps>((props
 })
 
 /**
- * @access private
  * @description Access the RadioGroupContext in the radio buttons.
  * @returns JSX.Element
  */
