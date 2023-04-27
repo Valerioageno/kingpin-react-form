@@ -36,17 +36,17 @@ Read more in the documentation.
 Install the package with your favourite package manager.
 
 ```bash
-npm i form-er
+npm i @former/former
 ```
 
 ```bash
-yarn add form-er
+yarn add @former/former
 ```
 
 Then create your form.
 
 ```tsx
-import { Form, Input, Value } from 'form-er'
+import { Form, Input, Value } from '@former/former'
 import { FormEvent } from 'react'
 
 function App(): JSX.Element {

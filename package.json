@@ -1,5 +1,5 @@
 {
-  "name": "form-er",
+  "name": "@former/former",
   "version": "0.1.0",
   "author": "Valerio Ageno <valerioageno@yahoo.it>",
   "module": "dist/former.esm.js",
