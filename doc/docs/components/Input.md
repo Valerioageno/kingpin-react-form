@@ -5,7 +5,7 @@ sidebar_position: 1
 # Input
 
 ```tsx
-import { Form, Input } from 'react-former'
+import { Form, Input } from 'form-er'
 
 function App(): JSX.Element {
   const submit = (e: FormEvent<HTMLFormElement>, data: Record<string, Value>) => {

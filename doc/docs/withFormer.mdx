@@ -31,7 +31,7 @@ After having installed react-select with your favourite package manager let's cr
 ```tsx
 // File: ./Select.tsx
 import { useState } from 'react'
-import { withFormer } from 'react-former'
+import { withFormer } from 'form-er'
 import Select, { SingleValue } from 'react-select'
 
 type Option = { value: string; label: string }
@@ -73,7 +73,7 @@ export default withFormer<CustomSelectProps, SingleValue<Option>>(CustomSelect)
 ```jsx
 // File: ./Select.tsx
 import { useState } from 'react'
-import { withFormer } from 'react-former'
+import { withFormer } from 'form-er'
 import Select from 'react-select'
 
 const options = [
@@ -114,7 +114,7 @@ Now we are ready to use our new component within our `Form` component.
 // File: ./App.tsx
 import CustomSelect './Select'
 import type { FormEvent } from 'react'
-import { Form, Value } from 'react-former'
+import { Form, Value } from 'form-er'
 
 function App(): JSX.Element {
   const submit = (e: FormEvent<HTMLFormElement>, data: Record<string, Value>) => {
@@ -142,7 +142,7 @@ function App(): JSX.Element {
 ```jsx
 // File: ./App.tsx
 import CustomSelect './Select'
-import { Form } from 'react-former'
+import { Form } from 'form-er'
 
 
 function App(): JSX.Element {

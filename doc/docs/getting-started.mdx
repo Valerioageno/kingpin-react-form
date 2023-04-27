@@ -15,21 +15,21 @@ Install the package with your favourite package manager.
 <TabItem value="npm" label="npm">
 
 ```bash
-npm install react-former
+npm install form-er
 ```
 
 </TabItem>
 <TabItem value="yarn" label="yarn">
 
 ```bash
-yarn add react-former
+yarn add form-er
 ```
 
 </TabItem>
 <TabItem value="pnpm" label="pnpm">
 
 ```bash
-pnpm add react-former
+pnpm add form-er
 ```
 
 </TabItem>
@@ -49,7 +49,7 @@ All the atomic states are kept by the `<Form />` component and they can be acces
 
 ```tsx
 import { FormEvent } from 'react'
-import { Form, Input, Value } from 'react-former'
+import { Form, Input, Value } from 'form-er'
 
 function App(): JSX.Element {
   const submit = (e: FormEvent<HTMLFormElement>, data: Record<string, Value>) => {
@@ -76,7 +76,7 @@ function App(): JSX.Element {
 <TabItem value="javascript" label="Javascript">
 
 ```jsx
-import { Form, Input } from 'react-former'
+import { Form, Input } from 'form-er'
 
 function App() {
   const submit = (e, data) => {
