@@ -8,12 +8,12 @@ type FormProps = Omit<HTMLAttributes<HTMLFormElement>, 'onSubmit'> & {
 }
 
 /**
- * @description This is the main element Former has. It's just a simple HTML form element which handle the logic of each Former element set as child element.
- * It takes as props all the HTML form attributes. The onSubmit event is extended with a second arguments which includes all the values set in the within Former elements.
+ * @description This is the main element Kingpin has. It's just a simple HTML form element which handle the logic of each Kingpin element set as child element.
+ * It takes as props all the HTML form attributes. The onSubmit event is extended with a second arguments which includes all the values set in the within Kingpin elements.
  * @param props FormHTMLAttributes
  * @returns JSX.Element
  */
-const FormerForm = (props: FormProps): JSX.Element => {
+const KingpinForm = (props: FormProps): JSX.Element => {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const childrenRef = useRef<InputEffect<any>[]>([])
 
@@ -30,7 +30,7 @@ const FormerForm = (props: FormProps): JSX.Element => {
   }
 
   const customProps = (componentName: string): PropsWithRef<unknown> => {
-    if (componentName.startsWith('Former') || componentName.startsWith('withFormer')) {
+    if (componentName.startsWith('Kingpin') || componentName.startsWith('withKingpin')) {
       return {
         ref: (ref: InputEffect<unknown>) => (childrenRef.current[childrenRef.current.length] = ref),
       }
@@ -45,4 +45,4 @@ const FormerForm = (props: FormProps): JSX.Element => {
   )
 }
 
-export default FormerForm
+export default KingpinForm

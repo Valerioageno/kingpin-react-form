@@ -21,10 +21,10 @@ Super fast ReactJS forms with almost null overhead.
 
 ## In few lines
 
-Former is a form library that aims to make the writing of forms on React easy like writing them directly
+Kingpin is a form library that aims to make the writing of forms on React easy like writing them directly
 on the HTML.
 
-To do it Former let each input to be just declared and enhance the [Single
+To do it Kingpin let each input to be just declared and enhance the [Single
 Responsibility Principle](https://en.wikipedia.org/wiki/Single-responsibility_principle)
 of each element (each input field take care just of it self).
 
@@ -33,7 +33,7 @@ The SRP let each field to render independently without causing unhandled re-rend
 The main `<Form />` component is the **only** interface for managing user set data, this choice in order to
 lead to a better forms develop and managing all the data in a single place.
 
-By the nature of Former this library is useful for sharing a components in a desing systems that includes also the
+By the nature of Kingpin this library is useful for sharing a components in a desing systems that includes also the
 inputs elements.
 
 ## Why a new form library?
@@ -46,10 +46,10 @@ way to handle forms in React.
 In most cases using uncontrolled components causes re-renders in unexpected
 actions like the submit (?).
 
-Among the other reasons Former wants to let the developer to write forms in the
+Among the other reasons Kingpin wants to let the developer to write forms in the
 better React way possible handling the re-renders in a declarative way.
 
-## How hard is writing Former's forms?
+## How hard is writing Kingpin's forms?
 
 In short... easy like a pie.
 
@@ -97,10 +97,10 @@ Check the next page for more details.
 
 ## Key concept
 
-In order to make Former efficient and reusable the entire state logic is managed
+In order to make Kingpin efficient and reusable the entire state logic is managed
 within the `<Form />` component (you don't need to directly control each input value).
 
-Each Former action element (`<Input />`, `<Textarea />`, ...) has two mandatory fields:
+Each Kingpin action element (`<Input />`, `<Textarea />`, ...) has two mandatory fields:
 
 - name (string describing the input purpose; check possible name conflicts!)
 - initialValue (That's it)
@@ -115,4 +115,4 @@ which is the `name:value` representation of its content.
 
 This project is licensed under the MIT License - see the
 
-<a href="https://github.com/Valerioageno/former/blob/main/LICENSE">LICENSE</a> file.
+<a href="https://github.com/Valerioageno/kingpin-react-form/blob/main/LICENSE">LICENSE</a> file.

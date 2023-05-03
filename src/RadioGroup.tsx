@@ -21,14 +21,14 @@ const RadioGroup = createContext<ContextType>({})
  * @param name The RadioGroup identifier
  * @returns JSX.Element
  */
-const FormerRadioGroup = forwardRef<InputEffect<string>, RadioGroupProps>((props, ref): JSX.Element => {
+const KingpinRadioGroup = forwardRef<InputEffect<string>, RadioGroupProps>((props, ref): JSX.Element => {
   const [selected, setSelected] = useState<string>('')
 
   useImperativeHandle(
     ref,
     () => ({
       sendData(): Result<string> {
-        return { name: props.name || 'former-radio-group', value: selected }
+        return { name: props.name || 'kingpin-radio-group', value: selected }
       },
     }),
     [props.name, selected],
@@ -45,5 +45,5 @@ export function useRadioGroupContext(): ContextType {
   return useContext<ContextType>(RadioGroup)
 }
 
-FormerRadioGroup.displayName = 'FormerRadioGroup'
-export default FormerRadioGroup
+KingpinRadioGroup.displayName = 'KingpinRadioGroup'
+export default KingpinRadioGroup

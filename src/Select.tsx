@@ -1,15 +1,15 @@
-import withFormer, { WithFormerType } from './withFormer'
+import withKingpin, { WithKingpinType } from './withKingpin'
 import React, { SelectHTMLAttributes } from 'react'
 
 /**
- * @description This is just a simple HTML select element which works within the Former form component out of the box. It takes whatever select HTML attribute as prop.
+ * @description This is just a simple HTML select element which works within the Kingpin form component out of the box. It takes whatever select HTML attribute as prop.
  * @param props SelectHTMLAttributes & initialValue
  * @returns JSX.Element
  */
-const FormerSelect = withFormer<SelectHTMLAttributes<HTMLSelectElement> & WithFormerType<string>, string>(
-  (props: SelectHTMLAttributes<HTMLSelectElement> & WithFormerType<string>): JSX.Element => (
-    <select name="former-select" {...props} onChange={(e): void => props?.updateState?.(e.target.value)} />
+const KingpinSelect = withKingpin<SelectHTMLAttributes<HTMLSelectElement> & WithKingpinType<string>, string>(
+  (props: SelectHTMLAttributes<HTMLSelectElement> & WithKingpinType<string>): JSX.Element => (
+    <select name="kingpin-select" {...props} onChange={(e): void => props?.updateState?.(e.target.value)} />
   ),
 )
 
-export default FormerSelect
+export default KingpinSelect

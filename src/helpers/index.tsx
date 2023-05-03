@@ -28,7 +28,7 @@ export const iterateOverChildren = <T,>(
     return cloneElement(child as ReactElement<any, string | JSXElementConstructor<any>>, {
       ...child.props,
       ...customProps(displayName),
-      children: displayName?.startsWith('Former')
+      children: displayName?.startsWith('Kingpin')
         ? child.props.children
         : iterateOverChildren(child.props.children, customProps),
     })

@@ -71,7 +71,7 @@ describe('Form', () => {
       number2: 80,
     })
 
-    fireEvent.change(screen.getByTestId('email'), { target: { value: 'hey@former.com' } })
+    fireEvent.change(screen.getByTestId('email'), { target: { value: 'hey@kingpin.com' } })
     fireEvent.change(screen.getByTestId('password'), { target: { value: 'psw' } })
     fireEvent.change(screen.getByTestId('textarea1'), { target: { value: 'test textarea 1' } })
     fireEvent.change(screen.getByTestId('textarea2'), { target: { value: 'test textarea 2' } })
@@ -87,7 +87,7 @@ describe('Form', () => {
     fireEvent.click(screen.getByTestId('submit'))
 
     expect(payload).toStrictEqual({
-      email: 'hey@former.com',
+      email: 'hey@kingpin.com',
       password: 'psw',
       textarea1: 'test textarea 1',
       textarea2: 'test textarea 2',

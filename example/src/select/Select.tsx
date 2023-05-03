@@ -1,4 +1,4 @@
-import { withFormer } from '../../../.'
+import { withKingpin } from '../../../.'
 import { useState } from 'react'
 import Select, { SingleValue } from 'react-select'
 
@@ -33,4 +33,4 @@ function CustomSelect({ updateState, initialValue }: CustomSelectProps): JSX.Ele
   )
 }
 
-export default withFormer<CustomSelectProps, SingleValue<Option>>(CustomSelect)
+export default withKingpin<CustomSelectProps, SingleValue<Option>>(CustomSelect)

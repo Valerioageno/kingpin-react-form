@@ -1,15 +1,15 @@
-import withFormer, { WithFormerType } from './withFormer'
+import withKingpin, { WithKingpinType } from './withKingpin'
 import React, { ChangeEvent, InputHTMLAttributes } from 'react'
 
 type ReturnTypes = string | number | boolean
 
 /**
- * @description This is just a simple HTML input element which works within the Former form  component out of the box. It takes whatever input HTML attribute as prop.
+ * @description This is just a simple HTML input element which works within the Kingpin form  component out of the box. It takes whatever input HTML attribute as prop.
  * @param props InputHTMLAttributes & initialValue
  * @returns JSX.Element
  */
-const FormerInput = withFormer<InputHTMLAttributes<HTMLInputElement> & WithFormerType<ReturnTypes>, ReturnTypes>(
-  (props: InputHTMLAttributes<HTMLInputElement> & WithFormerType<ReturnTypes>): JSX.Element => {
+const KingpinInput = withKingpin<InputHTMLAttributes<HTMLInputElement> & WithKingpinType<ReturnTypes>, ReturnTypes>(
+  (props: InputHTMLAttributes<HTMLInputElement> & WithKingpinType<ReturnTypes>): JSX.Element => {
     const onChange = (e: ChangeEvent<HTMLInputElement>): void => {
       props.onChange?.(e)
 
@@ -28,7 +28,7 @@ const FormerInput = withFormer<InputHTMLAttributes<HTMLInputElement> & WithForme
 
     return (
       <input
-        name="former-input"
+        name="Kingpin-input"
         {...props}
         value={props.value}
         checked={props.type === 'checkbox' ? (props.value as unknown as boolean) : undefined}
@@ -38,4 +38,4 @@ const FormerInput = withFormer<InputHTMLAttributes<HTMLInputElement> & WithForme
   },
 )
 
-export default FormerInput
+export default KingpinInput

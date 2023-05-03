@@ -5,19 +5,19 @@ sidebar_position: 3
 import TabItem from '@theme/TabItem'
 import Tabs from '@theme/Tabs'
 
-# withFormer
+# withKingpin
 
 Modern forms require more than just `<input />` and `<textarea />` components.
 
-Former plan is to add pluggable external components like `Typeaheads`, `Slider`, `Dropdown` ecc.
-specifically desinged and developed to work within a Former `Form`.
+Kingpin plan is to add pluggable external components like `Typeaheads`, `Slider`, `Dropdown` ecc.
+specifically desinged and developed to work within a Kingpin `Form`.
 
-In order to make Former extensible by anyone it's possible create custom
-components with the `withFormer` HOC.
+In order to make Kingpin extensible by anyone it's possible create custom
+components with the `withKingpin` HOC.
 
-Follow the next example to learn how to use the `withFormer` HOC.
+Follow the next example to learn how to use the `withKingpin` HOC.
 
-## Example: Former and react-select
+## Example: Kingpin and react-select
 
 Let's say that for our form we need an "enhanced" select component (compared to the plain HTML `<select />`)
 and for this reason we decide to use [react-select](https://github.com/jedwatson/react-select) (you can use
@@ -30,7 +30,7 @@ After having installed react-select with your favourite package manager let's cr
 
 ```tsx
 // File: ./Select.tsx
-import { withFormer } from 'kingpin-react-form'
+import { withKingpin } from 'kingpin-react-form'
 import { useState } from 'react'
 import Select, { SingleValue } from 'react-select'
 
@@ -64,7 +64,7 @@ function CustomSelect({ updateState, initialValue }: CustomSelectProps): JSX.Ele
   )
 }
 
-export default withFormer<CustomSelectProps, SingleValue<Option>>(CustomSelect)
+export default withKingpin<CustomSelectProps, SingleValue<Option>>(CustomSelect)
 ```
 
 </TabItem>
@@ -72,7 +72,7 @@ export default withFormer<CustomSelectProps, SingleValue<Option>>(CustomSelect)
 
 ```jsx
 // File: ./Select.tsx
-import { withFormer } from 'kingpin-react-form'
+import { withKingpin } from 'kingpin-react-form'
 import { useState } from 'react'
 import Select from 'react-select'
 
@@ -99,7 +99,7 @@ function CustomSelect({ updateState, initialValue }) {
   )
 }
 
-export default withFormer(CustomSelect)
+export default withKingpin(CustomSelect)
 ```
 
 </TabItem>
