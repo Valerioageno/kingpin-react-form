@@ -1,4 +1,4 @@
-# Former
+# Kingpin React Form
 
 ![ts](https://badgen.net/badge/-/TypeScript/blue?icon=typescript&label)
 ![CI](https://github.com/Valerioageno/former/actions/workflows/main.yml/badge.svg)
