@@ -3,6 +3,8 @@
 ![ts](https://badgen.net/badge/-/TypeScript/blue?icon=typescript&label)
 ![CI](https://github.com/Valerioageno/former/actions/workflows/main.yml/badge.svg)
 
+![Kingpin react form cover](Cover.png 'Kingpin React Form')
+
 Super fast ReactJS forms with almost null overhead.
 
 ## Features
