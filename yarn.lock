@@ -8900,9 +8900,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@former/former@workspace:.":
+"kingpin-react-form@workspace:.":
   version: 0.0.0-use.local
-  resolution: "@former/former@workspace:."
+  resolution: "kingpin-react-form@workspace:."
   dependencies:
     "@size-limit/preset-small-lib": ^8.2.4
     "@testing-library/jest-dom": ^5.16.5

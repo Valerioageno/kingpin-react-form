@@ -5,7 +5,7 @@ sidebar_position: 1
 # Input
 
 ```tsx
-import { Form, Input } from '@former/former'
+import { Form, Input } from 'kingpin-react-form'
 
 function App(): JSX.Element {
   const submit = (e: FormEvent<HTMLFormElement>, data: Record<string, Value>) => {

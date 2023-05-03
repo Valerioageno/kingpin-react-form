@@ -1,5 +1,5 @@
 {
-  "name": "@former/former",
+  "name": "kingpin-react-form",
   "version": "0.1.0",
   "author": "Valerio Ageno <valerioageno@yahoo.it>",
   "module": "dist/former.esm.js",
@@ -18,7 +18,8 @@
   },
   "files": [
     "dist",
-    "src"
+    "src",
+    "README.md"
   ],
   "engines": {
     "node": ">=14"

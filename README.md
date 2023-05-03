@@ -36,17 +36,17 @@ Read more in the documentation.
 Install the package with your favourite package manager.
 
 ```bash
-npm i @former/former
+npm i kingpin-react-form
 ```
 
 ```bash
-yarn add @former/former
+yarn add kingpin-react-form
 ```
 
 Then create your form.
 
 ```tsx
-import { Form, Input, Value } from '@former/former'
+import { Form, Input, Value } from 'kingpin-react-form'
 import { FormEvent } from 'react'
 
 function App(): JSX.Element {

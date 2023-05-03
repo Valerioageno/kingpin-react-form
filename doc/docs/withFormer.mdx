@@ -30,7 +30,7 @@ After having installed react-select with your favourite package manager let's cr
 
 ```tsx
 // File: ./Select.tsx
-import { withFormer } from '@former/former'
+import { withFormer } from 'kingpin-react-form'
 import { useState } from 'react'
 import Select, { SingleValue } from 'react-select'
 
@@ -72,7 +72,7 @@ export default withFormer<CustomSelectProps, SingleValue<Option>>(CustomSelect)
 
 ```jsx
 // File: ./Select.tsx
-import { withFormer } from '@former/former'
+import { withFormer } from 'kingpin-react-form'
 import { useState } from 'react'
 import Select from 'react-select'
 
@@ -114,7 +114,7 @@ Now we are ready to use our new component within our `Form` component.
 // File: ./App.tsx
 import CustomSelect './Select'
 import type { FormEvent } from 'react'
-import { Form, Value } from '@former/former'
+import { Form, Value } from 'kingpin-react-form'
 
 function App(): JSX.Element {
   const submit = (e: FormEvent<HTMLFormElement>, data: Record<string, Value>) => {
@@ -142,7 +142,7 @@ function App(): JSX.Element {
 ```jsx
 // File: ./App.tsx
 import CustomSelect './Select'
-import { Form } from '@former/former'
+import { Form } from 'kingpin-react-form'
 
 
 function App(): JSX.Element {
