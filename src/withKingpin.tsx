@@ -23,10 +23,9 @@ type WithKingpinProps<T> = {
  * @returns JSX.Element
  */
 export default function withKingpin<T, State>(
-  WrappedComponent: ComponentType<T>,
+  WrappedComponent: ComponentType<Omit<T, 'content' | 'rel' | 'rev'>>,
 ): ForwardRefExoticComponent<
-  React.PropsWithoutRef<Omit<T, 'updateState' | 'content' | 'rel' | 'rev'> & WithKingpinProps<State>> &
-    React.RefAttributes<InputEffect<State>>
+  React.PropsWithoutRef<Omit<T, 'updateState'> & WithKingpinProps<State>> & React.RefAttributes<InputEffect<State>>
 > {
   const displayName = WrappedComponent?.displayName || WrappedComponent?.name || 'Component'
 

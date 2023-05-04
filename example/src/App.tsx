@@ -59,29 +59,13 @@ function App(): JSX.Element {
         <h3>Radios</h3>
         <RadioGroup name="radio-group">
           <div className="form-check">
-            <Radio
-              className="form-check-input"
-              name="flexRadioDefault1"
-              id="flexRadioDefault1"
-              initialValue={false}
-              content={undefined}
-              rel={undefined}
-              rev={undefined}
-            />
+            <Radio className="form-check-input" name="flexRadioDefault1" id="flexRadioDefault1" initialValue={false} />
             <label className="form-check-label" htmlFor="flexRadioDefault1">
               Default radio
             </label>
           </div>
           <div className="form-check">
-            <Radio
-              className="form-check-input"
-              name="flexRadioDefault2"
-              id="flexRadioDefault2"
-              initialValue={true}
-              content={undefined}
-              rel={undefined}
-              rev={undefined}
-            />
+            <Radio className="form-check-input" name="flexRadioDefault2" id="flexRadioDefault2" initialValue={true} />
             <label className="form-check-label" htmlFor="flexRadioDefault2">
               Default checked radio
             </label>
