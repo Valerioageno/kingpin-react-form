@@ -21,18 +21,19 @@ Super fast ReactJS forms with almost null overhead.
 ## In few lines
 
 Kingpin is a form library that aims to make the writing of forms on React easy like writing them directly
-on the HTML.
+on a HTML file.
 
-To do it Kingpin let each input to be just declared and enhance the [Single
+To do it Kingpin lets each input to be just declared and respecting the [Single
 Responsibility Principle](https://en.wikipedia.org/wiki/Single-responsibility_principle)
 of each element (each input field take care just of it self).
 
-The SRP let each field to render independently without causing unhandled re-render side effects.
+The SRP lets each field to render independently without causing unhandled re-render side effects.
 
 The main `<Form />` component is the **only** interface for managing user set data, this choice in order to
-lead to a better forms develop and managing all the data in a single place.
+lead to a better forms develop and managing all the data in a single place (each state could be listened with the
+still available `onChange` element event).
 
-Read more in the documentation.
+Read more in the [documentation](https://kingpin-react-form.vercel.app/docs/intro).
 
 ## Getting started
 
@@ -59,7 +60,7 @@ function App(): JSX.Element {
 
     // data: {
     //     email: "",
-    //     password: ""
+    //     password: "",
     //     terms-acceptance: true
     // }
   }
@@ -80,7 +81,7 @@ Easy like a pie.
 ## Key concept
 
 In order to make Kingpin efficient and reusable the entire state logic is managed
-within the `<Form />` component (you don't need to directly control each input value).
+within the `<Form />` component (you shouldn't directly control each input value).
 
 Each Kingpin action element (`<Input />`, `<Textarea />`, ...) has two mandatory fields:
 
@@ -90,7 +91,8 @@ Each Kingpin action element (`<Input />`, `<Textarea />`, ...) has two mandatory
 Thanks to them the `<Form />` is now able to easily handle the internal state, but how?
 
 `<Form />` is "**just**" a simple html `<form>`, so you can use it as usual. The most important
-difference is that the `onSubmit` event now has two function arguments: the "classic" event and an object
+difference is that the `onSubmit` event now takes two arguments: the "classic"
+[event](https://developer.mozilla.org/en-US/docs/Web/API/SubmitEvent) and an object
 which is the `name:value` representation of its content.
 
 ## Extend Kingpin inputs
@@ -103,7 +105,7 @@ specifically desinged and developed to work within a Kingpin `Form`.
 In order to make Kingpin extensible by anyone it's possible create custom
 components with the `withKingpin` HOC.
 
-To see how it works with a real example check the documentation.
+To see how it works with a real example check the [documentation](https://kingpin-react-form.vercel.app/docs/withFormer).
 
 ## License
 

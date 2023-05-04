@@ -3,6 +3,6 @@
   "position": 4,
   "link": {
     "type": "generated-index",
-    "description": "A collection of components provided by Kingpin"
+    "description": "A collection of components provided out of the box by Kingpin"
   }
 }
