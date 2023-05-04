@@ -23,7 +23,7 @@ Super fast ReactJS forms with almost null overhead.
 Kingpin is a form library that aims to make the writing of forms on React easy like writing them directly
 on a HTML file.
 
-To do it Kingpin lets each input to be just declared and respecting the [Single
+To do it Kingpin lets each input to be just declared and forces it to follow the [Single
 Responsibility Principle](https://en.wikipedia.org/wiki/Single-responsibility_principle)
 of each element (each input field take care just of it self).
 
