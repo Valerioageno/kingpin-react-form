@@ -4,7 +4,14 @@ import { FormEvent, HTMLAttributes, PropsWithRef, useRef } from 'react'
 import React from 'react'
 
 type FormProps = Omit<HTMLAttributes<HTMLFormElement>, 'onSubmit'> & {
+  /**
+   * @description The "classic" onSubmit event but with a second argument containing the whole form payload.
+   */
   onSubmit?: (e: FormEvent<HTMLFormElement>, data: Record<string, Value>) => void
+  /**
+   * @description Callback that runs when all the field have been reset.
+   */
+  onReset?: () => void
 }
 
 /**
@@ -18,6 +25,13 @@ const KingpinForm = (props: FormProps): JSX.Element => {
   const childrenRef = useRef<InputEffect<any>[]>([])
 
   const submitFunction = (e: FormEvent<HTMLFormElement>): void => {
+    if ((e.nativeEvent as SubmitEvent).submitter?.getAttribute('name') === 'reset') {
+      e.preventDefault()
+      childrenRef?.current?.forEach((el): void => el?.reset?.())
+      props.onReset?.()
+      return
+    }
+
     const data: Record<string, Value> = {}
     childrenRef?.current?.forEach((el): void => {
       const d = el?.sendData?.()

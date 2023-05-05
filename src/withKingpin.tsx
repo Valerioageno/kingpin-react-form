@@ -37,6 +37,9 @@ export default function withKingpin<T, State>(
         sendData(): Result<State> {
           return { name: props?.name || 'Kingpin-element', value: state }
         },
+        reset(): void {
+          setState(props.initialValue)
+        },
       }))
 
       return (

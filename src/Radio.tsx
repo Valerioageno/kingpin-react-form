@@ -1,6 +1,6 @@
 import { useRadioGroupContext } from './RadioGroup'
 import { useIsomorphicEffect } from './helpers'
-import withKingpin, { WithKingpinType } from './withKingpin'
+import { WithKingpinType } from './withKingpin'
 import { InputHTMLAttributes } from 'react'
 import React from 'react'
 
@@ -11,33 +11,31 @@ type InputProps = InputHTMLAttributes<HTMLInputElement>
  * @param props InputHTMLAttributes & initialValue
  * @returns JSX.Element
  */
-const KingpinRadio = withKingpin<InputHTMLAttributes<HTMLInputElement> & WithKingpinType<boolean>, boolean>(
-  (props: InputProps & WithKingpinType<boolean>): JSX.Element => {
-    const { selected, setSelected } = useRadioGroupContext()
+const KingpinRadio = (props: InputProps & WithKingpinType<boolean>): JSX.Element => {
+  const { selected, setSelected } = useRadioGroupContext()
 
-    useIsomorphicEffect(() => {
-      if (selected === props.name) {
+  useIsomorphicEffect(() => {
+    if (selected === props.name) {
+      setSelected?.(props.name || 'kingpin-radio')
+    }
+  }, [selected, setSelected])
+
+  useIsomorphicEffect(() => {
+    if (props.value) setSelected?.(props.name || 'kingpin-radio')
+  }, [])
+
+  return (
+    <input
+      name="kingpin-radio"
+      {...props}
+      checked={selected === props.name}
+      type="radio"
+      onChange={(e): void => {
+        props.onChange?.(e)
         setSelected?.(props.name || 'kingpin-radio')
-      }
-    }, [selected, setSelected])
-
-    useIsomorphicEffect(() => {
-      if (props.value) setSelected?.(props.name || 'kingpin-radio')
-    }, [])
-
-    return (
-      <input
-        name="kingpin-radio"
-        {...props}
-        checked={selected === props.name}
-        type="radio"
-        onChange={(e): void => {
-          props.onChange?.(e)
-          setSelected?.(props.name || 'kingpin-radio')
-        }}
-      />
-    )
-  },
-)
+      }}
+    />
+  )
+}
 
 export default KingpinRadio

@@ -9,8 +9,9 @@ import Tabs from '@theme/Tabs'
 
 Radio buttons differ from other inputs because they need a wrapper which keeps the state.
 
-That wrapper is provider by Kingpin itself and is the `<RadioGroup />` component. The only
-prop it takes is the `name: string`
+That wrapper is provider by Kingpin itself and is the `<RadioGroup />` component. It takes
+as attributes the `name` (which is the key in the Kingpin submit payload) and the `initialValue`
+which is the name of the selected radio.
 
 <Tabs>
 <TabItem value="typescript" label="Typescript">
@@ -25,9 +26,9 @@ function App(): JSX.Element {
 
   return (
     <Form onSubmit={submit}>
-      <RadioGroup name="radio-group">
-        <Radio name="radio1" initialValue={false} />
-        <Radio name="radio2" initialValue={true} />
+      <RadioGroup name="radio-group" initialValue="radio2">
+        <Radio name="radio1" />
+        <Radio name="radio2" />
       </RadioGroup>
       <button type="submit">Submit</button>
     </Form>
@@ -48,9 +49,9 @@ function App() {
 
   return (
     <Form onSubmit={submit}>
-      <RadioGroup name="radio-group">
-        <Radio name="radio1" initialValue={false} />
-        <Radio name="radio2" initialValue={true} />
+      <RadioGroup name="radio-group" initialValue="radio2">
+        <Radio name="radio1" />
+        <Radio name="radio2" />
       </RadioGroup>
       <button type="submit">Submit</button>
     </Form>
