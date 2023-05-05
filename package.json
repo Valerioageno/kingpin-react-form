@@ -8,8 +8,11 @@
   "typings": "dist/index.d.ts",
   "description": "Super fast ReactJS forms with almost null overhead.",
   "keywords": [
-    "ReactJS",
-    "form"
+    "React",
+    "form",
+    "forms",
+    "hoc",
+    "typescript"
   ],
   "homepage": "https://kingpin-react-form.vercel.app/docs/intro",
   "repository": {
@@ -91,6 +94,7 @@
     "prettier": "^2.8.4",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-select": "^5.7.3",
     "size-limit": "^8.2.4",
     "tsdx": "^0.14.1",
     "tslib": "^2.5.0",
