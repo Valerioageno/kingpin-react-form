@@ -13,6 +13,20 @@ describe('Form', () => {
 
   it('Correct submit payload', async () => {
     let payload: Record<string, Value> = {}
+    const initialPayload = {
+      email: '',
+      password: '',
+      textarea1: '',
+      textarea2: '',
+      select1: '',
+      select2: '',
+      'radio-group-1': 'radio2',
+      'radio-group-2': 'radio3',
+      checkbox1: true,
+      checkbox2: false,
+      number1: 0,
+      number2: 80,
+    }
     const submitFn = (e: React.FormEvent<HTMLFormElement>, data: Record<string, Value>): void => {
       e.preventDefault()
       payload = data
@@ -36,18 +50,21 @@ describe('Form', () => {
           <option value="2">Two</option>
           <option value="3">Three</option>
         </Select>
-        <RadioGroup name="radio-group-1">
-          <Radio name="radio1" data-testid="radio1" initialValue={false} />
-          <Radio name="radio2" initialValue={true} />
+        <RadioGroup name="radio-group-1" initialValue="radio2">
+          <Radio name="radio1" data-testid="radio1" />
+          <Radio name="radio2" />
         </RadioGroup>
-        <RadioGroup name="radio-group-2">
-          <Radio name="radio3" initialValue={true} />
-          <Radio name="radio4" initialValue={false} />
+        <RadioGroup name="radio-group-2" initialValue="radio3">
+          <Radio name="radio3" />
+          <Radio name="radio4" />
         </RadioGroup>
         <Input name="checkbox1" type="checkbox" data-testid="checkbox1" initialValue />
         <Input name="checkbox2" type="checkbox" data-testid="checkbox2" initialValue={false} />
         <Input name="number1" type="number" data-testid="number1" initialValue={0} />
         <Input name="number2" type="number" data-testid="number2" initialValue={80} />
+        <button type="button" name="reset" data-testid="reset">
+          Reset
+        </button>
         <button type="submit" data-testid="submit">
           submit
         </button>
@@ -56,20 +73,7 @@ describe('Form', () => {
 
     fireEvent.click(screen.getByTestId('submit'))
 
-    expect(payload).toStrictEqual({
-      email: '',
-      password: '',
-      textarea1: '',
-      textarea2: '',
-      select1: '',
-      select2: '',
-      'radio-group-1': 'radio2',
-      'radio-group-2': 'radio3',
-      checkbox1: true,
-      checkbox2: false,
-      number1: 0,
-      number2: 80,
-    })
+    expect(payload).toStrictEqual(initialPayload)
 
     fireEvent.change(screen.getByTestId('email'), { target: { value: 'hey@kingpin.com' } })
     fireEvent.change(screen.getByTestId('password'), { target: { value: 'psw' } })
@@ -100,5 +104,11 @@ describe('Form', () => {
       number1: 40,
       number2: 10,
     })
+
+    fireEvent.click(screen.getByTestId('reset'))
+
+    fireEvent.click(screen.getByTestId('submit'))
+
+    expect(payload).toStrictEqual(initialPayload)
   })
 })

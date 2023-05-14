@@ -14,7 +14,7 @@ import {
 
 export const iterateOverChildren = <T,>(
   children: ReactNode,
-  customProps: (componentName: string) => PropsWithRef<T>,
+  customProps: (componentName: ReactElement) => PropsWithRef<T>,
 ): ReactNode => {
   return Children.map(children, (child) => {
     // equal to (if (child == null || typeof child == 'string'))
@@ -27,7 +27,7 @@ export const iterateOverChildren = <T,>(
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     return cloneElement(child as ReactElement<any, string | JSXElementConstructor<any>>, {
       ...child.props,
-      ...customProps(displayName),
+      ...customProps(child),
       children: displayName?.startsWith('Kingpin')
         ? child.props.children
         : iterateOverChildren(child.props.children, customProps),

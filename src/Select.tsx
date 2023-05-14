@@ -11,5 +11,5 @@ const KingpinSelect = withKingpin<SelectHTMLAttributes<HTMLSelectElement> & With
     <select name="kingpin-select" {...props} onChange={(e): void => props?.updateState?.(e.target.value)} />
   ),
 )
-
+KingpinSelect.displayName = 'KingpinSelect'
 export default KingpinSelect

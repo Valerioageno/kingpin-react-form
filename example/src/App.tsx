@@ -57,15 +57,15 @@ function App(): JSX.Element {
           <option value="3">Three</option>
         </Select>
         <h3>Radios</h3>
-        <RadioGroup name="radio-group">
+        <RadioGroup name="radio-group" initialValue="flexRadioDefault2">
           <div className="form-check">
-            <Radio className="form-check-input" name="flexRadioDefault1" id="flexRadioDefault1" initialValue={false} />
+            <Radio className="form-check-input" name="flexRadioDefault1" id="flexRadioDefault1" />
             <label className="form-check-label" htmlFor="flexRadioDefault1">
               Default radio
             </label>
           </div>
           <div className="form-check">
-            <Radio className="form-check-input" name="flexRadioDefault2" id="flexRadioDefault2" initialValue={true} />
+            <Radio className="form-check-input" name="flexRadioDefault2" id="flexRadioDefault2" />
             <label className="form-check-label" htmlFor="flexRadioDefault2">
               Default checked radio
             </label>
@@ -86,6 +86,9 @@ function App(): JSX.Element {
         </div>
         <button type="submit" className="btn btn-primary mt-3">
           Submit
+        </button>
+        <button type="button" name="reset" className="btn btn-secondary mt-3">
+          Reset
         </button>
       </Form>
     </div>

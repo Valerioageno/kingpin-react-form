@@ -37,5 +37,6 @@ const KingpinInput = withKingpin<InputHTMLAttributes<HTMLInputElement> & WithKin
     )
   },
 )
+KingpinInput.displayName = 'KingpinInput'
 
 export default KingpinInput

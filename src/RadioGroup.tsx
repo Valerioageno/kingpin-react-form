@@ -5,6 +5,7 @@ import React from 'react'
 
 type RadioGroupProps = {
   name: string
+  initialValue: string
   children: ReactNode
 }
 
@@ -22,7 +23,7 @@ const RadioGroup = createContext<ContextType>({})
  * @returns JSX.Element
  */
 const KingpinRadioGroup = forwardRef<InputEffect<string>, RadioGroupProps>((props, ref): JSX.Element => {
-  const [selected, setSelected] = useState<string>('')
+  const [selected, setSelected] = useState<string>(props.initialValue || '')
 
   useImperativeHandle(
     ref,
@@ -30,8 +31,11 @@ const KingpinRadioGroup = forwardRef<InputEffect<string>, RadioGroupProps>((prop
       sendData(): Result<string> {
         return { name: props.name || 'kingpin-radio-group', value: selected }
       },
+      reset(): void {
+        setSelected(props.initialValue || '')
+      },
     }),
-    [props.name, selected],
+    [props.name, selected, props.initialValue],
   )
   // TODO: stop here ref propagation
   return <RadioGroup.Provider value={{ selected, setSelected }}>{props.children}</RadioGroup.Provider>

@@ -1,6 +1,6 @@
 {
   "name": "kingpin-react-form",
-  "version": "0.1.2",
+  "version": "0.2.0",
   "author": "Valerio Ageno <valerioageno@yahoo.it>",
   "module": "dist/kingpin-react-form.esm.js",
   "license": "MIT",
@@ -21,7 +21,6 @@
   },
   "files": [
     "dist",
-    "src",
     "README.md"
   ],
   "engines": {
@@ -74,6 +73,7 @@
     "@size-limit/preset-small-lib": "^8.2.4",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^14.0.0",
+    "@testing-library/user-event": "^14.4.3",
     "@trivago/prettier-plugin-sort-imports": "^4.1.1",
     "@types/react": "^18.0.28",
     "@types/react-dom": "^18.0.11",

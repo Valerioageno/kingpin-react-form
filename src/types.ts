@@ -1,5 +1,6 @@
 export type InputEffect<T> = {
   sendData?: () => Result<T>
+  reset?: () => void
 }
 
 export type Result<T> = { name: string; value: T }
