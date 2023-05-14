@@ -1,6 +1,6 @@
 import { iterateOverChildren } from './helpers'
 import type { InputEffect, Value } from './types'
-import { FormEvent, HTMLAttributes, PropsWithRef, useRef } from 'react'
+import { FormEvent, HTMLAttributes, MouseEvent, PropsWithRef, ReactElement, useRef } from 'react'
 import React from 'react'
 
 type FormProps = Omit<HTMLAttributes<HTMLFormElement>, 'onSubmit'> & {
@@ -24,14 +24,14 @@ const KingpinForm = (props: FormProps): JSX.Element => {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const childrenRef = useRef<InputEffect<any>[]>([])
 
-  const submitFunction = (e: FormEvent<HTMLFormElement>): void => {
-    if ((e.nativeEvent as SubmitEvent).submitter?.getAttribute('name') === 'reset') {
-      e.preventDefault()
-      childrenRef?.current?.forEach((el): void => el?.reset?.())
-      props.onReset?.()
-      return
-    }
+  const resetForm = (e: MouseEvent<HTMLButtonElement>): void => {
+    e.preventDefault()
 
+    childrenRef?.current?.forEach((el): void => el?.reset?.())
+    props.onReset?.()
+  }
+
+  const submitFunction = (e: FormEvent<HTMLFormElement>): void => {
     const data: Record<string, Value> = {}
     childrenRef?.current?.forEach((el): void => {
       const d = el?.sendData?.()
@@ -43,12 +43,18 @@ const KingpinForm = (props: FormProps): JSX.Element => {
     props?.onSubmit?.(e, data)
   }
 
-  const customProps = (componentName: string): PropsWithRef<unknown> => {
-    if (componentName.startsWith('Kingpin') || componentName.startsWith('withKingpin')) {
+  const customProps = (child: ReactElement): PropsWithRef<unknown> => {
+    if (child.props.name === 'reset') {
+      return {
+        onClick: resetForm,
+      }
+    }
+    if (child.props.name) {
       return {
         ref: (ref: InputEffect<unknown>) => (childrenRef.current[childrenRef.current.length] = ref),
       }
     }
+
     return {}
   }
 

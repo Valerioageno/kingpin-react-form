@@ -11,5 +11,6 @@ const KingpinTextarea = withKingpin<TextareaHTMLAttributes<HTMLTextAreaElement> 
     <textarea name="kingpin-textarea" {...props} onChange={(e): void => props?.updateState?.(e.target.value)} />
   ),
 )
+KingpinTextarea.displayName = 'KingpinTextarea'
 
 export default KingpinTextarea

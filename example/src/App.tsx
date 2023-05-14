@@ -87,7 +87,7 @@ function App(): JSX.Element {
         <button type="submit" className="btn btn-primary mt-3">
           Submit
         </button>
-        <button type="submit" name="reset" className="btn btn-secondary mt-3">
+        <button type="button" name="reset" className="btn btn-secondary mt-3">
           Reset
         </button>
       </Form>

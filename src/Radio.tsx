@@ -37,5 +37,4 @@ const KingpinRadio = (props: InputProps & WithKingpinType<boolean>): JSX.Element
     />
   )
 }
-
 export default KingpinRadio
