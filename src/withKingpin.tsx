@@ -1,6 +1,9 @@
 import { InputEffect, Result } from './types'
 import React, { ComponentType, ForwardRefExoticComponent, forwardRef, useImperativeHandle, useState } from 'react'
 
+export type KingpinComponent<T, State> = ForwardRefExoticComponent<
+  React.PropsWithoutRef<Omit<T, 'updateState'> & WithKingpinProps<State>> & React.RefAttributes<InputEffect<State>>
+>
 export type WithKingpinType<T> = {
   updateState?: (val: T) => void
 }
@@ -9,9 +12,6 @@ type WithKingpinProps<T> = {
   name: string
   initialValue: T
 }
-type KingpinComponent<T, State> = ForwardRefExoticComponent<
-  React.PropsWithoutRef<Omit<T, 'updateState'> & WithKingpinProps<State>> & React.RefAttributes<InputEffect<State>>
->
 
 /**
  * @description Trasnform the passed WrappedComponent into an input usable by the Kingpin form component.
