@@ -1,3 +1,4 @@
+import { removeKeysFromObject } from './helpers'
 import withKingpin, { WithKingpinType } from './withKingpin'
 import React, { ChangeEvent, InputHTMLAttributes } from 'react'
 
@@ -29,7 +30,7 @@ const KingpinInput = withKingpin<InputHTMLAttributes<HTMLInputElement> & WithKin
     return (
       <input
         name="Kingpin-input"
-        {...props}
+        {...removeKeysFromObject(props, ['initialValue', 'updateState'])}
         value={props.value}
         checked={props.type === 'checkbox' ? (props.value as unknown as boolean) : undefined}
         onChange={onChange}
@@ -37,6 +38,7 @@ const KingpinInput = withKingpin<InputHTMLAttributes<HTMLInputElement> & WithKin
     )
   },
 )
+
 KingpinInput.displayName = 'KingpinInput'
 
 export default KingpinInput

@@ -1,3 +1,4 @@
+import { removeKeysFromObject } from './helpers'
 import withKingpin, { WithKingpinType } from './withKingpin'
 import React, { TextareaHTMLAttributes } from 'react'
 
@@ -8,7 +9,11 @@ import React, { TextareaHTMLAttributes } from 'react'
  */
 const KingpinTextarea = withKingpin<TextareaHTMLAttributes<HTMLTextAreaElement> & WithKingpinType<string>, string>(
   (props: TextareaHTMLAttributes<HTMLTextAreaElement> & WithKingpinType<string>): JSX.Element => (
-    <textarea name="kingpin-textarea" {...props} onChange={(e): void => props?.updateState?.(e.target.value)} />
+    <textarea
+      name="kingpin-textarea"
+      {...removeKeysFromObject(props, ['initialValue', 'updateState'])}
+      onChange={(e): void => props?.updateState?.(e.target.value)}
+    />
   ),
 )
 KingpinTextarea.displayName = 'KingpinTextarea'

@@ -1,3 +1,4 @@
+import { removeKeysFromObject } from './helpers'
 import withKingpin, { WithKingpinType } from './withKingpin'
 import React, { SelectHTMLAttributes } from 'react'
 
@@ -8,7 +9,11 @@ import React, { SelectHTMLAttributes } from 'react'
  */
 const KingpinSelect = withKingpin<SelectHTMLAttributes<HTMLSelectElement> & WithKingpinType<string>, string>(
   (props: SelectHTMLAttributes<HTMLSelectElement> & WithKingpinType<string>): JSX.Element => (
-    <select name="kingpin-select" {...props} onChange={(e): void => props?.updateState?.(e.target.value)} />
+    <select
+      name="kingpin-select"
+      {...removeKeysFromObject(props, ['initialValue', 'updateState'])}
+      onChange={(e): void => props?.updateState?.(e.target.value)}
+    />
   ),
 )
 KingpinSelect.displayName = 'KingpinSelect'

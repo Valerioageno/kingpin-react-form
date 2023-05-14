@@ -35,6 +35,26 @@ export const iterateOverChildren = <T,>(
   })
 }
 
+/**
+ * @description remove from the passed object all the keys set in the second argument.
+ * @param obj the object which needs to remove some fields.
+ * @param keys the fields to remove.
+ * @returns A new object without the listed keys.
+ */
+export function removeKeysFromObject<T = Record<string, unknown>>(obj: T, keys: string[]): T {
+  // TODO: avoid clone the object
+  const newObj: T = { ...obj }
+
+  keys.forEach((k) => {
+    // TODO: correct type casting
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
+    delete newObj[k]
+  })
+
+  return newObj
+}
+
 export const useIsomorphicEffect = (callback: EffectCallback, deps: DependencyList): void => {
   if (typeof window !== 'undefined') {
     // eslint-disable-next-line react-hooks/rules-of-hooks
