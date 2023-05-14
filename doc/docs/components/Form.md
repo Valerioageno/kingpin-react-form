@@ -41,6 +41,12 @@ To reset the form you just need to create a simple button with `name="reset"`.
 
 The rest of the logic is entirely managed by Kingpin.
 
+:::caution
+
+Be sure to set `type="button"` in order to avoid unwanted submits.
+
+:::
+
 ```tsx
 import { Form, Input } from 'kingpin-react-form'
 
@@ -58,7 +64,9 @@ function App(): JSX.Element {
     <Form onSubmit={submit} onReset={reset}>
       <Input name="email" type="email" initialValue="" />
       <Input name="password" type="password" initialValue="" />
-      <button name="reset">Reset</button>
+      <button name="reset" type="button">
+        Reset
+      </button>
       <button type="submit">Submit</button>
     </Form>
   )
