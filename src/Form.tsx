@@ -1,5 +1,5 @@
 import { iterateOverChildren } from './helpers'
-import type { InputEffect, Value } from './types'
+import type { FormResult, InputEffect, Value } from './types'
 import { FormEvent, HTMLAttributes, MouseEvent, PropsWithRef, ReactElement, useRef } from 'react'
 import React from 'react'
 
@@ -7,7 +7,7 @@ type FormProps = Omit<HTMLAttributes<HTMLFormElement>, 'onSubmit'> & {
   /**
    * @description The "classic" onSubmit event but with a second argument containing the whole form payload.
    */
-  onSubmit?: (e: FormEvent<HTMLFormElement>, data: Record<string, Value>) => void
+  onSubmit?: (e: FormEvent<HTMLFormElement>, form: FormResult) => void
   /**
    * @description Callback that runs when all the field have been reset.
    */
@@ -22,7 +22,7 @@ type FormProps = Omit<HTMLAttributes<HTMLFormElement>, 'onSubmit'> & {
  */
 const KingpinForm = (props: FormProps): JSX.Element => {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const childrenRef = useRef<InputEffect<any>[]>([])
+  const childrenRef = useRef<Map<string, InputEffect<any>>>(new Map([]))
 
   const resetForm = (e: MouseEvent<HTMLButtonElement>): void => {
     e.preventDefault()
@@ -32,15 +32,23 @@ const KingpinForm = (props: FormProps): JSX.Element => {
   }
 
   const submitFunction = (e: FormEvent<HTMLFormElement>): void => {
-    const data: Record<string, Value> = {}
+    const payload: Record<string, Value> = {}
+    let isFormValid = true
+
     childrenRef?.current?.forEach((el): void => {
       const d = el?.sendData?.()
+      const isElementValid = el?.checkValidation ? el.checkValidation() : true
+
+      if (!isElementValid) {
+        isFormValid = false
+      }
 
       if (d?.name) {
-        data[d.name] = d?.value
+        payload[d.name] = d?.value
       }
     })
-    props?.onSubmit?.(e, data)
+
+    props?.onSubmit?.(e, { isFormValid, payload })
   }
 
   const customProps = (child: ReactElement): PropsWithRef<unknown> => {
@@ -49,9 +57,12 @@ const KingpinForm = (props: FormProps): JSX.Element => {
         onClick: resetForm,
       }
     }
+
     if (child.props.name) {
       return {
-        ref: (ref: InputEffect<unknown>) => (childrenRef.current[childrenRef.current.length] = ref),
+        ref: (element: InputEffect<unknown>): void => {
+          childrenRef.current.set(child.props.name, element)
+        },
       }
     }
 

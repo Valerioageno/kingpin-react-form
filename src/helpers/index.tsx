@@ -20,17 +20,12 @@ export const iterateOverChildren = <T,>(
     // equal to (if (child == null || typeof child == 'string'))
     if (!isValidElement(child)) return child
 
-    // TODO: fix this crap
-    const displayName: string | undefined =
-      (child.type as unknown as { render: { displayName: '' } })?.render?.displayName || ''
-
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     return cloneElement(child as ReactElement<any, string | JSXElementConstructor<any>>, {
       ...child.props,
       ...customProps(child),
-      children: displayName?.startsWith('Kingpin')
-        ? child.props.children
-        : iterateOverChildren(child.props.children, customProps),
+      // TODO: avoid iterate over radios
+      children: iterateOverChildren(child.props.children, customProps),
     })
   })
 }

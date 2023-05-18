@@ -1,15 +1,21 @@
-import { Form, Input, Radio, RadioGroup, Select, Textarea, Value } from '../../.'
+import { Form, FormResult, Input, Radio, RadioGroup, Select, Textarea } from '../../.'
 import WithHOCSelect from './select'
 import { FormEvent } from 'react'
 
 function App(): JSX.Element {
-  const submit = (e: FormEvent<HTMLFormElement>, data: Record<string, Value>) => {
+  const submit = (e: FormEvent<HTMLFormElement>, form: FormResult) => {
     e.preventDefault()
-    console.log(data)
+    console.log(form)
   }
+
+  const shouldNotBeEmpty = (s: string | number | boolean): boolean => {
+    if (typeof s === 'string') return s.length > 0
+    return true
+  }
+
   return (
     <div className="container py-4 px-3 mx-auto">
-      <h1 className="text-primary">Form Example</h1>
+      {/* <h1 className="text-primary">Form Example</h1> */}
       <Form onSubmit={submit}>
         <h3>Inputs</h3>
         <div className="mb-3">
@@ -23,16 +29,24 @@ function App(): JSX.Element {
             id="exampleInputEmail1"
             aria-describedby="emailHelp"
             initialValue=""
+            validation={shouldNotBeEmpty}
           />
         </div>
         <div className="mb-3">
           <label htmlFor="exampleInputPassword1" className="form-label">
             Password
           </label>
-          <Input name="password" type="password" className="form-control" id="exampleInputPassword1" initialValue="" />
+          <Input
+            name="password"
+            type="password"
+            className="form-control"
+            id="exampleInputPassword1"
+            initialValue=""
+            validation={shouldNotBeEmpty}
+          />
         </div>
-        <WithHOCSelect name="with-kingpin-select" initialValue={null} randomProp={10} />
-        <h3>Textarea</h3>
+        {/* <WithHOCSelect name="with-kingpin-select" initialValue={null} randomProp={10} /> */}
+        {/* <h3>Textarea</h3>
         <div className="form-floating mb-3">
           <Textarea
             name="comments"
@@ -56,6 +70,7 @@ function App(): JSX.Element {
           <option value="2">Two</option>
           <option value="3">Three</option>
         </Select>
+         */}
         <h3>Radios</h3>
         <RadioGroup name="radio-group" initialValue="flexRadioDefault2">
           <div className="form-check">
@@ -71,7 +86,7 @@ function App(): JSX.Element {
             </label>
           </div>
         </RadioGroup>
-        <h3>Checkboxes</h3>
+        {/* <h3>Checkboxes</h3>
         <div className="form-check">
           <Input
             className="form-check-input"
@@ -83,13 +98,13 @@ function App(): JSX.Element {
           <label className="form-check-label" htmlFor="flexCheckDefault">
             Default checkbox
           </label>
-        </div>
+        </div> */}
         <button type="submit" className="btn btn-primary mt-3">
           Submit
         </button>
-        <button type="button" name="reset" className="btn btn-secondary mt-3">
+        {/* <button type="button" name="reset" className="btn btn-secondary mt-3">
           Reset
-        </button>
+        </button> */}
       </Form>
     </div>
   )

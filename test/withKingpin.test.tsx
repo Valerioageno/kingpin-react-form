@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
-import { Form, Value, withKingpin } from '../src'
+import { Form, FormResult, withKingpin } from '../src'
 import { fireEvent, render, screen } from '@testing-library/react'
 import React, { useState } from 'react'
 import Select, { SingleValue } from 'react-select'
@@ -39,8 +39,8 @@ const CustomSelect = withKingpin<CustomSelectProps, SingleValue<Option>>(
 
 describe('withKingpin HOC', () => {
   it('Correctly submit the payload', async () => {
-    let payload: Record<string, Value> = {}
-    const submitFn = (e: React.FormEvent<HTMLFormElement>, data: Record<string, Value>): void => {
+    let payload: FormResult
+    const submitFn = (e: React.FormEvent<HTMLFormElement>, data: FormResult): void => {
       e.preventDefault()
       payload = data
     }
@@ -54,8 +54,11 @@ describe('withKingpin HOC', () => {
     )
     fireEvent.click(screen.getByTestId('submit'))
 
-    expect(payload).toStrictEqual({
-      'custom-select': null,
+    expect(payload!).toStrictEqual({
+      isFormValid: true,
+      payload: {
+        'custom-select': null,
+      },
     })
 
     fireEvent.focus(container.querySelector('input')!)
@@ -63,8 +66,11 @@ describe('withKingpin HOC', () => {
     fireEvent.click(screen.getByText('Strawberry'))
     fireEvent.click(screen.getByTestId('submit'))
 
-    expect(payload).toStrictEqual({
-      'custom-select': { value: 'strawberry', label: 'Strawberry' },
+    expect(payload!).toStrictEqual({
+      isFormValid: true,
+      payload: {
+        'custom-select': { value: 'strawberry', label: 'Strawberry' },
+      },
     })
   })
 })

@@ -1,5 +1,13 @@
+import { useIsomorphicEffect } from './helpers'
 import { InputEffect, Result } from './types'
-import React, { ComponentType, ForwardRefExoticComponent, forwardRef, useImperativeHandle, useState } from 'react'
+import React, {
+  ComponentType,
+  ForwardRefExoticComponent,
+  forwardRef,
+  useCallback,
+  useImperativeHandle,
+  useState,
+} from 'react'
 
 export type KingpinComponent<T, State> = ForwardRefExoticComponent<
   React.PropsWithoutRef<Omit<T, 'updateState'> & WithKingpinProps<State>> & React.RefAttributes<InputEffect<State>>
@@ -8,9 +16,12 @@ export type WithKingpinType<T> = {
   updateState?: (val: T) => void
 }
 
+type ValidationFn<State> = (s: State) => boolean
+
 type WithKingpinProps<T> = {
   name: string
   initialValue: T
+  validation?: ValidationFn<T> | ValidationFn<T>[]
 }
 
 /**
@@ -31,6 +42,36 @@ export default function withKingpin<T, State>(WrappedComponent: ComponentType<T>
   const ComponentWithKingpin = forwardRef<InputEffect<State>, Omit<T, 'updateState'> & WithKingpinProps<State>>(
     (props, ref) => {
       const [state, setState] = useState<State>(props.initialValue)
+      const [isValid, setIsValid] = useState<boolean>(true)
+
+      const checkIsValid = useCallback(
+        (s: State): boolean => {
+          if (!props.validation) {
+            return true
+          }
+
+          if (Array.isArray(props.validation)) {
+            props.validation.forEach((validFn): boolean => {
+              if (validFn(s) === false) {
+                return false
+              }
+              return true
+            })
+            return true
+          }
+
+          if ((props.validation as ValidationFn<State>)?.(s)) {
+            return true
+          }
+          return false
+        },
+        [props.validation],
+      )
+
+      // Check on the first render if the initial value is valid
+      useIsomorphicEffect(() => {
+        setIsValid(checkIsValid(props.initialValue))
+      }, [checkIsValid, props.initialValue])
 
       useImperativeHandle(ref, () => ({
         sendData(): Result<State> {
@@ -39,13 +80,20 @@ export default function withKingpin<T, State>(WrappedComponent: ComponentType<T>
         reset(): void {
           setState(props.initialValue)
         },
+        checkValidation(): boolean {
+          return isValid
+        },
       }))
 
       return (
         <WrappedComponent
           {...(props as unknown as T)}
           value={state}
-          updateState={(val: State): void => setState(val)}
+          updateState={(val: State): void => {
+            setIsValid(checkIsValid(val))
+            setState(val)
+          }}
+          isValid={isValid}
         />
       )
     },

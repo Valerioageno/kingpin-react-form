@@ -1,4 +1,5 @@
-import { Form, Textarea, Value } from '../src'
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
+import { Form, FormResult, Textarea } from '../src'
 import '@testing-library/jest-dom'
 import { fireEvent, render, screen } from '@testing-library/react'
 import * as React from 'react'
@@ -18,8 +19,8 @@ describe('Textarea', () => {
   })
 
   it('Reset textarea', () => {
-    let payload: Record<string, Value> = {}
-    const onSubmitFn = (e: React.FormEvent<HTMLFormElement>, data: Record<string, Value>): void => {
+    let payload: FormResult
+    const onSubmitFn = (e: React.FormEvent<HTMLFormElement>, data: FormResult): void => {
       e.preventDefault()
       payload = data
     }
@@ -37,19 +38,19 @@ describe('Textarea', () => {
     )
 
     fireEvent.click(screen.getByTestId('submit'))
-    expect(payload).toStrictEqual({ textarea: '' })
+    expect(payload!).toStrictEqual({ isFormValid: true, payload: { textarea: '' } })
 
     expect(screen.queryByDisplayValue('ciao')).not.toBeInTheDocument()
     fireEvent.change(screen.getByTestId('textarea'), { target: { value: 'ciao' } })
     expect(screen.queryByDisplayValue('ciao')).toBeInTheDocument()
 
     fireEvent.click(screen.getByTestId('submit'))
-    expect(payload).toStrictEqual({ textarea: 'ciao' })
+    expect(payload!).toStrictEqual({ isFormValid: true, payload: { textarea: 'ciao' } })
 
     fireEvent.click(screen.getByTestId('reset'))
     expect(screen.queryByDisplayValue('ciao')).not.toBeInTheDocument()
 
     fireEvent.click(screen.getByTestId('submit'))
-    expect(payload).toStrictEqual({ textarea: '' })
+    expect(payload!).toStrictEqual({ isFormValid: true, payload: { textarea: '' } })
   })
 })

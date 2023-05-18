@@ -3,6 +3,7 @@ import withKingpin, { WithKingpinType } from './withKingpin'
 import React, { ChangeEvent, InputHTMLAttributes } from 'react'
 
 type ReturnTypes = string | number | boolean
+
 type Props = InputHTMLAttributes<HTMLInputElement> & WithKingpinType<ReturnTypes>
 
 /**
@@ -30,7 +31,7 @@ const KingpinInput = withKingpin<Props, ReturnTypes>((props: Props): JSX.Element
   return (
     <input
       name="Kingpin-input"
-      {...removeKeysFromObject(props, ['initialValue', 'updateState'])}
+      {...removeKeysFromObject(props, ['initialValue', 'updateState', 'isValid', 'validation'])}
       value={props.value}
       checked={props.type === 'checkbox' ? (props.value as unknown as boolean) : undefined}
       onChange={onChange}
