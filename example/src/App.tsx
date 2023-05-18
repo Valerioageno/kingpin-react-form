@@ -1,11 +1,12 @@
 import { Form, FormResult, Input, Radio, RadioGroup, Select, Textarea } from '../../.'
 import WithHOCSelect from './select'
-import { FormEvent } from 'react'
+import { FormEvent, useRef } from 'react'
 
 function App(): JSX.Element {
-  const submit = (e: FormEvent<HTMLFormElement>, form: FormResult) => {
+  const ref = useRef<HTMLFormElement>(null)
+  const submit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    console.log(form)
+    new FormData(ref.current!).forEach(console.log)
   }
 
   const shouldNotBeEmpty = (s: string | number | boolean): boolean => {
@@ -16,7 +17,7 @@ function App(): JSX.Element {
   return (
     <div className="container py-4 px-3 mx-auto">
       {/* <h1 className="text-primary">Form Example</h1> */}
-      <Form onSubmit={submit}>
+      <form onSubmit={submit} ref={ref}>
         <h3>Inputs</h3>
         <div className="mb-3">
           <label htmlFor="exampleInputEmail1" className="form-label">
@@ -29,7 +30,7 @@ function App(): JSX.Element {
             id="exampleInputEmail1"
             aria-describedby="emailHelp"
             initialValue=""
-            validation={shouldNotBeEmpty}
+            validation={[shouldNotBeEmpty]}
           />
         </div>
         <div className="mb-3">
@@ -105,7 +106,7 @@ function App(): JSX.Element {
         {/* <button type="button" name="reset" className="btn btn-secondary mt-3">
           Reset
         </button> */}
-      </Form>
+      </form>
     </div>
   )
 }
