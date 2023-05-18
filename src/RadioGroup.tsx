@@ -1,12 +1,14 @@
 /* eslint-disable jsdoc/check-param-names */
-import type { InputEffect, Result } from './types'
-import { ReactNode, createContext, forwardRef, useContext, useImperativeHandle, useState } from 'react'
+import useValidation from './hooks/useValidation'
+import type { InputEffect, Result, ValidationFn } from './types'
+import { ReactNode, createContext, forwardRef, useContext, useEffect, useImperativeHandle, useState } from 'react'
 import React from 'react'
 
 type RadioGroupProps = {
   name: string
   initialValue: string
   children: ReactNode
+  validation?: ValidationFn<string> | ValidationFn<string>[]
 }
 
 type ContextType = {
@@ -24,6 +26,8 @@ const RadioGroup = createContext<ContextType>({})
  */
 const KingpinRadioGroup = forwardRef<InputEffect<string>, RadioGroupProps>((props, ref): JSX.Element => {
   const [selected, setSelected] = useState<string>(props.initialValue || '')
+  const checkIsValid = useValidation(props.validation)
+  const [isValid, setIsValid] = useState<boolean>(checkIsValid(props.initialValue))
 
   useImperativeHandle(
     ref,
@@ -34,9 +38,17 @@ const KingpinRadioGroup = forwardRef<InputEffect<string>, RadioGroupProps>((prop
       reset(): void {
         setSelected(props.initialValue || '')
       },
+      checkValidation(): boolean {
+        return isValid
+      },
     }),
-    [props.name, selected, props.initialValue],
+    [props.name, selected, props.initialValue, isValid],
   )
+
+  useEffect(() => {
+    setIsValid(checkIsValid(selected))
+  }, [selected, setIsValid, checkIsValid])
+
   // TODO: stop here ref propagation
   return <RadioGroup.Provider value={{ selected, setSelected }}>{props.children}</RadioGroup.Provider>
 })

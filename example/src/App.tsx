@@ -3,10 +3,8 @@ import WithHOCSelect from './select'
 import { FormEvent, useRef } from 'react'
 
 function App(): JSX.Element {
-  const ref = useRef<HTMLFormElement>(null)
-  const submit = (e: FormEvent<HTMLFormElement>) => {
+  const submit = (e: FormEvent<HTMLFormElement>, form: FormResult) => {
     e.preventDefault()
-    new FormData(ref.current!).forEach(console.log)
   }
 
   const shouldNotBeEmpty = (s: string | number | boolean): boolean => {
@@ -14,10 +12,12 @@ function App(): JSX.Element {
     return true
   }
 
+  const shouldBeFirst = (s: string): boolean => s === 'flexRadioDefault1'
+
   return (
     <div className="container py-4 px-3 mx-auto">
       {/* <h1 className="text-primary">Form Example</h1> */}
-      <form onSubmit={submit} ref={ref}>
+      <Form onSubmit={submit}>
         <h3>Inputs</h3>
         <div className="mb-3">
           <label htmlFor="exampleInputEmail1" className="form-label">
@@ -73,7 +73,7 @@ function App(): JSX.Element {
         </Select>
          */}
         <h3>Radios</h3>
-        <RadioGroup name="radio-group" initialValue="flexRadioDefault2">
+        <RadioGroup name="radio-group" initialValue="flexRadioDefault2" validation={shouldBeFirst}>
           <div className="form-check">
             <Radio className="form-check-input" name="flexRadioDefault1" id="flexRadioDefault1" />
             <label className="form-check-label" htmlFor="flexRadioDefault1">
@@ -106,7 +106,7 @@ function App(): JSX.Element {
         {/* <button type="button" name="reset" className="btn btn-secondary mt-3">
           Reset
         </button> */}
-      </form>
+      </Form>
     </div>
   )
 }

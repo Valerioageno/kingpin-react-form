@@ -57,30 +57,35 @@ describe('Radio', () => {
     expect(payload!).toStrictEqual({ isFormValid: true, payload: { radios: 'radio1' } })
   })
 
-  //   it('Input validation', () => {
-  //     let payload: FormResult
-  //     const onSubmitFn = (e: React.FormEvent<HTMLFormElement>, data: FormResult): void => {
-  //       e.preventDefault()
-  //       payload = data
-  //     }
-  //     render(
-  //       <Form onSubmit={onSubmitFn}>
-  //         <Input data-testid="input" initialValue="" name="input" validation={shouldNotBeEmpty} />
-  //         <button type="submit" data-testid="submit">
-  //           Submit
-  //         </button>
-  //       </Form>,
-  //     )
+  it('Radio validation', () => {
+    let payload: FormResult
+    const onSubmitFn = (e: React.FormEvent<HTMLFormElement>, data: FormResult): void => {
+      e.preventDefault()
+      payload = data
+    }
+    const shouldBeFirst = (s: string): boolean => s === 'radio1'
 
-  //     fireEvent.click(screen.getByTestId('submit'))
-  //     expect(payload!).toStrictEqual({ isFormValid: false, payload: { input: '' } })
+    render(
+      <Form onSubmit={onSubmitFn}>
+        <RadioGroup name="radios" initialValue="radio2" validation={shouldBeFirst}>
+          <Radio name="radio1" data-testid="radio1" />
+          <Radio name="radio2" data-testid="radio2" />
+        </RadioGroup>
+        <button type="submit" data-testid="submit">
+          Submit
+        </button>
+      </Form>,
+    )
 
-  //     fireEvent.change(screen.getByTestId('input'), { target: { value: 'ciao' } })
-  //     fireEvent.click(screen.getByTestId('submit'))
-  //     expect(payload!).toStrictEqual({ isFormValid: true, payload: { input: 'ciao' } })
+    fireEvent.click(screen.getByTestId('submit'))
+    expect(payload!).toStrictEqual({ isFormValid: false, payload: { radios: 'radio2' } })
 
-  //     fireEvent.change(screen.getByTestId('input'), { target: { value: '' } })
-  //     fireEvent.click(screen.getByTestId('submit'))
-  //     expect(payload!).toStrictEqual({ isFormValid: false, payload: { input: '' } })
-  //   })
+    fireEvent.click(screen.getByTestId('radio1'))
+    fireEvent.click(screen.getByTestId('submit'))
+    expect(payload!).toStrictEqual({ isFormValid: true, payload: { radios: 'radio1' } })
+
+    fireEvent.click(screen.getByTestId('radio2'))
+    fireEvent.click(screen.getByTestId('submit'))
+    expect(payload!).toStrictEqual({ isFormValid: false, payload: { radios: 'radio2' } })
+  })
 })

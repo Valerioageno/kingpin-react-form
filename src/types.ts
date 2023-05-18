@@ -10,4 +10,5 @@ export type InputEffect<T> = {
 
 export type Result<T> = { name: string; value: T }
 
+export type ValidationFn<State> = (s: State) => boolean
 export type Value = string | number | boolean | readonly string[]

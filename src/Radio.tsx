@@ -14,12 +14,14 @@ type InputProps = InputHTMLAttributes<HTMLInputElement>
 const KingpinRadio = (props: InputProps & WithKingpinType<boolean>): JSX.Element => {
   const { selected, setSelected } = useRadioGroupContext()
 
+  // Update selection
   useIsomorphicEffect(() => {
     if (selected === props.name) {
       setSelected?.(props.name || 'kingpin-radio')
     }
   }, [selected, setSelected])
 
+  // Select radio on first render
   useIsomorphicEffect(() => {
     if (props.value) setSelected?.(props.name || 'kingpin-radio')
   }, [])
