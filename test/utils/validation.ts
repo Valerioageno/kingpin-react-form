@@ -1,3 +1,5 @@
+export const shouldBe3 = (s: string): boolean => s === '3'
+
 export const shouldBeAtLeast10Chars = (s: string): boolean => s.length > 10
 
 export const shouldNotBeEmpty = (s: string | number | boolean): boolean => {
