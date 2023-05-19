@@ -24,8 +24,7 @@ export const iterateOverChildren = <T,>(
     return cloneElement(child as ReactElement<any, string | JSXElementConstructor<any>>, {
       ...child.props,
       ...customProps(child),
-      // TODO: avoid iterate over radios
-      children: iterateOverChildren(child.props.children, customProps),
+      children: child.props.name ? child.props.children : iterateOverChildren(child.props.children, customProps),
     })
   })
 }
