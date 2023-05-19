@@ -9,13 +9,11 @@ const useValidation = <T,>(validationFns: ValidationFn<T> | ValidationFn<T>[] | 
       }
 
       if (Array.isArray(validationFns)) {
-        validationFns.forEach((validFn): boolean => {
-          if (validFn(s) === false) {
-            return false
-          }
-          return true
+        let validationRes = true
+        validationFns.forEach((validFn) => {
+          if (validFn(s) === false) validationRes = false
         })
-        return true
+        return validationRes
       }
 
       if ((validationFns as ValidationFn<T>)?.(s)) {

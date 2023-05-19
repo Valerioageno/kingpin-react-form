@@ -14,7 +14,10 @@ const KingpinTextarea = withKingpin<Props, string>(
     <textarea
       name="kingpin-textarea"
       {...removeKeysFromObject(props, ['initialValue', 'updateState', 'isValid', 'validation'])}
-      onChange={(e): void => props?.updateState?.(e.target.value)}
+      onChange={(e): void => {
+        props.updateState?.(e.target.value)
+        props.onChange?.(e)
+      }}
     />
   ),
 )

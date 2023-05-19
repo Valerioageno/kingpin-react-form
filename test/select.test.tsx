@@ -23,10 +23,12 @@ describe('Select', () => {
 
   it('Reset select', () => {
     let payload: FormResult
+
     const onSubmitFn = (e: React.FormEvent<HTMLFormElement>, data: FormResult): void => {
       e.preventDefault()
       payload = data
     }
+
     render(
       <Form onSubmit={onSubmitFn}>
         <Select data-testid="select" initialValue="" name="select">

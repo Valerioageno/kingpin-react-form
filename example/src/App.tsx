@@ -5,6 +5,7 @@ import { FormEvent, useRef } from 'react'
 function App(): JSX.Element {
   const submit = (e: FormEvent<HTMLFormElement>, form: FormResult) => {
     e.preventDefault()
+    console.log(form)
   }
 
   const shouldNotBeEmpty = (s: string | number | boolean): boolean => {
@@ -13,6 +14,7 @@ function App(): JSX.Element {
   }
 
   const shouldBeFirst = (s: string): boolean => s === 'flexRadioDefault1'
+  const shouldBeAtLeast10Chars = (s: string): boolean => s.length > 10
 
   return (
     <div className="container py-4 px-3 mx-auto">
@@ -30,24 +32,16 @@ function App(): JSX.Element {
             id="exampleInputEmail1"
             aria-describedby="emailHelp"
             initialValue=""
-            validation={[shouldNotBeEmpty]}
           />
         </div>
         <div className="mb-3">
           <label htmlFor="exampleInputPassword1" className="form-label">
             Password
           </label>
-          <Input
-            name="password"
-            type="password"
-            className="form-control"
-            id="exampleInputPassword1"
-            initialValue=""
-            validation={shouldNotBeEmpty}
-          />
+          <Input name="password" type="password" className="form-control" id="exampleInputPassword1" initialValue="" />
         </div>
         {/* <WithHOCSelect name="with-kingpin-select" initialValue={null} randomProp={10} /> */}
-        {/* <h3>Textarea</h3>
+        <h3>Textarea</h3>
         <div className="form-floating mb-3">
           <Textarea
             name="comments"
@@ -55,9 +49,11 @@ function App(): JSX.Element {
             placeholder="Leave a comment here"
             id="floatingTextarea"
             initialValue=""
+            validation={[shouldBeAtLeast10Chars, shouldNotBeEmpty]}
           />
           <label htmlFor="floatingTextarea">Comments</label>
         </div>
+        {/*
         <h3>Select</h3>
         <Select
           name="number-selector"
@@ -73,7 +69,7 @@ function App(): JSX.Element {
         </Select>
          */}
         <h3>Radios</h3>
-        <RadioGroup name="radio-group" initialValue="flexRadioDefault2" validation={shouldBeFirst}>
+        <RadioGroup name="radio-group" initialValue="flexRadioDefault2">
           <div className="form-check">
             <Radio className="form-check-input" name="flexRadioDefault1" id="flexRadioDefault1" />
             <label className="form-check-label" htmlFor="flexRadioDefault1">
