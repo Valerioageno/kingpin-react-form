@@ -40,7 +40,7 @@ function App(): JSX.Element {
 Input is hands down the most versatile among the inputs type since the number of different
 values the `type` attribute can have.
 
-For this reason quite probably you won't need always a `string` as return type and Kingping
+For this reason quite probably you won't need always a `string` as return type and Kingpin
 take actually care of it.
 
 Basically if the `type` attribute is `range` or `number` the return tipe will be a
