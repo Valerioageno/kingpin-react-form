@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
-import { Form, FormResult, Input } from '../src'
+import { Error, Form, FormResult, Input } from '../src'
 import { shouldNotBeEmpty } from './utils/validation'
 import '@testing-library/jest-dom'
 import { fireEvent, render, screen } from '@testing-library/react'
@@ -54,7 +54,7 @@ describe('Input', () => {
     expect(payload!).toStrictEqual({ isFormValid: true, payload: { input: '' } })
   })
 
-  it('Input validation', () => {
+  it('Input validation and error handling', () => {
     let payload: FormResult
     const onSubmitFn = (e: React.FormEvent<HTMLFormElement>, data: FormResult): void => {
       e.preventDefault()
@@ -63,21 +63,28 @@ describe('Input', () => {
     render(
       <Form onSubmit={onSubmitFn}>
         <Input data-testid="input" initialValue="" name="input" validation={shouldNotBeEmpty} />
+        <Error name="input:error">
+          <p data-testid="error-message">Error message</p>
+        </Error>
         <button type="submit" data-testid="submit">
           Submit
         </button>
       </Form>,
     )
 
+    expect(screen.queryByTestId('error-message')).not.toBeInTheDocument()
     fireEvent.click(screen.getByTestId('submit'))
+    expect(screen.queryByTestId('error-message')).toBeInTheDocument()
     expect(payload!).toStrictEqual({ isFormValid: false, payload: { input: '' } })
 
     fireEvent.change(screen.getByTestId('input'), { target: { value: 'ciao' } })
     fireEvent.click(screen.getByTestId('submit'))
+    expect(screen.queryByTestId('error-message')).not.toBeInTheDocument()
     expect(payload!).toStrictEqual({ isFormValid: true, payload: { input: 'ciao' } })
 
     fireEvent.change(screen.getByTestId('input'), { target: { value: '' } })
     fireEvent.click(screen.getByTestId('submit'))
+    expect(screen.queryByTestId('error-message')).toBeInTheDocument()
     expect(payload!).toStrictEqual({ isFormValid: false, payload: { input: '' } })
   })
 })

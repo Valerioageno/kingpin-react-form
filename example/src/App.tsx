@@ -15,6 +15,7 @@ function App(): JSX.Element {
 
   const shouldBeFirst = (s: string): boolean => s === 'flexRadioDefault1'
   const shouldBeAtLeast10Chars = (s: string): boolean => s.length > 10
+  const shouldNotbeNull = (s: any): boolean => s !== null
 
   return (
     <div className="container py-4 px-3 mx-auto">
@@ -40,7 +41,12 @@ function App(): JSX.Element {
           </label>
           <Input name="password" type="password" className="form-control" id="exampleInputPassword1" initialValue="" />
         </div>
-        {/* <WithHOCSelect name="with-kingpin-select" initialValue={null} randomProp={10} /> */}
+        <WithHOCSelect name="with-kingpin-select" initialValue={null} randomProp={10} validation={shouldNotbeNull} />
+        <Error name="with-kingpin-select:error">
+          <div className="alert alert-danger" role="alert">
+            This is a danger alert—check it out!
+          </div>
+        </Error>
         <h3>Textarea</h3>
         <div className="form-floating mb-3">
           <Textarea
