@@ -94,8 +94,8 @@ Each Kingpin action element (`<Input />`, `<Textarea />`, ...) has two mandatory
 
 Thanks to them the `<Form />` is now able to easily handle the internal state, but how?
 
-`<Form />` is "**just**" a simple html `<form>`, so you can use it as usual. The most important
-difference is that the `onSubmit` event now takes two arguments: the "classic"
+`<Form />` is "**just**" a simple html `<form>`, so you can use it as usual. The most significant
+difference is that the `onSubmit` callback now takes two arguments: the "classic"
 [event](https://developer.mozilla.org/en-US/docs/Web/API/SubmitEvent) and an object
 which contains whether the form is valid or not ([here](https://kingpin-react-form.vercel.app/docs/validation)
 about validation) and `payload` which is the `name:value` representation of its content.

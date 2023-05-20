@@ -44,10 +44,11 @@ Read more in the [documentation](https://kingpin-react-form.vercel.app/docs/intr
 Currently implementations are quite verbose causing a confusing DX.
 
 Also there are many way to think about forms implementations:
+
 - Using `new FormData` with the plain HTML validation systems ([ref](https://react.dev/reference/react-dom/components/input#reading-the-input-values-when-submitting-a-form))
 - Using `useRef` to handle the data on submit.
 - Using `useState` for each field causing multiple re-renders and low performances
-but a very deep level of interaction with the data.
+  but a very deep level of interaction with the data.
 
 Kingpin wants to take the best from each of them ensuring a strong development experience
 but providing top performances and the deepest level of interaction.
@@ -140,8 +141,8 @@ Each Kingpin action element (`<Input />`, `<Textarea />`, ...) has two mandatory
 
 Thanks to them the `<Form />` is now able to easily handle the internal state, but how?
 
-`<Form />` is "**just**" a simple html `<form>`, so you can use it as usual. The most important
-difference is that the `onSubmit` event now takes two arguments: the "classic"
+`<Form />` is "**just**" a simple html `<form>`, so you can use it as usual. The most significant
+difference is that the `onSubmit` callback now takes two arguments: the "classic"
 [event](https://developer.mozilla.org/en-US/docs/Web/API/SubmitEvent) and an object
 which contains whether the form is valid or not ([here](validation)
 about validation) and `payload` which is the `name:value` representation of its content.
