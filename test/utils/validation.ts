@@ -6,3 +6,5 @@ export const shouldNotBeEmpty = (s: string | number | boolean): boolean => {
   if (typeof s === 'string') return s.length > 0
   return true
 }
+
+export const shouldNotBeNull = (s: null | Record<string, string>): boolean => s !== null

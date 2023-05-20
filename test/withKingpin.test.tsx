@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { Form, FormResult, withKingpin } from '../src'
+import { shouldNotBeNull } from './utils/validation'
 import { fireEvent, render, screen } from '@testing-library/react'
 import React, { useState } from 'react'
 import Select, { SingleValue } from 'react-select'
@@ -46,7 +47,7 @@ describe('withKingpin HOC', () => {
     }
     const { container } = render(
       <Form onSubmit={submitFn}>
-        <CustomSelect name="custom-select" initialValue={null} data-testid="custom-select" />)
+        <CustomSelect name="custom-select" initialValue={null} data-testid="custom-select" />
         <button type="submit" data-testid="submit">
           Submit
         </button>
@@ -71,6 +72,38 @@ describe('withKingpin HOC', () => {
       payload: {
         'custom-select': { value: 'strawberry', label: 'Strawberry' },
       },
+    })
+  })
+
+  it('validation', () => {
+    let payload: FormResult
+    const submitFn = (e: React.FormEvent<HTMLFormElement>, data: FormResult): void => {
+      e.preventDefault()
+      payload = data
+    }
+    const { container } = render(
+      <Form onSubmit={submitFn}>
+        <CustomSelect
+          name="custom-select"
+          initialValue={null}
+          data-testid="custom-select"
+          validation={shouldNotBeNull}
+        />
+        <button type="submit" data-testid="submit">
+          Submit
+        </button>
+      </Form>,
+    )
+
+    fireEvent.click(screen.getByTestId('submit'))
+    expect(payload!).toStrictEqual({ isFormValid: false, payload: { 'custom-select': null } })
+
+    fireEvent.keyDown(container.querySelector('input')!, { key: 'ArrowDown', code: 40 })
+    fireEvent.click(screen.getByText('Strawberry'))
+    fireEvent.click(screen.getByTestId('submit'))
+    expect(payload!).toStrictEqual({
+      isFormValid: true,
+      payload: { 'custom-select': { value: 'strawberry', label: 'Strawberry' } },
     })
   })
 })
