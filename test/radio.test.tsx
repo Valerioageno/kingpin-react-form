@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
-import { Form, FormResult, Radio, RadioGroup } from '../src'
+import { Error, Form, FormResult, Radio, RadioGroup } from '../src'
 import '@testing-library/jest-dom'
 import { fireEvent, render, screen } from '@testing-library/react'
 import * as React from 'react'
@@ -57,7 +57,7 @@ describe('Radio', () => {
     expect(payload!).toStrictEqual({ isFormValid: true, payload: { radios: 'radio1' } })
   })
 
-  it('Radio validation', () => {
+  it('Radio validation and error handling', () => {
     let payload: FormResult
     const onSubmitFn = (e: React.FormEvent<HTMLFormElement>, data: FormResult): void => {
       e.preventDefault()
@@ -71,21 +71,28 @@ describe('Radio', () => {
           <Radio name="radio1" data-testid="radio1" />
           <Radio name="radio2" data-testid="radio2" />
         </RadioGroup>
+        <Error name="radios:error">
+          <p data-testid="error-message">Error message</p>
+        </Error>
         <button type="submit" data-testid="submit">
           Submit
         </button>
       </Form>,
     )
 
+    expect(screen.queryByTestId('error-message')).not.toBeInTheDocument()
     fireEvent.click(screen.getByTestId('submit'))
+    expect(screen.queryByTestId('error-message')).toBeInTheDocument()
     expect(payload!).toStrictEqual({ isFormValid: false, payload: { radios: 'radio2' } })
 
     fireEvent.click(screen.getByTestId('radio1'))
     fireEvent.click(screen.getByTestId('submit'))
+    expect(screen.queryByTestId('error-message')).not.toBeInTheDocument()
     expect(payload!).toStrictEqual({ isFormValid: true, payload: { radios: 'radio1' } })
 
     fireEvent.click(screen.getByTestId('radio2'))
     fireEvent.click(screen.getByTestId('submit'))
+    expect(screen.queryByTestId('error-message')).toBeInTheDocument()
     expect(payload!).toStrictEqual({ isFormValid: false, payload: { radios: 'radio2' } })
   })
 })

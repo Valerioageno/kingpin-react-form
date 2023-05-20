@@ -1,5 +1,8 @@
 ---
 sidebar_position: 4
+tags:
+  - Error handling
+  - Kingpin
 ---
 
 import TabItem from '@theme/TabItem'
@@ -28,18 +31,8 @@ const shouldBeAtLeast10Chars = (s: string): boolean => s.length > 10
 function App(): JSX.Element {
   return (
     <Form>
-      <Input 
-        name="email" 
-        type="email" 
-        initialValue="" 
-        validation={shouldNotBeEmpty} 
-      />
-      <Input 
-        name="password" 
-        type="password" 
-        initialValue="" 
-        validation={[shouldNotBeEmpty, shouldBeAtLeast10Chars]}
-      />
+      <Input name="email" type="email" initialValue="" validation={shouldNotBeEmpty} />
+      <Input name="password" type="password" initialValue="" validation={[shouldNotBeEmpty, shouldBeAtLeast10Chars]} />
       <button type="submit">Submit</button>
     </Form>
   )
@@ -58,18 +51,8 @@ const shouldBeAtLeast10Chars = (s: string): boolean => s.length > 10
 function App() {
   return (
     <Form>
-      <Input 
-        name="email" 
-        type="email" 
-        initialValue="" 
-        validation={shouldNotBeEmpty} 
-      />
-      <Input 
-        name="password" 
-        type="password" 
-        initialValue="" 
-        validation={[shouldNotBeEmpty, shouldBeAtLeast10Chars]}
-      />
+      <Input name="email" type="email" initialValue="" validation={shouldNotBeEmpty} />
+      <Input name="password" type="password" initialValue="" validation={[shouldNotBeEmpty, shouldBeAtLeast10Chars]} />
       <button type="submit">Submit</button>
     </Form>
   )
@@ -82,3 +65,10 @@ function App() {
 You can still use all the
 [native HTML validation attributes](https://developer.mozilla.org/en-US/docs/Learn/Forms/Form_validation#the_required_attribute)
 and even use them together with your custom functions.
+
+## Error handling
+
+Validation is very useful expecially when you want to display meaningful messages to the users.
+
+For this reason the `validation` mechanism is strongly bond to the `<Error />` component
+([check here](./components/error) for more) and it's encouraged to use them together.

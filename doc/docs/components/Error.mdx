@@ -1,0 +1,62 @@
+---
+sidebar_position: 6
+tags:
+  - Component
+  - Error handling
+  - Kingpin
+---
+
+import TabItem from '@theme/TabItem'
+import Tabs from '@theme/Tabs'
+
+# Error
+
+The error component lets your form to display meaningful messages to the user
+when a form element doesn't satisfy its validation policy ([here](../validation) for validation info).
+
+The whole logic is handled internally by Kingpin itself soo you don't have to manually show the error.
+
+It takes as props just the `name` which has to follow the pattern: `{componentName}:error`.
+
+<Tabs>
+<TabItem value="typescript" label="Typescript">
+
+```tsx
+import { Error, Form, Input } from 'kingpin-react-form'
+
+function App(): JSX.Element {
+  const shouldNotBeEmpty = (s: string): boolean => s.length > 0
+  return (
+    <Form onSubmit={submit}>
+      <Input name="email" type="email" initialValue="" validation={shouldNotBeEmpty} />
+      <Error name="email:error">
+        <p>Email should not be empty.</p>
+      </Error>
+      <button type="submit">Submit</button>
+    </Form>
+  )
+}
+```
+
+</TabItem>
+<TabItem value="javascript" label="Javascript">
+
+```jsx
+import { Error, Form, Input } from 'kingpin-react-form'
+
+function App() {
+  const shouldNotBeEmpty = (s) => s.length > 0
+  return (
+    <Form onSubmit={submit}>
+      <Input name="email" type="email" initialValue="" validation={shouldNotBeEmpty} />
+      <Error name="email:error">
+        <p>Email should not be empty.</p>
+      </Error>
+      <button type="submit">Submit</button>
+    </Form>
+  )
+}
+```
+
+</TabItem>
+</Tabs>

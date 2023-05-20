@@ -21,9 +21,21 @@ type FormProps = Omit<HTMLAttributes<HTMLFormElement>, 'onSubmit'> & {
  * @returns JSX.Element
  */
 const KingpinForm = (props: FormProps): JSX.Element => {
+  /**
+   * @description Contains the reference to all the kingpin valid fields.
+   */
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const childrenRef = useRef<Map<string, InputEffect<any>>>(new Map([]))
 
+  /**
+   * @description Contains the name of all current form errors.
+   */
+  const errorsRef = useRef<Set<string>>(new Set([]))
+
+  /**
+   * @description Iterates over all kingpin elements running the reset function.
+   * @param e MouseEvent<HTMLButtonElement>
+   */
   const resetForm = (e: MouseEvent<HTMLButtonElement>): void => {
     e.preventDefault()
 
@@ -31,26 +43,45 @@ const KingpinForm = (props: FormProps): JSX.Element => {
     props.onReset?.()
   }
 
+  /**
+   * @description Handle the submit event.
+   * @param e FormEvent<HTMLFormElement>
+   */
   const submitFunction = (e: FormEvent<HTMLFormElement>): void => {
     const payload: Record<string, Value> = {}
     let isFormValid = true
+    errorsRef.current.clear()
 
+    /**
+     * Iterate over each kingpin element, fetch the value and check for possible validation error.
+     */
     childrenRef?.current?.forEach((el): void => {
       const d = el?.sendData?.()
       const isElementValid = el?.checkValidation ? el.checkValidation() : true
 
-      if (!isElementValid) {
-        isFormValid = false
-      }
-
       if (d?.name) {
+        if (!isElementValid) {
+          errorsRef.current.add(`${d.name}:error`)
+          isFormValid = false
+        }
         payload[d.name] = d?.value
       }
     })
 
+    /**
+     * Iterate over all elements and display or clear errors.
+     */
+    childrenRef.current.forEach((el) => el.shouldShowError?.(errorsRef.current))
+
+    // Return data to user function.
     props?.onSubmit?.(e, { isFormValid, payload })
   }
 
+  /**
+   * @description Generate props based on the element name
+   * @param child ReactElement
+   * @returns The reference to pass to valid kingpin elements
+   */
   const customProps = (child: ReactElement): PropsWithRef<unknown> => {
     if (child.props.name === 'reset') {
       return {

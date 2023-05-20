@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
-import { Form, FormResult, Textarea } from '../src'
+import { Error, Form, FormResult, Textarea } from '../src'
 import { shouldBeAtLeast10Chars, shouldNotBeEmpty } from './utils/validation'
 import '@testing-library/jest-dom'
 import { fireEvent, render, screen } from '@testing-library/react'
@@ -55,7 +55,7 @@ describe('Textarea', () => {
     expect(payload!).toStrictEqual({ isFormValid: true, payload: { textarea: '' } })
   })
 
-  it('Textarea array validation', () => {
+  it('Textarea array validation and error handling', () => {
     let payload: FormResult
     const onSubmitFn = (e: React.FormEvent<HTMLFormElement>, data: FormResult): void => {
       e.preventDefault()
@@ -69,6 +69,9 @@ describe('Textarea', () => {
           name="textarea"
           validation={[shouldBeAtLeast10Chars, shouldNotBeEmpty]}
         />
+        <Error name="textarea:error">
+          <p data-testid="error-message">Error message</p>
+        </Error>
         <button type="submit" data-testid="submit">
           Submit
         </button>
@@ -76,18 +79,22 @@ describe('Textarea', () => {
     )
 
     fireEvent.click(screen.getByTestId('submit'))
+    expect(screen.queryByTestId('error-message')).toBeInTheDocument()
     expect(payload!).toStrictEqual({ isFormValid: false, payload: { textarea: '' } })
 
     fireEvent.change(screen.getByTestId('textarea'), { target: { value: 'ciao' } })
     fireEvent.click(screen.getByTestId('submit'))
+    expect(screen.queryByTestId('error-message')).toBeInTheDocument()
     expect(payload!).toStrictEqual({ isFormValid: false, payload: { textarea: 'ciao' } })
 
     fireEvent.change(screen.getByTestId('textarea'), { target: { value: 'ciaociaociao' } })
     fireEvent.click(screen.getByTestId('submit'))
+    expect(screen.queryByTestId('error-message')).not.toBeInTheDocument()
     expect(payload!).toStrictEqual({ isFormValid: true, payload: { textarea: 'ciaociaociao' } })
 
     fireEvent.change(screen.getByTestId('textarea'), { target: { value: 'ciao' } })
     fireEvent.click(screen.getByTestId('submit'))
+    expect(screen.queryByTestId('error-message')).toBeInTheDocument()
     expect(payload!).toStrictEqual({ isFormValid: false, payload: { textarea: 'ciao' } })
   })
 })

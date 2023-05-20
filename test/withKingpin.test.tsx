@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
-import { Form, FormResult, withKingpin } from '../src'
+import { Error, Form, FormResult, withKingpin } from '../src'
 import { shouldNotBeNull } from './utils/validation'
+import '@testing-library/jest-dom'
 import { fireEvent, render, screen } from '@testing-library/react'
 import React, { useState } from 'react'
 import Select, { SingleValue } from 'react-select'
@@ -75,7 +76,7 @@ describe('withKingpin HOC', () => {
     })
   })
 
-  it('validation', () => {
+  it('withKingpin validation and error handling', () => {
     let payload: FormResult
     const submitFn = (e: React.FormEvent<HTMLFormElement>, data: FormResult): void => {
       e.preventDefault()
@@ -89,6 +90,9 @@ describe('withKingpin HOC', () => {
           data-testid="custom-select"
           validation={shouldNotBeNull}
         />
+        <Error name="custom-select:error">
+          <p data-testid="error-message">Error message</p>
+        </Error>
         <button type="submit" data-testid="submit">
           Submit
         </button>
@@ -96,11 +100,13 @@ describe('withKingpin HOC', () => {
     )
 
     fireEvent.click(screen.getByTestId('submit'))
+    expect(screen.queryByTestId('error-message')).toBeInTheDocument()
     expect(payload!).toStrictEqual({ isFormValid: false, payload: { 'custom-select': null } })
 
     fireEvent.keyDown(container.querySelector('input')!, { key: 'ArrowDown', code: 40 })
     fireEvent.click(screen.getByText('Strawberry'))
     fireEvent.click(screen.getByTestId('submit'))
+    expect(screen.queryByTestId('error-message')).not.toBeInTheDocument()
     expect(payload!).toStrictEqual({
       isFormValid: true,
       payload: { 'custom-select': { value: 'strawberry', label: 'Strawberry' } },

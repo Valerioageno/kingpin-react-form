@@ -6,6 +6,7 @@ export type InputEffect<T> = {
   sendData?: () => Result<T>
   reset?: () => void
   checkValidation?: () => boolean
+  shouldShowError?: (e: Set<string>) => void
 }
 
 export type Result<T> = { name: string; value: T }
