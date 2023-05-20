@@ -1,3 +1,4 @@
+import Error from './Error'
 import Form from './Form'
 import Input from './Input'
 import Radio from './Radio'
@@ -8,4 +9,4 @@ import type { FormResult } from './types'
 import withKingpin from './withKingpin'
 
 export type { FormResult }
-export { Form, Input, Radio, RadioGroup, Select, Textarea, withKingpin }
+export { Error, Form, Input, Radio, RadioGroup, Select, Textarea, withKingpin }

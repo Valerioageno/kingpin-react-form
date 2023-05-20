@@ -1,4 +1,4 @@
-import { Form, FormResult, Input, Radio, RadioGroup, Select, Textarea } from '../../.'
+import { Error, Form, FormResult, Input, Radio, RadioGroup, Select, Textarea } from '../../.'
 import WithHOCSelect from './select'
 import { FormEvent, useRef } from 'react'
 
@@ -52,6 +52,11 @@ function App(): JSX.Element {
             validation={[shouldBeAtLeast10Chars, shouldNotBeEmpty]}
           />
           <label htmlFor="floatingTextarea">Comments</label>
+          <Error name="comments:error">
+            <div className="alert alert-danger" role="alert">
+              This is a danger alert—check it out!
+            </div>
+          </Error>
         </div>
         {/*
         <h3>Select</h3>
