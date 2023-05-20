@@ -41,16 +41,18 @@ Read more in the [documentation](https://kingpin-react-form.vercel.app/docs/intr
 
 ## Why a new form library?
 
-Currently implementations are quite verbose causing a confusing DX and in
-some case they use uncontrolled components which is the
-[unrecommended](https://reactjs.org/docs/uncontrolled-components.html)
-way to handle forms in React.
+Currently implementations are quite verbose causing a confusing DX.
 
-In most cases using uncontrolled components causes re-renders in unexpected
-actions like during the submit (?).
+Also there are many way to think about forms implementations:
+- Using `new FormData` with the plain HTML validation systems ([ref](https://react.dev/reference/react-dom/components/input#reading-the-input-values-when-submitting-a-form))
+- Using `useRef` to handle the data on submit.
+- Using `useState` for each field causing multiple re-renders and low performances
+but a very deep level of interaction with the data.
 
-Among the other reasons Kingpin wants to let the developer to write forms in the
-better React way possible handling the re-renders in a declarative way.
+Kingpin wants to take the best from each of them ensuring a strong development experience
+but providing top performances and the deepest level of interaction.
+
+Also Kingpin wants to be (and it is) lightweight and tree-shakable.
 
 ## How hard is writing Kingpin's forms?
 
@@ -60,10 +62,24 @@ In short... easy like a pie.
 <TabItem value="typescript" label="Typescript">
 
 ```tsx
-import { Form, Input, Value } from 'kingpin-react-form'
+import { Form, FormResult, Input } from 'kingpin-react-form'
 import { FormEvent } from 'react'
 
 function App(): JSX.Element {
+  const submit = (e: FormEvent<HTMLFormElement>, form: FormResult) => {
+    e.preventDefault()
+    console.log(form)
+
+    // form: {
+    //     isValid: true,
+    //     payload: {
+    //       email: "",
+    //       password: "",
+    //       terms-acceptance: true
+    //     }
+    // }
+  }
+
   return (
     <Form onSubmit={submit}>
       <Input name="email" type="email" initialValue="" />
@@ -82,6 +98,20 @@ function App(): JSX.Element {
 import { Form, Input } from 'kingpin-react-form'
 
 function App() {
+  const submit = (e, form) => {
+    e.preventDefault()
+    console.log(form)
+
+    // form: {
+    //     isValid: true,
+    //     payload: {
+    //       email: "",
+    //       password: "",
+    //       terms-acceptance: true
+    //     }
+    // }
+  }
+
   return (
     <Form onSubmit={submit}>
       <Input name="email" type="email" initialValue="" />
@@ -113,7 +143,8 @@ Thanks to them the `<Form />` is now able to easily handle the internal state, b
 `<Form />` is "**just**" a simple html `<form>`, so you can use it as usual. The most important
 difference is that the `onSubmit` event now takes two arguments: the "classic"
 [event](https://developer.mozilla.org/en-US/docs/Web/API/SubmitEvent) and an object
-which is the `name:value` representation of its content.
+which contains whether the form is valid or not ([here](validation)
+about validation) and `payload` which is the `name:value` representation of its content.
 
 ## License
 

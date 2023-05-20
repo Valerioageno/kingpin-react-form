@@ -13,7 +13,7 @@ const KingpinSelect = withKingpin<Props, string>(
   (props: Props): JSX.Element => (
     <select
       name="kingpin-select"
-      {...removeKeysFromObject(props, ['initialValue', 'updateState'])}
+      {...removeKeysFromObject(props, ['initialValue', 'updateState', 'isValid', 'validation'])}
       onChange={(e): void => props?.updateState?.(e.target.value)}
     />
   ),

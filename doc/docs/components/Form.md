@@ -17,10 +17,10 @@ The form is just a normal HTML `<form>` element with just two differences:
    reset.
 
 ```tsx
-import { Form, Input } from 'kingpin-react-form'
+import { Form, FormResult, Input } from 'kingpin-react-form'
 
 function App(): JSX.Element {
-  const submit = (e: FormEvent<HTMLFormElement>, data: Record<string, Value>) => {
+  const submit = (e: FormEvent<HTMLFormElement>, data: FormResult) => {
     e.preventDefault()
     console.log(data)
   }
@@ -48,10 +48,10 @@ Be sure to set `type="button"` in order to avoid unwanted submits.
 :::
 
 ```tsx
-import { Form, Input } from 'kingpin-react-form'
+import { Form, FormResult, Input } from 'kingpin-react-form'
 
 function App(): JSX.Element {
-  const submit = (e: FormEvent<HTMLFormElement>, data: Record<string, Value>) => {
+  const submit = (e: FormEvent<HTMLFormElement>, data: FormResult) => {
     e.preventDefault()
     console.log(data)
   }

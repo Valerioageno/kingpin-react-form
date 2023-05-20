@@ -13,11 +13,15 @@ const KingpinTextarea = withKingpin<Props, string>(
   (props: Props): JSX.Element => (
     <textarea
       name="kingpin-textarea"
-      {...removeKeysFromObject(props, ['initialValue', 'updateState'])}
-      onChange={(e): void => props?.updateState?.(e.target.value)}
+      {...removeKeysFromObject(props, ['initialValue', 'updateState', 'isValid', 'validation'])}
+      onChange={(e): void => {
+        props.updateState?.(e.target.value)
+        props.onChange?.(e)
+      }}
     />
   ),
 )
+
 KingpinTextarea.displayName = 'KingpinTextarea'
 
 export default KingpinTextarea

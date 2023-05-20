@@ -1,0 +1,60 @@
+---
+sidebar_position: 4
+---
+
+import TabItem from '@theme/TabItem'
+import Tabs from '@theme/Tabs'
+
+# Validation
+
+Kingpin's validation mechanism is very easy and it is totally driven
+by the single responsibility principle. Each form element contains its validation
+policy and validate itself.
+
+Each field can have the optional `validation` props which is a function or an array
+of functions.
+
+So basically to validate a simple input you can:
+
+<Tabs>
+<TabItem value="typescript" label="Typescript">
+
+```tsx
+import { Form, Input } from 'kingpin-react-form'
+
+const shouldNotBeEmpty = (s: string): boolean => s.length > 0
+
+function App(): JSX.Element {
+  return (
+    <Form>
+      <Input name="email" type="email" initialValue="" validation={shouldNotBeEmpty} />
+      <button type="submit">Submit</button>
+    </Form>
+  )
+}
+```
+
+</TabItem>
+<TabItem value="javascript" label="Javascript">
+
+```jsx
+import { Form, Input } from 'kingpin-react-form'
+
+const shouldNotBeEmpty = (s) => s.length > 0
+
+function App() {
+  return (
+    <Form>
+      <Input name="email" type="email" initialValue="" validation={shouldNotBeEmpty} />
+      <button type="submit">Submit</button>
+    </Form>
+  )
+}
+```
+
+</TabItem>
+</Tabs>
+
+You can still use all the
+[native HTML validation attributes](https://developer.mozilla.org/en-US/docs/Learn/Forms/Form_validation#the_required_attribute)
+and even use them together with your custom functions.

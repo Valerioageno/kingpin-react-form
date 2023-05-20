@@ -48,17 +48,20 @@ All the atomic states are kept by the `<Form />` component and they can be acces
 <TabItem value="typescript" label="Typescript">
 
 ```tsx
-import { Form, Input, Value } from 'kingpin-react-form'
+import { Form, FormResult, Input } from 'kingpin-react-form'
 import { FormEvent } from 'react'
 
 function App(): JSX.Element {
-  const submit = (e: FormEvent<HTMLFormElement>, data: Record<string, Value>) => {
+  const submit = (e: FormEvent<HTMLFormElement>, data: FormResult) => {
     e.preventDefault()
     console.log(data)
 
     // data: {
-    //     email: "",
-    //     password: ""
+    //     isValid: true,
+    //     payload: {
+    //       email: "",
+    //       password: "",
+    //     }
     // }
   }
 
@@ -84,8 +87,11 @@ function App() {
     console.log(data)
 
     // data: {
-    //     email: "",
-    //     password: ""
+    //     isValid: true,
+    //     payload: {
+    //       email: "",
+    //       password: "",
+    //     }
     // }
   }
 

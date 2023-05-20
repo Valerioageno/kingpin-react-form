@@ -1,4 +1,5 @@
-import { Form, Input, Radio, RadioGroup, Select, Textarea, Value } from '../src'
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
+import { Form, FormResult, Input, Radio, RadioGroup, Select, Textarea } from '../src'
 import '@testing-library/jest-dom'
 import { fireEvent, render, screen } from '@testing-library/react'
 import * as React from 'react'
@@ -12,22 +13,25 @@ describe('Form', () => {
   })
 
   it('Correct submit payload', async () => {
-    let payload: Record<string, Value> = {}
+    let payload: FormResult
     const initialPayload = {
-      email: '',
-      password: '',
-      textarea1: '',
-      textarea2: '',
-      select1: '',
-      select2: '',
-      'radio-group-1': 'radio2',
-      'radio-group-2': 'radio3',
-      checkbox1: true,
-      checkbox2: false,
-      number1: 0,
-      number2: 80,
+      isFormValid: true,
+      payload: {
+        email: '',
+        password: '',
+        textarea1: '',
+        textarea2: '',
+        select1: '',
+        select2: '',
+        'radio-group-1': 'radio2',
+        'radio-group-2': 'radio3',
+        checkbox1: true,
+        checkbox2: false,
+        number1: 0,
+        number2: 80,
+      },
     }
-    const submitFn = (e: React.FormEvent<HTMLFormElement>, data: Record<string, Value>): void => {
+    const submitFn = (e: React.FormEvent<HTMLFormElement>, data: FormResult): void => {
       e.preventDefault()
       payload = data
     }
@@ -73,7 +77,7 @@ describe('Form', () => {
 
     fireEvent.click(screen.getByTestId('submit'))
 
-    expect(payload).toStrictEqual(initialPayload)
+    expect(payload!).toStrictEqual(initialPayload)
 
     fireEvent.change(screen.getByTestId('email'), { target: { value: 'hey@kingpin.com' } })
     fireEvent.change(screen.getByTestId('password'), { target: { value: 'psw' } })
@@ -90,25 +94,28 @@ describe('Form', () => {
 
     fireEvent.click(screen.getByTestId('submit'))
 
-    expect(payload).toStrictEqual({
-      email: 'hey@kingpin.com',
-      password: 'psw',
-      textarea1: 'test textarea 1',
-      textarea2: 'test textarea 2',
-      select1: '1',
-      select2: '3',
-      'radio-group-1': 'radio1',
-      'radio-group-2': 'radio3',
-      checkbox1: false,
-      checkbox2: true,
-      number1: 40,
-      number2: 10,
+    expect(payload!).toStrictEqual({
+      isFormValid: true,
+      payload: {
+        email: 'hey@kingpin.com',
+        password: 'psw',
+        textarea1: 'test textarea 1',
+        textarea2: 'test textarea 2',
+        select1: '1',
+        select2: '3',
+        'radio-group-1': 'radio1',
+        'radio-group-2': 'radio3',
+        checkbox1: false,
+        checkbox2: true,
+        number1: 40,
+        number2: 10,
+      },
     })
 
     fireEvent.click(screen.getByTestId('reset'))
 
     fireEvent.click(screen.getByTestId('submit'))
 
-    expect(payload).toStrictEqual(initialPayload)
+    expect(payload!).toStrictEqual(initialPayload)
   })
 })

@@ -1,4 +1,5 @@
-import { InputEffect, Result } from './types'
+import useValidation from './hooks/useValidation'
+import type { InputEffect, Result, ValidationFn } from './types'
 import React, { ComponentType, ForwardRefExoticComponent, forwardRef, useImperativeHandle, useState } from 'react'
 
 export type KingpinComponent<T, State> = ForwardRefExoticComponent<
@@ -11,6 +12,7 @@ export type WithKingpinType<T> = {
 type WithKingpinProps<T> = {
   name: string
   initialValue: T
+  validation?: ValidationFn<T> | ValidationFn<T>[]
 }
 
 /**
@@ -30,7 +32,10 @@ export default function withKingpin<T, State>(WrappedComponent: ComponentType<T>
 
   const ComponentWithKingpin = forwardRef<InputEffect<State>, Omit<T, 'updateState'> & WithKingpinProps<State>>(
     (props, ref) => {
+      const checkIsValid = useValidation(props.validation)
+
       const [state, setState] = useState<State>(props.initialValue)
+      const [isValid, setIsValid] = useState<boolean>(checkIsValid(props.initialValue))
 
       useImperativeHandle(ref, () => ({
         sendData(): Result<State> {
@@ -39,13 +44,20 @@ export default function withKingpin<T, State>(WrappedComponent: ComponentType<T>
         reset(): void {
           setState(props.initialValue)
         },
+        checkValidation(): boolean {
+          return isValid
+        },
       }))
 
       return (
         <WrappedComponent
           {...(props as unknown as T)}
           value={state}
-          updateState={(val: State): void => setState(val)}
+          updateState={(val: State): void => {
+            setIsValid(checkIsValid(val))
+            setState(val)
+          }}
+          isValid={isValid}
         />
       )
     },

@@ -10,7 +10,8 @@ import Tabs from '@theme/Tabs'
 Modern forms require more than just `<input />` and `<textarea />` components.
 
 Kingpin plan is to add pluggable external components like `Typeaheads`, `Slider`, `Dropdown` ecc.
-specifically desinged and developed to work within a Kingpin `Form`.
+specifically desinged and developed to work within a Kingpin `Form` that work without any
+configuration.
 
 In order to make Kingpin extensible by anyone it's possible create custom
 components with the `withKingpin` HOC.
@@ -114,15 +115,18 @@ Now we are ready to use our new component within our `Form` component.
 // File: ./App.tsx
 import CustomSelect './Select'
 import type { FormEvent } from 'react'
-import { Form, Value } from 'kingpin-react-form'
+import { Form, FormResult } from 'kingpin-react-form'
 
 function App(): JSX.Element {
-  const submit = (e: FormEvent<HTMLFormElement>, data: Record<string, Value>) => {
+  const submit = (e: FormEvent<HTMLFormElement>, data: FormResult) => {
     e.preventDefault()
     console.log(data)
 
     // data: {
-    //     hoc-select: null
+    //     isValid: true,
+    //     payload: {
+    //       hoc-select: null
+    //     }
     // }
   }
 
@@ -151,7 +155,10 @@ function App(): JSX.Element {
     console.log(data)
 
     // data: {
-    //     hoc-select: null
+    //     isValid: true,
+    //     payload: {
+    //       hoc-select: null
+    //     }
     // }
   }
 

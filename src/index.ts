@@ -4,8 +4,8 @@ import Radio from './Radio'
 import RadioGroup from './RadioGroup'
 import Select from './Select'
 import Textarea from './Textarea'
-import type { Value } from './types'
+import type { FormResult } from './types'
 import withKingpin from './withKingpin'
 
-export type { Value }
+export type { FormResult }
 export { Form, Input, Radio, RadioGroup, Select, Textarea, withKingpin }

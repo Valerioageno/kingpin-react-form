@@ -17,10 +17,10 @@ If you need a radio button take a look at the [Radio](./Radio.mdx) component.
 :::
 
 ```tsx
-import { Form, Input } from 'kingpin-react-form'
+import { Form, FormResult, Input } from 'kingpin-react-form'
 
 function App(): JSX.Element {
-  const submit = (e: FormEvent<HTMLFormElement>, data: Record<string, Value>) => {
+  const submit = (e: FormEvent<HTMLFormElement>, data: FormResult) => {
     e.preventDefault()
     console.log(data)
   }
@@ -40,7 +40,7 @@ function App(): JSX.Element {
 Input is hands down the most versatile among the inputs type since the number of different
 values the `type` attribute can have.
 
-For this reason quite probably you won't need always a `string` as return type and Kingping
+For this reason quite probably you won't need always a `string` as return type and Kingpin
 take actually care of it.
 
 Basically if the `type` attribute is `range` or `number` the return tipe will be a
