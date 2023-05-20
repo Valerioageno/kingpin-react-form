@@ -1,5 +1,8 @@
 ---
 sidebar_position: 4
+tags:
+  - Error handling
+  - Kingpin
 ---
 
 import TabItem from '@theme/TabItem'
@@ -62,3 +65,10 @@ function App() {
 You can still use all the
 [native HTML validation attributes](https://developer.mozilla.org/en-US/docs/Learn/Forms/Form_validation#the_required_attribute)
 and even use them together with your custom functions.
+
+## Error handling
+
+Validation is very useful expecially when you want to display meaningful messages to the users.
+
+For this reason the `validation` mechanism is strongly bond to the `<Error />` component
+([check here](./components/error) for more) and it's encouraged to use them together.

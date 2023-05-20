@@ -1,5 +1,8 @@
 ---
 sidebar_position: 2
+tags:
+  - Component
+  - Kingpin
 ---
 
 # Select
