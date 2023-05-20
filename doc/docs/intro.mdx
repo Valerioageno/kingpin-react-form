@@ -41,16 +41,18 @@ Read more in the [documentation](https://kingpin-react-form.vercel.app/docs/intr
 
 ## Why a new form library?
 
-Currently implementations are quite verbose causing a confusing DX and in
-some case they use uncontrolled components which is the
-[unrecommended](https://reactjs.org/docs/uncontrolled-components.html)
-way to handle forms in React.
+Currently implementations are quite verbose causing a confusing DX.
 
-In most cases using uncontrolled components causes re-renders in unexpected
-actions like during the submit (?).
+Also there are many way to think about forms implementations:
+- Using `new FormData` with the plain HTML validation systems ([ref](https://react.dev/reference/react-dom/components/input#reading-the-input-values-when-submitting-a-form))
+- Using `useRef` to handle the data on submit.
+- Using `useState` for each field causing multiple re-renders and low performances
+but a very deep level of interaction with the data.
 
-Among the other reasons Kingpin wants to let the developer to write forms in the
-better React way possible handling the re-renders in a declarative way.
+Kingpin wants to take the best from each of them ensuring a strong development experience
+but providing top performances and the deepest level of interaction.
+
+Also Kingpin wants to be (and it is) lightweight and tree-shakable.
 
 ## How hard is writing Kingpin's forms?
 
@@ -66,9 +68,9 @@ import { FormEvent } from 'react'
 function App(): JSX.Element {
   const submit = (e: FormEvent<HTMLFormElement>, form: FormResult) => {
     e.preventDefault()
-    console.log(data)
+    console.log(form)
 
-    // data: {
+    // form: {
     //     isValid: true,
     //     payload: {
     //       email: "",
@@ -98,9 +100,9 @@ import { Form, Input } from 'kingpin-react-form'
 function App() {
   const submit = (e, form) => {
     e.preventDefault()
-    console.log(data)
+    console.log(form)
 
-    // data: {
+    // form: {
     //     isValid: true,
     //     payload: {
     //       email: "",
