@@ -3,7 +3,6 @@
 ![ts](https://badgen.net/badge/-/TypeScript/blue?icon=typescript&label)
 ![license](https://badgen.net/npm/license/kingpin-react-form)
 ![CI](https://github.com/Valerioageno/kingpin-react-form/actions/workflows/main.yml/badge.svg)
-![bundlephobia](https://badgen.net/bundlephobia/minzip/kingpin-react-form)
 
 ![Kingpin react form cover](https://raw.githubusercontent.com/Valerioageno/kingpin-react-form/main/Cover.png 'Kingpin React Form')
 
