@@ -23,11 +23,23 @@ So basically to validate a simple input you can:
 import { Form, Input } from 'kingpin-react-form'
 
 const shouldNotBeEmpty = (s: string): boolean => s.length > 0
+const shouldBeAtLeast10Chars = (s: string): boolean => s.length > 10
 
 function App(): JSX.Element {
   return (
     <Form>
-      <Input name="email" type="email" initialValue="" validation={shouldNotBeEmpty} />
+      <Input 
+        name="email" 
+        type="email" 
+        initialValue="" 
+        validation={shouldNotBeEmpty} 
+      />
+      <Input 
+        name="password" 
+        type="password" 
+        initialValue="" 
+        validation={[shouldNotBeEmpty, shouldBeAtLeast10Chars]}
+      />
       <button type="submit">Submit</button>
     </Form>
   )
@@ -41,11 +53,23 @@ function App(): JSX.Element {
 import { Form, Input } from 'kingpin-react-form'
 
 const shouldNotBeEmpty = (s) => s.length > 0
+const shouldBeAtLeast10Chars = (s: string): boolean => s.length > 10
 
 function App() {
   return (
     <Form>
-      <Input name="email" type="email" initialValue="" validation={shouldNotBeEmpty} />
+      <Input 
+        name="email" 
+        type="email" 
+        initialValue="" 
+        validation={shouldNotBeEmpty} 
+      />
+      <Input 
+        name="password" 
+        type="password" 
+        initialValue="" 
+        validation={[shouldNotBeEmpty, shouldBeAtLeast10Chars]}
+      />
       <button type="submit">Submit</button>
     </Form>
   )
