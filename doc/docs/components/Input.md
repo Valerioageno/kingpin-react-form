@@ -17,10 +17,10 @@ If you need a radio button take a look at the [Radio](./Radio.mdx) component.
 :::
 
 ```tsx
-import { Form, Input } from 'kingpin-react-form'
+import { Form, FormResult, Input } from 'kingpin-react-form'
 
 function App(): JSX.Element {
-  const submit = (e: FormEvent<HTMLFormElement>, data: Record<string, Value>) => {
+  const submit = (e: FormEvent<HTMLFormElement>, data: FormResult) => {
     e.preventDefault()
     console.log(data)
   }

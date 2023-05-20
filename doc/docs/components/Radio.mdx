@@ -17,10 +17,10 @@ which is the name of the selected radio.
 <TabItem value="typescript" label="Typescript">
 
 ```tsx
-import { Form, Radio, RadioGroup, Value } from 'kingpin-react-form'
+import { Form, FormResult, Radio, RadioGroup } from 'kingpin-react-form'
 
 function App(): JSX.Element {
-  const submit = (e: FormEvent<HTMLFormElement>, data: Record<string, Value>): void => {
+  const submit = (e: FormEvent<HTMLFormElement>, data: FormResult): void => {
     e.preventDefault()
   }
 

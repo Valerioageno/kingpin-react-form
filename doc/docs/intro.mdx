@@ -60,10 +60,24 @@ In short... easy like a pie.
 <TabItem value="typescript" label="Typescript">
 
 ```tsx
-import { Form, Input, Value } from 'kingpin-react-form'
+import { Form, FormResult, Input } from 'kingpin-react-form'
 import { FormEvent } from 'react'
 
 function App(): JSX.Element {
+  const submit = (e: FormEvent<HTMLFormElement>, form: FormResult) => {
+    e.preventDefault()
+    console.log(data)
+
+    // data: {
+    //     isValid: true,
+    //     payload: {
+    //       email: "",
+    //       password: "",
+    //       terms-acceptance: true
+    //     }
+    // }
+  }
+
   return (
     <Form onSubmit={submit}>
       <Input name="email" type="email" initialValue="" />
@@ -82,6 +96,20 @@ function App(): JSX.Element {
 import { Form, Input } from 'kingpin-react-form'
 
 function App() {
+  const submit = (e, form) => {
+    e.preventDefault()
+    console.log(data)
+
+    // data: {
+    //     isValid: true,
+    //     payload: {
+    //       email: "",
+    //       password: "",
+    //       terms-acceptance: true
+    //     }
+    // }
+  }
+
   return (
     <Form onSubmit={submit}>
       <Input name="email" type="email" initialValue="" />
@@ -113,7 +141,8 @@ Thanks to them the `<Form />` is now able to easily handle the internal state, b
 `<Form />` is "**just**" a simple html `<form>`, so you can use it as usual. The most important
 difference is that the `onSubmit` event now takes two arguments: the "classic"
 [event](https://developer.mozilla.org/en-US/docs/Web/API/SubmitEvent) and an object
-which is the `name:value` representation of its content.
+which contains whether the form is valid or not ([here](validation)
+about validation) and `payload` which is the `name:value` representation of its content.
 
 ## License
 

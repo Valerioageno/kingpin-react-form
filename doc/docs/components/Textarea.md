@@ -11,10 +11,10 @@ as prop plus `initialValue`.
 The `name` and `initialValue` attributes are mandatory.
 
 ```tsx
-import { Form, Textarea } from 'kingpin-react-form'
+import { Form, FormResult, Textarea } from 'kingpin-react-form'
 
 function App(): JSX.Element {
-  const submit = (e: FormEvent<HTMLFormElement>, data: Record<string, Value>) => {
+  const submit = (e: FormEvent<HTMLFormElement>, data: FormResult) => {
     e.preventDefault()
     console.log(data)
   }

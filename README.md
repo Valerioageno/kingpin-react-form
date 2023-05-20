@@ -52,18 +52,21 @@ yarn add kingpin-react-form
 Then create your form.
 
 ```tsx
-import { Form, Input, Value } from 'kingpin-react-form'
+import { Form, FormResult, Input } from 'kingpin-react-form'
 import { FormEvent } from 'react'
 
 function App(): JSX.Element {
-  const submit = (e: FormEvent<HTMLFormElement>, data: Record<string, Value>) => {
+  const submit = (e: FormEvent<HTMLFormElement>, form: FormResult) => {
     e.preventDefault()
     console.log(data)
 
     // data: {
-    //     email: "",
-    //     password: "",
-    //     terms-acceptance: true
+    //     isValid: true,
+    //     payload: {
+    //       email: "",
+    //       password: "",
+    //       terms-acceptance: true
+    //     }
     // }
   }
 
@@ -95,7 +98,8 @@ Thanks to them the `<Form />` is now able to easily handle the internal state, b
 `<Form />` is "**just**" a simple html `<form>`, so you can use it as usual. The most important
 difference is that the `onSubmit` event now takes two arguments: the "classic"
 [event](https://developer.mozilla.org/en-US/docs/Web/API/SubmitEvent) and an object
-which is the `name:value` representation of its content.
+which contains whether the form is valid or not ([here](https://kingpin-react-form.vercel.app/docs/validation)
+about validation) and `payload` which is the `name:value` representation of its content.
 
 ## Extend Kingpin inputs
 
