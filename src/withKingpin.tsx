@@ -1,19 +1,6 @@
 import useValidation from './hooks/useValidation'
-import type { InputEffect, Result, ValidationFn } from './types'
-import React, { ComponentType, ForwardRefExoticComponent, forwardRef, useImperativeHandle, useState } from 'react'
-
-export type KingpinComponent<T, State> = ForwardRefExoticComponent<
-  React.PropsWithoutRef<Omit<T, 'updateState'> & WithKingpinProps<State>> & React.RefAttributes<InputEffect<State>>
->
-export type WithKingpinType<T> = {
-  updateState?: (val: T) => void
-}
-
-type WithKingpinProps<T> = {
-  name: string
-  initialValue: T
-  validation?: ValidationFn<T> | ValidationFn<T>[]
-}
+import type { InputEffect, KingpinComponent, Result, WithKingpinProps } from './types'
+import React, { ComponentType, forwardRef, useImperativeHandle, useState } from 'react'
 
 /**
  * @description Trasnform the passed WrappedComponent into an input usable by the Kingpin form component.
