@@ -1,5 +1,5 @@
-import { Error, Form, FormResult, Input, Radio, RadioGroup, Select, Textarea } from '../../.'
 import WithHOCSelect from './select'
+import { Error, Form, FormResult, Input, Radio, RadioGroup, Select, Textarea } from 'kingpin-react-form'
 import { FormEvent, useRef } from 'react'
 
 function App(): JSX.Element {

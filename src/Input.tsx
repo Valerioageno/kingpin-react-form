@@ -1,6 +1,6 @@
 import { removeKeysFromObject } from './helpers'
 import withKingpin, { WithKingpinType } from './withKingpin'
-import React, { ChangeEvent, InputHTMLAttributes } from 'react'
+import React, { ChangeEvent, FunctionComponent, InputHTMLAttributes } from 'react'
 
 type ReturnTypes = string | number | boolean
 
@@ -41,4 +41,4 @@ const KingpinInput = withKingpin<Props, ReturnTypes>((props: Props): JSX.Element
 
 KingpinInput.displayName = 'KingpinInput'
 
-export default KingpinInput
+export default KingpinInput as unknown as FunctionComponent<Props>
