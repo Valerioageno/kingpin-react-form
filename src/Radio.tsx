@@ -1,6 +1,6 @@
 import { useRadioGroupContext } from './RadioGroup'
 import { useIsomorphicEffect } from './helpers'
-import { WithKingpinType } from './withKingpin'
+import type { WithKingpinType } from './types'
 import { InputHTMLAttributes } from 'react'
 import React from 'react'
 

@@ -1,6 +1,7 @@
 import { removeKeysFromObject } from './helpers'
-import withKingpin, { WithKingpinType } from './withKingpin'
-import React, { SelectHTMLAttributes } from 'react'
+import type { WithKingpinProps, WithKingpinType } from './types'
+import withKingpin from './withKingpin'
+import React, { FunctionComponent, SelectHTMLAttributes } from 'react'
 
 type Props = SelectHTMLAttributes<HTMLSelectElement> & WithKingpinType<string>
 
@@ -19,4 +20,5 @@ const KingpinSelect = withKingpin<Props, string>(
   ),
 )
 KingpinSelect.displayName = 'KingpinSelect'
-export default KingpinSelect
+
+export default KingpinSelect as unknown as FunctionComponent<WithKingpinProps<string> & Props>

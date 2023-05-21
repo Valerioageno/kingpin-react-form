@@ -1,6 +1,7 @@
 import { removeKeysFromObject } from './helpers'
-import withKingpin, { WithKingpinType } from './withKingpin'
-import React, { TextareaHTMLAttributes } from 'react'
+import type { WithKingpinProps, WithKingpinType } from './types'
+import withKingpin from './withKingpin'
+import React, { FunctionComponent, TextareaHTMLAttributes } from 'react'
 
 type Props = TextareaHTMLAttributes<HTMLTextAreaElement> & WithKingpinType<string>
 
@@ -24,4 +25,4 @@ const KingpinTextarea = withKingpin<Props, string>(
 
 KingpinTextarea.displayName = 'KingpinTextarea'
 
-export default KingpinTextarea
+export default KingpinTextarea as unknown as FunctionComponent<WithKingpinProps<string> & Props>
