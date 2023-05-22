@@ -92,7 +92,7 @@ const config = {
               },
               {
                 label: 'Components',
-                to: '/docs/components',
+                to: '/docs/category/components',
               },
             ],
           },
