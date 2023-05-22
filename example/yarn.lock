@@ -1230,7 +1230,7 @@ __metadata:
     "@types/react-select": ^5.0.1
     "@vitejs/plugin-react": ^3.1.0
     bootstrap: ^5.2.3
-    kingpin-react-form: ^0.1.1
+    kingpin-react-form: 0.4.1
     react: ^18.2.0
     react-dom: ^18.2.0
     react-select: ^5.7.2
@@ -1612,12 +1612,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"kingpin-react-form@npm:^0.1.1":
-  version: 0.1.1
-  resolution: "kingpin-react-form@npm:0.1.1"
+"kingpin-react-form@npm:0.4.1":
+  version: 0.4.1
+  resolution: "kingpin-react-form@npm:0.4.1"
   peerDependencies:
     react: ">=16"
-  checksum: fe3b258cc52e939762c512678feb9cc7bc2cd11c55acb40865d71ac96b05ace6c1cb5d549da61f65822a7d69923b09bb48d8a5a7cebb1b6c824d884d3048b1d0
+  checksum: 531a14934c90f85b75969ef51e0d6ac11b378c57cb4024387f2917bb52457c8df5f06e27866be6ce4cf1635ef22faab2489b14b14669f2000e73d7c9f4e1db7a
   languageName: node
   linkType: hard
 

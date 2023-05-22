@@ -41,8 +41,6 @@ const config = {
       ({
         docs: {
           sidebarPath: require.resolve('./sidebars.js'),
-          // Please change this to your repo.
-          // Remove this to remove the "edit this page" links.
           editUrl: 'https://github.com/Valerioageno/kingpin-react-form/tree/main/doc',
         },
         theme: {
@@ -70,6 +68,7 @@ const config = {
             position: 'left',
             label: 'Docs',
           },
+          // { type: 'doc', position: 'left', label: 'Examples', docId: 'intro' },
           {
             href: 'https://github.com/Valerioageno/kingpin-react-form',
             label: 'GitHub',
@@ -84,8 +83,16 @@ const config = {
             title: 'Docs',
             items: [
               {
-                label: 'Tutorial',
+                label: 'Kingpin',
                 to: '/docs/intro',
+              },
+              {
+                label: 'Getting started',
+                to: '/docs/getting-started',
+              },
+              {
+                label: 'Components',
+                to: '/docs/components',
               },
             ],
           },
@@ -93,16 +100,8 @@ const config = {
             title: 'Community',
             items: [
               {
-                label: 'Stack Overflow',
-                href: 'https://stackoverflow.com/questions/tagged/docusaurus',
-              },
-              {
-                label: 'Discord',
-                href: 'https://discordapp.com/invite/docusaurus',
-              },
-              {
-                label: 'Twitter',
-                href: 'https://twitter.com/docusaurus',
+                label: 'Github',
+                href: 'https://github.com/Valerioageno/kingpin-react-form',
               },
             ],
           },
