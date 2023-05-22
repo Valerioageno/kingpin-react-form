@@ -38,17 +38,17 @@ describe('Form', () => {
 
     render(
       <Form onSubmit={submitFn}>
-        <Input name="email" type="email" data-testid="email" initialValue="" />
-        <Input name="password" type="password" data-testid="password" initialValue="" />
-        <Textarea name="textarea1" data-testid="textarea1" initialValue="" />
-        <Textarea name="textarea2" data-testid="textarea2" initialValue="" />
-        <Select name="select1" data-testid="select1" initialValue="">
+        <Input name="email" type="email" data-testid="email" />
+        <Input name="password" type="password" data-testid="password" />
+        <Textarea name="textarea1" data-testid="textarea1" />
+        <Textarea name="textarea2" data-testid="textarea2" />
+        <Select name="select1" data-testid="select1">
           <option value="0">Open this select menu</option>
           <option value="1">One</option>
           <option value="2">Two</option>
           <option value="3">Three</option>
         </Select>
-        <Select name="select2" data-testid="select2" initialValue="">
+        <Select name="select2" data-testid="select2">
           <option value="0">Open this select menu</option>
           <option value="1">One</option>
           <option value="2">Two</option>

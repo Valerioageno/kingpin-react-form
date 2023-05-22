@@ -12,24 +12,31 @@ import React, { ComponentType, forwardRef, useImperativeHandle, useState } from 
  * to be used as state setter.
  * Check the documentation for more details.
  * @param WrappedComponent ComponentType T
+ * @param initialState Default state. Used when "initialState" is not provided - Optional
  * @returns JSX.Element
  */
-export default function withKingpin<T, State>(WrappedComponent: ComponentType<T>): KingpinComponent<T, State> {
+export default function withKingpin<T, State>(
+  WrappedComponent: ComponentType<T>,
+  initialState?: State,
+): KingpinComponent<T, State> {
   const displayName = WrappedComponent?.displayName || WrappedComponent?.name || 'Component'
 
   const ComponentWithKingpin = forwardRef<InputEffect<State>, Omit<T, 'updateState'> & WithKingpinProps<State>>(
     (props, ref) => {
       const checkIsValid = useValidation(props.validation)
 
-      const [state, setState] = useState<State>(props.initialValue)
-      const [isValid, setIsValid] = useState<boolean>(checkIsValid(props.initialValue))
+      const generateInitialVal = (): State | undefined =>
+        typeof props?.initialValue === 'undefined' ? initialState : props?.initialValue
+
+      const [state, setState] = useState<State | undefined>(generateInitialVal())
+      const [isValid, setIsValid] = useState<boolean>(checkIsValid(state))
 
       useImperativeHandle(ref, () => ({
-        sendData(): Result<State> {
+        sendData(): Result<State | undefined> {
           return { name: props?.name || 'Kingpin-element', value: state }
         },
         reset(): void {
-          setState(props.initialValue)
+          setState(generateInitialVal())
         },
         checkValidation(): boolean {
           return isValid

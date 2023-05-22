@@ -18,6 +18,7 @@ const KingpinSelect = withKingpin<Props, string>(
       onChange={(e): void => props?.updateState?.(e.target.value)}
     />
   ),
+  '',
 )
 KingpinSelect.displayName = 'KingpinSelect'
 
