@@ -140,9 +140,6 @@ describe('Form', () => {
         <Error name="error">
           <p data-testid="global-error">Global error</p>
         </Error>
-        <button type="button" name="reset">
-          Reset
-        </button>
         <button type="submit" data-testid="submit">
           Submit
         </button>
@@ -189,5 +186,38 @@ describe('Form', () => {
         password: 'psw',
       },
     })
+  })
+
+  it('Error reset', async () => {
+    const submitFn = (e: React.FormEvent<HTMLFormElement>): void => {
+      e.preventDefault()
+    }
+
+    render(
+      <Form onSubmit={submitFn}>
+        <Input name="email" type="email" validation={shouldBeAnEmail} data-testid="email" />
+        <Error name="email:error">
+          <p data-testid="email-error">Email error</p>
+        </Error>
+        <Error name="error">
+          <p data-testid="global-error">Global error</p>
+        </Error>
+        <button type="button" name="reset" data-testid="reset">
+          Reset
+        </button>
+        <button type="submit" data-testid="submit">
+          Submit
+        </button>
+      </Form>,
+    )
+
+    expect(screen.queryByTestId('global-error')).not.toBeInTheDocument()
+    expect(screen.queryByTestId('email-error')).not.toBeInTheDocument()
+    fireEvent.click(screen.getByTestId('submit'))
+    expect(screen.queryByTestId('global-error')).toBeInTheDocument()
+    expect(screen.queryByTestId('email-error')).toBeInTheDocument()
+    fireEvent.click(screen.getByTestId('reset'))
+    expect(screen.queryByTestId('global-error')).not.toBeInTheDocument()
+    expect(screen.queryByTestId('email-error')).not.toBeInTheDocument()
   })
 })
