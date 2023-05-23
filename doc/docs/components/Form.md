@@ -13,7 +13,7 @@ In order to make the inputs working correctly they have to al
 be wrapped within a Kingpin `<Form />` element.
 
 :::note
-It accepts in the body whatever React element. By the way just Kinpin [components](../components/)
+It accepts in the body whatever React element. By the way just Kinpin [components](../components/_category_.json)
 or element wrapped by the [withKingpin](../withKingpin.mdx) HOC will be
 considered in the submit payload.
 :::
