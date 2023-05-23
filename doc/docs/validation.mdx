@@ -90,9 +90,9 @@ function App(): JSX.Element {
   return (
     <Form>
       <Input name="email" type="email" validation={shouldNotBeEmpty} />
-      <Error>The email field is mandatory</Error>
+      <Error name="email:error">The email field is mandatory</Error>
       <Input name="password" type="password" validation={[shouldNotBeEmpty, shouldBeAtLeast10Chars]} />
-      <Error>Please set a stronger password.</Error>
+      <Error name="password:error">Please set a stronger password.</Error>
       <button type="submit">Submit</button>
     </Form>
   )
@@ -112,9 +112,9 @@ function App() {
   return (
     <Form>
       <Input name="email" type="email" validation={shouldNotBeEmpty} />
-      <Error>The email field is mandatory</Error>
+      <Error name="email:error">The email field is mandatory</Error>
       <Input name="password" type="password" validation={[shouldNotBeEmpty, shouldBeAtLeast10Chars]} />
-      <Error>Please set a stronger password.</Error>
+      <Error name="password:error">Please set a stronger password.</Error>
       <button type="submit">Submit</button>
     </Form>
   )
