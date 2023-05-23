@@ -67,3 +67,57 @@ function App() {
 
 </TabItem>
 </Tabs>
+
+## Global error
+
+If you need to have also a global error you can just create an `<Error />` element
+with name `error`. 
+
+This element is complementary to the atomic errors. You can still access to `{componentName}:error` errors.
+
+<Tabs>
+<TabItem value="typescript" label="Typescript">
+
+```tsx
+import { Error, Form, Input } from 'kingpin-react-form'
+
+const shouldNotBeEmpty = (s: string): boolean => s.length > 0
+
+function App(): JSX.Element {
+  return (
+    <Form onSubmit={submit}>
+      <Input name="email" type="email" validation={shouldNotBeEmpty} />
+      <Input name="password" type="password" validation={shouldNotBeEmpty} />
+      <Error name="error">
+        <p>The form is invalid</p>
+      </Error>
+      <button type="submit">Submit</button>
+    </Form>
+  )
+}
+```
+
+</TabItem>
+<TabItem value="javascript" label="Javascript">
+
+```jsx
+import { Error, Form, Input } from 'kingpin-react-form'
+
+const shouldNotBeEmpty = (s) => s.length > 0
+
+function App() {
+  return (
+    <Form onSubmit={submit}>
+      <Input name="email" type="email" validation={shouldNotBeEmpty} />
+      <Input name="password" type="password" validation={shouldNotBeEmpty} />
+      <Error name="error">
+        <p>The form is invalid</p>
+      </Error>
+      <button type="submit">Submit</button>
+    </Form>
+  )
+}
+```
+
+</TabItem>
+</Tabs>

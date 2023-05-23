@@ -1,5 +1,6 @@
 export const shouldBe3 = (s?: string): boolean => s === '3'
-
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export const shouldBeAnEmail = (s?: any): boolean => /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/.test(s || '')
 export const shouldBeAtLeast10Chars = (s?: string): boolean => (s?.length || 0) > 10
 export const shouldBeFirst = (s?: string): boolean => s === 'radio1'
 export const shouldNotBeEmpty = (s?: string | number | boolean): boolean => {
