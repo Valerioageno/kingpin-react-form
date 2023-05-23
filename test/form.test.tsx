@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
-import { Form, FormResult, Input, Radio, RadioGroup, Select, Textarea } from '../src'
+import { Error, Form, FormResult, Input, Radio, RadioGroup, Select, Textarea } from '../src'
+import { shouldBeAnEmail, shouldNotBeEmpty } from './utils/validation'
 import '@testing-library/jest-dom'
 import { fireEvent, render, screen } from '@testing-library/react'
 import * as React from 'react'
@@ -117,5 +118,76 @@ describe('Form', () => {
     fireEvent.click(screen.getByTestId('submit'))
 
     expect(payload!).toStrictEqual(initialPayload)
+  })
+
+  it('Global error', async () => {
+    let payload: FormResult
+    const submitFn = (e: React.FormEvent<HTMLFormElement>, data: FormResult): void => {
+      e.preventDefault()
+      payload = data
+    }
+
+    render(
+      <Form onSubmit={submitFn}>
+        <Input name="email" type="email" validation={shouldBeAnEmail} data-testid="email" />
+        <Error name="email:error">
+          <p data-testid="email-error">Email error</p>
+        </Error>
+        <Input name="password" type="password" validation={shouldNotBeEmpty} data-testid="password" />
+        <Error name="password:error">
+          <p data-testid="password-error">Password Error</p>
+        </Error>
+        <Error name="error">
+          <p data-testid="global-error">Global error</p>
+        </Error>
+        <button type="button" name="reset">
+          Reset
+        </button>
+        <button type="submit" data-testid="submit">
+          Submit
+        </button>
+      </Form>,
+    )
+
+    expect(screen.queryByTestId('email-error')).not.toBeInTheDocument()
+    expect(screen.queryByTestId('password-error')).not.toBeInTheDocument()
+    expect(screen.queryByTestId('global-error')).not.toBeInTheDocument()
+    fireEvent.click(screen.getByTestId('submit'))
+    expect(payload!).toStrictEqual({
+      isFormValid: false,
+      payload: {
+        email: '',
+        password: '',
+      },
+    })
+
+    expect(screen.queryByTestId('email-error')).toBeInTheDocument()
+    expect(screen.queryByTestId('password-error')).toBeInTheDocument()
+    expect(screen.queryByTestId('global-error')).toBeInTheDocument()
+
+    fireEvent.change(screen.getByTestId('email'), { target: { value: 'hey@kingpin.com' } })
+    fireEvent.click(screen.getByTestId('submit'))
+    expect(screen.queryByTestId('email-error')).not.toBeInTheDocument()
+    expect(screen.queryByTestId('password-error')).toBeInTheDocument()
+    expect(screen.queryByTestId('global-error')).toBeInTheDocument()
+    expect(payload!).toStrictEqual({
+      isFormValid: false,
+      payload: {
+        email: 'hey@kingpin.com',
+        password: '',
+      },
+    })
+    fireEvent.change(screen.getByTestId('password'), { target: { value: 'psw' } })
+    fireEvent.click(screen.getByTestId('submit'))
+    expect(screen.queryByTestId('email-error')).not.toBeInTheDocument()
+    expect(screen.queryByTestId('password-error')).not.toBeInTheDocument()
+    expect(screen.queryByTestId('global-error')).not.toBeInTheDocument()
+    expect(payload!).toStrictEqual({
+      isFormValid: true,
+      payload: {
+        email: 'hey@kingpin.com',
+        password: 'psw',
+      },
+    })
   })
 })

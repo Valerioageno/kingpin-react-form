@@ -69,6 +69,11 @@ const KingpinForm = (props: FormProps): JSX.Element => {
     })
 
     /**
+     * Throw global error
+     */
+    if (!isFormValid) errorsRef.current.add('error')
+
+    /**
      * Iterate over all elements and display or clear errors.
      */
     childrenRef.current.forEach((el) => el.shouldShowError?.(errorsRef.current))
