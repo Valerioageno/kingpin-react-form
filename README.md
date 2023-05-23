@@ -52,7 +52,7 @@ yarn add kingpin-react-form
 Then create your form.
 
 ```tsx
-import { Form, FormResult, Input } from 'kingpin-react-form'
+import { Error, Form, FormResult, Input } from 'kingpin-react-form'
 import { FormEvent } from 'react'
 
 function App(): JSX.Element {
@@ -90,7 +90,7 @@ Easy like a pie. Check how to handle errors in the [documentation](https://kingp
 In order to make Kingpin efficient and reusable the entire state logic is managed
 within the `<Form />` component (you shouldn't directly control each input value).
 
-Each Kingpin action element (`<Input />`, `<Textarea />`, ...) needs a `name prop in order
+Each Kingpin action element (`<Input />`, `<Textarea />`, ...) needs a `name` prop in order
 to efficiently collect the result payload. The name should describe the
 input purpose; be aware of possible name conflicts!
 

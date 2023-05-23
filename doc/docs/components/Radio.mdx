@@ -16,6 +16,25 @@ That wrapper is provider by Kingpin itself and is the `<RadioGroup />` component
 as attributes the `name` (which is the key in the Kingpin submit payload) and the `initialValue`
 which is the name of the selected radio.
 
+## RadioGroup Props
+
+Name | Mandatory | Purpose
+---- | ---- | ----
+name | true | A string which describe the element. Will be the element `key` in the submit payload
+initialValue | false | A string that represent the name of the selected radio
+validation | false | A single (or an array of) function(s) to validate the element. Check the [doc](../validation.mdx)
+
+
+## Radio Props
+
+
+Name | Mandatory | Purpose
+---- | ---- | ----
+name | true | A string which describe the element. It will be the `value` in the submitted payload
+Input attributes | false | All the React [input attributes](https://react.dev/reference/react-dom/components/input#props).
+
+## Example
+
 <Tabs>
 <TabItem value="typescript" label="Typescript">
 
@@ -65,6 +84,6 @@ function App() {
 </TabItem>
 </Tabs>
 
-The `<Radio />` component takes all the basic HTMLInputAttributes plus `initialValue`.
-
+:::note
 Setting the `type` attribute won't have any effect as well as the `checked` attribute which will be overrided by the `initialValue`.
+:::
