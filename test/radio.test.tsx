@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { Error, Form, FormResult, Radio, RadioGroup } from '../src'
+import { shouldBeFirst } from './utils/validation'
 import '@testing-library/jest-dom'
 import { fireEvent, render, screen } from '@testing-library/react'
 import * as React from 'react'
@@ -63,7 +64,6 @@ describe('Radio', () => {
       e.preventDefault()
       payload = data
     }
-    const shouldBeFirst = (s: string): boolean => s === 'radio1'
 
     render(
       <Form onSubmit={onSubmitFn}>

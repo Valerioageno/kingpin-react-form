@@ -21,6 +21,7 @@ const KingpinTextarea = withKingpin<Props, string>(
       }}
     />
   ),
+  '',
 )
 
 KingpinTextarea.displayName = 'KingpinTextarea'

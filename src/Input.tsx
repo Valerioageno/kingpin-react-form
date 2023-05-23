@@ -34,11 +34,11 @@ const KingpinInput = withKingpin<Props, ReturnTypes>((props: Props): JSX.Element
       name="Kingpin-input"
       {...removeKeysFromObject(props, ['initialValue', 'updateState', 'isValid', 'validation'])}
       value={props.value}
-      checked={props.type === 'checkbox' ? (props.value as unknown as boolean) : undefined}
+      checked={props.type === 'checkbox' ? Boolean(props.value) : undefined}
       onChange={onChange}
     />
   )
-})
+}, '')
 
 KingpinInput.displayName = 'KingpinInput'
 

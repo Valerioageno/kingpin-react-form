@@ -16,7 +16,12 @@ when a form element doesn't satisfy its validation policy ([here](../validation)
 
 The whole logic is handled internally by Kingpin itself soo you don't have to manually show the error.
 
-It takes as props just the `name` which has to follow the pattern: `{componentName}:error`.
+## Props
+
+| Name     | Mandatory | Purpose                                                                                                   |
+| -------- | --------- | --------------------------------------------------------------------------------------------------------- |
+| name     | true      | The name which points to the related input. The `name` has to follow the pattern: `{componentName}:error` |
+| children | true      | The JSX element to show.                                                                                  |
 
 <Tabs>
 <TabItem value="typescript" label="Typescript">
@@ -24,11 +29,12 @@ It takes as props just the `name` which has to follow the pattern: `{componentNa
 ```tsx
 import { Error, Form, Input } from 'kingpin-react-form'
 
+const shouldNotBeEmpty = (s: string): boolean => s.length > 0
+
 function App(): JSX.Element {
-  const shouldNotBeEmpty = (s: string): boolean => s.length > 0
   return (
     <Form onSubmit={submit}>
-      <Input name="email" type="email" initialValue="" validation={shouldNotBeEmpty} />
+      <Input name="email" type="email" validation={shouldNotBeEmpty} />
       <Error name="email:error">
         <p>Email should not be empty.</p>
       </Error>
@@ -44,11 +50,12 @@ function App(): JSX.Element {
 ```jsx
 import { Error, Form, Input } from 'kingpin-react-form'
 
+const shouldNotBeEmpty = (s) => s.length > 0
+
 function App() {
-  const shouldNotBeEmpty = (s) => s.length > 0
   return (
     <Form onSubmit={submit}>
-      <Input name="email" type="email" initialValue="" validation={shouldNotBeEmpty} />
+      <Input name="email" type="email" validation={shouldNotBeEmpty} />
       <Error name="email:error">
         <p>Email should not be empty.</p>
       </Error>

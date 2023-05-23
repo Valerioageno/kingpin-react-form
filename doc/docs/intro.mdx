@@ -43,19 +43,22 @@ Read more in the [documentation](https://kingpin-react-form.vercel.app/docs/intr
 
 ## Why a new form library?
 
-Currently implementations are quite verbose causing a confusing DX.
+Current form libraries are too verbose causing a confusing development experience.
+They are also frequently very heavy and this is bad under many perspectives.
 
-Also there are many way to think about forms implementations:
+> The main Kingpin purpose is to create a production ready library with a great
+> development experience and a very little overhead.
 
-- Using `new FormData` with the plain HTML validation systems ([ref](https://react.dev/reference/react-dom/components/input#reading-the-input-values-when-submitting-a-form))
-- Using `useRef` to handle the data on submit.
-- Using `useState` for each field causing multiple re-renders and low performances
-  but a very deep level of interaction with the data.
+That's basically it but there is another thing that require a new form library.
+
+Currently there are many ways to think about forms implementations:
+
+- Using `new FormData` with the plain HTML validation systems ([ref](https://react.dev/reference/react-dom/components/input#reading-the-input-values-when-submitting-a-form)) (Hard to manage)
+- Using `useRef` to handle the data on submit. (Easy to use but difficult to manage atomic errors)
+- Using `useState` on each field. (Super easy to use but causing very low performances)
 
 Kingpin wants to take the best from each of them ensuring a strong development experience
-but providing top performances and the deepest level of interaction.
-
-Also Kingpin wants to be (and it is) lightweight and tree-shakable.
+but providing top performances and the most atomic level of interaction.
 
 ## How hard is writing Kingpin's forms?
 
@@ -65,15 +68,15 @@ In short... easy like a pie.
 <TabItem value="typescript" label="Typescript">
 
 ```tsx
-import { Form, FormResult, Input } from 'kingpin-react-form'
+import { Error, Form, FormResult, Input } from 'kingpin-react-form'
 import { FormEvent } from 'react'
 
 function App(): JSX.Element {
   const submit = (e: FormEvent<HTMLFormElement>, form: FormResult) => {
     e.preventDefault()
-    console.log(form)
+    console.log(data)
 
-    // form: {
+    // data: {
     //     isValid: true,
     //     payload: {
     //       email: "",
@@ -85,8 +88,10 @@ function App(): JSX.Element {
 
   return (
     <Form onSubmit={submit}>
-      <Input name="email" type="email" initialValue="" />
-      <Input name="password" type="password" initialValue="" />
+      <Input name="email" type="email" />
+      <Error name="email:error">The email doesn't exist</Error>
+      <Input name="password" type="password" />
+      <Error name="password:error">The password is wrong</Error>
       <Input name="terms-acceptance" type="checkbox" initialValue={true} />
       <button type="submit">Submit</button>
     </Form>
@@ -98,14 +103,15 @@ function App(): JSX.Element {
 <TabItem value="javascript" label="Javascript">
 
 ```jsx
-import { Form, Input } from 'kingpin-react-form'
+import { Error, Form, Input } from 'kingpin-react-form'
+import { FormEvent } from 'react'
 
 function App() {
   const submit = (e, form) => {
     e.preventDefault()
-    console.log(form)
+    console.log(data)
 
-    // form: {
+    // data: {
     //     isValid: true,
     //     payload: {
     //       email: "",
@@ -117,8 +123,10 @@ function App() {
 
   return (
     <Form onSubmit={submit}>
-      <Input name="email" type="email" initialValue="" />
-      <Input name="password" type="password" initialValue="" />
+      <Input name="email" type="email" />
+      <Error name="email:error">The email doesn't exist</Error>
+      <Input name="password" type="password" />
+      <Error name="password:error">The password is wrong</Error>
       <Input name="terms-acceptance" type="checkbox" initialValue={true} />
       <button type="submit">Submit</button>
     </Form>
@@ -136,12 +144,11 @@ Check the next page for more details.
 In order to make Kingpin efficient and reusable the entire state logic is managed
 within the `<Form />` component (you shouldn't directly control each input value).
 
-Each Kingpin action element (`<Input />`, `<Textarea />`, ...) has two mandatory fields:
+Each Kingpin action element (`<Input />`, `<Textarea />`, ...) needs a `name` prop in order
+to efficiently collect the result payload. The name should describe the
+input purpose; be aware of possible name conflicts!
 
-- name (string describing the input purpose; be aware of possible name conflicts!)
-- initialValue (That's it)
-
-Thanks to them the `<Form />` is now able to easily handle the internal state, but how?
+Thanks to it the `<Form />` is now able to easily handle the internal state, but how?
 
 `<Form />` is "**just**" a simple html `<form>`, so you can use it as usual. The most significant
 difference is that the `onSubmit` callback now takes two arguments: the "classic"
@@ -149,8 +156,14 @@ difference is that the `onSubmit` callback now takes two arguments: the "classic
 which contains whether the form is valid or not ([here](validation)
 about validation) and `payload` which is the `name:value` representation of its content.
 
+## Why the name "Kingpin"?
+
+Kingpin is “JUST” a bolt in a skateboard truck but is where the entire steering mechanism rely on.
+Since its importance it's often very well engineer by truck companies with also many variants.
+
+That's exactly what _kingpin-react-form_ is: a super simple component,
+good engineered that allows your website to get the right direction.
+
 ## License
 
-This project is licensed under the MIT License - see the
-
-<a href="https://github.com/Valerioageno/kingpin-react-form/blob/main/LICENSE">LICENSE</a> file.
+This project is licensed under the MIT License - see the <a href="https://github.com/Valerioageno/kingpin-react-form/blob/main/LICENSE">LICENSE</a> file.

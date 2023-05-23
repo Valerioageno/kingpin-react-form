@@ -14,7 +14,7 @@ import Tabs from '@theme/Tabs'
 Modern forms require more than just `<input />` and `<textarea />` components.
 
 Kingpin plan is to add pluggable external components like `Typeaheads`, `Slider`, `Dropdown` ecc.
-specifically desinged and developed to work within a Kingpin `Form` that work without any
+specifically desinged and developed to work within a Kingpin `Form` that works without any
 configuration.
 
 In order to make Kingpin extensible by anyone it's possible create custom
@@ -22,13 +22,24 @@ components with the `withKingpin` HOC.
 
 Follow the next example to learn how to use the `withKingpin` HOC.
 
+## Props
+
+The created element will have the following props.
+
+| Name              | Mandatory | Purpose                                                                                       |
+| ----------------- | --------- | --------------------------------------------------------------------------------------------- |
+| name              | true      | A string which describe the element. Will be the element `key` in the submit payload          |
+| initialValue      | false     | The element initial value                                                                     |
+| validation        | false     | A single (or an array of) function(s) to validate the element. Check the [doc](./validation)  |
+| Custom attributes | false     | All your custom attributes                                                                    |
+
 ## Example: Kingpin and react-select
 
 Let's say that for our form we need an "enhanced" select component (compared to the plain HTML `<select />`)
 and for this reason we decide to use [react-select](https://github.com/jedwatson/react-select) (you can use
-whatever third part component or event build your own).
+whatever third part component or even build your own).
 
-After having installed react-select with your favourite package manager let's create the new custom component.
+After having installed `react-select` with your favourite package manager let's create the new custom component.
 
 <Tabs>
 <TabItem value="typescript" label="Typescript">
@@ -49,7 +60,7 @@ const options: Option[] = [
 
 type CustomSelectProps = {
   updateState: (val: SingleValue<Option>) => void
-  initialValue: SingleValue<Option>
+  initialValue?: SingleValue<Option>
 }
 
 function CustomSelect({ updateState, initialValue }: CustomSelectProps): JSX.Element {
@@ -136,7 +147,7 @@ function App(): JSX.Element {
 
   return (
     <Form onSubmit={submit}>
-      <CustomSelect name="hoc-select" initialValue={null} />
+      <CustomSelect name="hoc-select" />
       <button type="submit">Submit</button>
     </Form>
   )
@@ -153,7 +164,7 @@ import CustomSelect './Select'
 import { Form } from 'kingpin-react-form'
 
 
-function App(): JSX.Element {
+function App() {
   const submit = (e, data) => {
     e.preventDefault()
     console.log(data)
@@ -168,7 +179,7 @@ function App(): JSX.Element {
 
   return (
     <Form onSubmit={submit}>
-      <CustomSelect name="hoc-select" initialValue={null} />
+      <CustomSelect name="hoc-select" />
       <button type="submit">Submit</button>
     </Form>
   )

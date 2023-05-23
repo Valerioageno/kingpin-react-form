@@ -1,7 +1,7 @@
 import type { ValidationFn } from '../types'
 import { useCallback } from 'react'
 
-const useValidation = <T,>(validationFns: ValidationFn<T> | ValidationFn<T>[] | undefined): ((s: T) => boolean) =>
+const useValidation = <T,>(validationFns: ValidationFn<T> | ValidationFn<T>[] | undefined): ((s?: T) => boolean) =>
   useCallback(
     (s): boolean => {
       if (!validationFns) {

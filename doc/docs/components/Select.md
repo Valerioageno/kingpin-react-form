@@ -8,10 +8,16 @@ tags:
 # Select
 
 This is just a simple HTML select element which works within the Kingpin
-`<Form />` component out of the box. It takes whatever input HTML attribute
-as prop plus `initialValue`.
+`<Form />` component out of the box.
 
-The `name` and `initialValue` attributes are mandatory.
+## Props
+
+| Name              | Mandatory | Purpose                                                                                          |
+| ----------------- | --------- | ------------------------------------------------------------------------------------------------ |
+| name              | true      | A string which describe the element. Will be the element `key` in the submit payload             |
+| initialValue      | false     | The select initial value                                                                         |
+| validation        | false     | A single (or an array of) function(s) to validate the element. Check the [doc](../validation)    |
+| Select attributes | false     | All the React [select attributes](https://react.dev/reference/react-dom/components/select#props) |
 
 ```tsx
 import { Form, FormResult, Select } from 'kingpin-react-form'
@@ -25,7 +31,7 @@ function App(): JSX.Element {
   return (
     <Form onSubmit={submit}>
       <h3>Favourite pasta</h3>
-      <Select name="pasta" initialValue="">
+      <Select name="pasta">
         <option value="0">Open this select menu</option>
         <option value="1">Pesto</option>
         <option value="2">Ragù</option>

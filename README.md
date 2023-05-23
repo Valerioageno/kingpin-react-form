@@ -52,7 +52,7 @@ yarn add kingpin-react-form
 Then create your form.
 
 ```tsx
-import { Form, FormResult, Input } from 'kingpin-react-form'
+import { Error, Form, FormResult, Input } from 'kingpin-react-form'
 import { FormEvent } from 'react'
 
 function App(): JSX.Element {
@@ -72,8 +72,10 @@ function App(): JSX.Element {
 
   return (
     <Form onSubmit={submit}>
-      <Input name="email" type="email" initialValue="" />
-      <Input name="password" type="password" initialValue="" />
+      <Input name="email" type="email" />
+      <Error name="email:error">The email doesn't exist</Error>
+      <Input name="password" type="password" />
+      <Error name="password:error">The password is wrong</Error>
       <Input name="terms-acceptance" type="checkbox" initialValue={true} />
       <button type="submit">Submit</button>
     </Form>
@@ -81,19 +83,18 @@ function App(): JSX.Element {
 }
 ```
 
-Easy like a pie.
+Easy like a pie. Check how to handle errors in the [documentation](https://kingpin-react-form.vercel.app/docs/validation)
 
 ## Key concept
 
 In order to make Kingpin efficient and reusable the entire state logic is managed
 within the `<Form />` component (you shouldn't directly control each input value).
 
-Each Kingpin action element (`<Input />`, `<Textarea />`, ...) has two mandatory fields:
+Each Kingpin action element (`<Input />`, `<Textarea />`, ...) needs a `name` prop in order
+to efficiently collect the result payload. The name should describe the
+input purpose; be aware of possible name conflicts!
 
-- name (string describing the input purpose; be aware of possible name conflicts!)
-- initialValue (That's it)
-
-Thanks to them the `<Form />` is now able to easily handle the internal state, but how?
+Thanks to it the `<Form />` is now able to easily handle the internal state, but how?
 
 `<Form />` is "**just**" a simple html `<form>`, so you can use it as usual. The most significant
 difference is that the `onSubmit` callback now takes two arguments: the "classic"

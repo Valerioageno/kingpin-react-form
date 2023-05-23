@@ -11,8 +11,10 @@ import Tabs from '@theme/Tabs'
 # Validation
 
 Kingpin's validation mechanism is very easy and it is totally driven
-by the single responsibility principle. Each form element contains its validation
-policy and validate itself.
+by the single responsibility principle.
+
+> Each form element contains its validation
+> policy and validate itself.
 
 Each field can have the optional `validation` props which is a function or an array
 of functions.
@@ -31,8 +33,8 @@ const shouldBeAtLeast10Chars = (s: string): boolean => s.length > 10
 function App(): JSX.Element {
   return (
     <Form>
-      <Input name="email" type="email" initialValue="" validation={shouldNotBeEmpty} />
-      <Input name="password" type="password" initialValue="" validation={[shouldNotBeEmpty, shouldBeAtLeast10Chars]} />
+      <Input name="email" type="email" validation={shouldNotBeEmpty} />
+      <Input name="password" type="password" validation={[shouldNotBeEmpty, shouldBeAtLeast10Chars]} />
       <button type="submit">Submit</button>
     </Form>
   )
@@ -46,13 +48,13 @@ function App(): JSX.Element {
 import { Form, Input } from 'kingpin-react-form'
 
 const shouldNotBeEmpty = (s) => s.length > 0
-const shouldBeAtLeast10Chars = (s: string): boolean => s.length > 10
+const shouldBeAtLeast10Chars = (s) => s.length > 10
 
 function App() {
   return (
     <Form>
-      <Input name="email" type="email" initialValue="" validation={shouldNotBeEmpty} />
-      <Input name="password" type="password" initialValue="" validation={[shouldNotBeEmpty, shouldBeAtLeast10Chars]} />
+      <Input name="email" type="email" validation={shouldNotBeEmpty} />
+      <Input name="password" type="password" validation={[shouldNotBeEmpty, shouldBeAtLeast10Chars]} />
       <button type="submit">Submit</button>
     </Form>
   )
@@ -72,3 +74,52 @@ Validation is very useful expecially when you want to display meaningful message
 
 For this reason the `validation` mechanism is strongly bond to the `<Error />` component
 ([check here](./components/Error) for more) and it's encouraged to use them together.
+
+So the validation example above it could be extended in:
+
+<Tabs>
+<TabItem value="typescript" label="Typescript">
+
+```tsx
+import { Error, Form, Input } from 'kingpin-react-form'
+
+const shouldNotBeEmpty = (s: string): boolean => s.length > 0
+const shouldBeAtLeast10Chars = (s: string): boolean => s.length > 10
+
+function App(): JSX.Element {
+  return (
+    <Form>
+      <Input name="email" type="email" validation={shouldNotBeEmpty} />
+      <Error>The email field is mandatory</Error>
+      <Input name="password" type="password" validation={[shouldNotBeEmpty, shouldBeAtLeast10Chars]} />
+      <Error>Please set a stronger password.</Error>
+      <button type="submit">Submit</button>
+    </Form>
+  )
+}
+```
+
+</TabItem>
+<TabItem value="javascript" label="Javascript">
+
+```jsx
+import { Error, Form, Input } from 'kingpin-react-form'
+
+const shouldNotBeEmpty = (s) => s.length > 0
+const shouldBeAtLeast10Chars = (s) => s.length > 10
+
+function App() {
+  return (
+    <Form>
+      <Input name="email" type="email" validation={shouldNotBeEmpty} />
+      <Error>The email field is mandatory</Error>
+      <Input name="password" type="password" validation={[shouldNotBeEmpty, shouldBeAtLeast10Chars]} />
+      <Error>Please set a stronger password.</Error>
+      <button type="submit">Submit</button>
+    </Form>
+  )
+}
+```
+
+</TabItem>
+</Tabs>
