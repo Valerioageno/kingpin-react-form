@@ -121,8 +121,8 @@ First off, thank you if you will consider to contribute to kingpin-react-form.
 There are many ways to contribute like implementing a new feature, fixing bugs, improving the test suite or
 refining the documentation with fixes or examples.
 
-The main kingpinp's purpose is to be lightweight, full of functionalities and easy to work with. Be
-sure to follow this guideline when you will do your implementation.
+The main kingpin's purpose is to be lightweight, full of functionalities and easy to work with. Be
+sure to follow this guidelines when you will do your implementation.
 
 Any contribution or help will be appreciated.
 
