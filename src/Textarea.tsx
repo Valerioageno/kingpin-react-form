@@ -1,6 +1,6 @@
 import { removeKeysFromObject } from './helpers'
+import withKingpin from './hoc/withKingpin'
 import type { WithKingpinProps, WithKingpinType } from './types'
-import withKingpin from './withKingpin'
 import React, { FunctionComponent, TextareaHTMLAttributes } from 'react'
 
 type Props = TextareaHTMLAttributes<HTMLTextAreaElement> & WithKingpinType<string>
@@ -14,7 +14,7 @@ const KingpinTextarea = withKingpin<Props, string>(
   (props: Props): JSX.Element => (
     <textarea
       name="kingpin-textarea"
-      {...removeKeysFromObject(props, ['initialValue', 'updateState', 'isValid', 'validation'])}
+      {...removeKeysFromObject(props, ['initialValue', 'updateState', 'isValid', 'validation', 'errorClassName'])}
       onChange={(e): void => {
         props.updateState?.(e.target.value)
         props.onChange?.(e)

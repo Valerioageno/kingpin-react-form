@@ -56,8 +56,8 @@ const KingpinForm = (props: FormProps): JSX.Element => {
      * Iterate over each kingpin element, fetch the value and check for possible validation error.
      */
     childrenRef?.current?.forEach((el): void => {
-      const d = el?.sendData?.()
       const isElementValid = el?.checkValidation ? el.checkValidation() : true
+      const d = el?.sendData?.()
 
       if (d?.name) {
         if (!isElementValid) {

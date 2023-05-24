@@ -1,5 +1,5 @@
+import { Error, Form, FormResult, Input, Radio, RadioGroup, Select, Textarea } from '../../.'
 import WithHOCSelect from './select'
-import { Error, Form, FormResult, Input, Radio, RadioGroup, Select, Textarea } from 'kingpin-react-form'
 import { FormEvent, useRef } from 'react'
 
 function App(): JSX.Element {
@@ -32,7 +32,6 @@ function App(): JSX.Element {
             className="form-control"
             id="exampleInputEmail1"
             aria-describedby="emailHelp"
-            initialValue=""
           />
         </div>
         <div className="mb-3">
@@ -56,6 +55,7 @@ function App(): JSX.Element {
             id="floatingTextarea"
             initialValue=""
             validation={[shouldBeAtLeast10Chars, shouldNotBeEmpty]}
+            errorClassName="alert-danger"
           />
           <label htmlFor="floatingTextarea">Comments</label>
           <Error name="comments:error">

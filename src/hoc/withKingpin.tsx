@@ -1,6 +1,6 @@
-import useValidation from './hooks/useValidation'
-import type { InputEffect, KingpinComponent, Result, WithKingpinProps } from './types'
-import React, { ComponentType, forwardRef, useImperativeHandle, useState } from 'react'
+import useValidation from '../hooks/useValidation'
+import type { InputEffect, KingpinComponent, Result, WithKingpinProps } from '../types'
+import React, { ComponentType, forwardRef, useImperativeHandle, useMemo, useState } from 'react'
 
 /**
  * @description Trasnform the passed WrappedComponent into an input usable by the Kingpin form component.
@@ -25,18 +25,33 @@ export default function withKingpin<T, State>(
     (props, ref) => {
       const checkIsValid = useValidation(props.validation)
 
-      const generateInitialVal = (): State | undefined =>
-        typeof props?.initialValue === 'undefined' ? initialState : props?.initialValue
+      const generateInitialVal = useMemo(
+        (): State | undefined => (typeof props?.initialValue === 'undefined' ? initialState : props?.initialValue),
+        [props.initialValue],
+      )
 
-      const [state, setState] = useState<State | undefined>(generateInitialVal())
+      const [state, setState] = useState<State | undefined>(generateInitialVal)
       const [isValid, setIsValid] = useState<boolean>(checkIsValid(state))
+      const [className, setClassName] = useState<string>(props.className || '')
 
+      /**
+       * Execute top level triggered events.
+       * The triggers are in the Form element.
+       */
       useImperativeHandle(ref, () => ({
         sendData(): Result<State | undefined> {
+          /**
+           * Handle the classNames logic.
+           * Attach the "errorClassName" on invalid fields.
+           */
+          setClassName(
+            [props.className, isValid || props.errorClassName].filter((x) => typeof x === 'string').join(' '),
+          )
           return { name: props?.name || 'Kingpin-element', value: state }
         },
         reset(): void {
-          setState(generateInitialVal())
+          setClassName(props.className || '')
+          setState(generateInitialVal)
         },
         checkValidation(): boolean {
           return isValid
@@ -47,6 +62,7 @@ export default function withKingpin<T, State>(
         <WrappedComponent
           {...(props as unknown as T)}
           value={state}
+          className={className}
           updateState={(val: State): void => {
             setIsValid(checkIsValid(val))
             setState(val)

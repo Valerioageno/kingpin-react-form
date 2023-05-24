@@ -87,4 +87,48 @@ describe('Input', () => {
     expect(screen.queryByTestId('error-message')).toBeInTheDocument()
     expect(payload!).toStrictEqual({ isFormValid: false, payload: { input: '' } })
   })
+
+  it('Input errorClassName', () => {
+    const onSubmitFn = (e: React.FormEvent<HTMLFormElement>): void => {
+      e.preventDefault()
+    }
+    render(
+      <Form onSubmit={onSubmitFn}>
+        <Input
+          data-testid="email"
+          name="emal"
+          type="email"
+          validation={shouldNotBeEmpty}
+          errorClassName="email-error"
+        />
+        <Input
+          data-testid="password"
+          name="password"
+          type="password"
+          validation={shouldNotBeEmpty}
+          className="password-class"
+          errorClassName="password-error"
+        />
+        <button type="submit" data-testid="submit">
+          Submit
+        </button>
+      </Form>,
+    )
+
+    expect(screen.getByTestId('email')?.className).toBe('')
+    expect(screen.getByTestId('password')?.className).toBe('password-class')
+    fireEvent.click(screen.getByTestId('submit'))
+
+    expect(screen.getByTestId('email')?.className).toBe('email-error')
+    expect(screen.getByTestId('password')?.className).toBe('password-class password-error')
+    fireEvent.change(screen.getByTestId('email'), { target: { value: 'ciao' } })
+    fireEvent.change(screen.getByTestId('password'), { target: { value: 'ciao' } })
+
+    // Before submit they should still be invalid
+    expect(screen.getByTestId('email')?.className).toBe('email-error')
+    expect(screen.getByTestId('password')?.className).toBe('password-class password-error')
+    fireEvent.click(screen.getByTestId('submit'))
+    expect(screen.getByTestId('email')?.className).toBe('')
+    expect(screen.getByTestId('password')?.className).toBe('password-class')
+  })
 })
