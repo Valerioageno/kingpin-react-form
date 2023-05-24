@@ -11,7 +11,7 @@ Super fast ReactJS forms with almost null overhead.
 
 ## Features
 
-- 🪶 Super light-weight - Zero dependencies
+- 🪶 Super light-weight - Zero dependencies (< 2kb gzip)
 - 🌲 Tree shakable
 - 🎯 Top rendering performance
 - 😎 Declarative and easy to read
