@@ -40,7 +40,14 @@ function App(): JSX.Element {
           </label>
           <Input name="password" type="password" className="form-control" id="exampleInputPassword1" initialValue="" />
         </div>
-        <WithHOCSelect name="with-kingpin-select" initialValue={null} randomProp={10} validation={shouldNotbeNull} />
+        <WithHOCSelect
+          name="with-kingpin-select"
+          className=""
+          initialValue={null}
+          randomProp={10}
+          validation={shouldNotbeNull}
+          errorClassName="error-class"
+        />
         <Error name="with-kingpin-select:error">
           <div className="alert alert-danger" role="alert">
             This is a danger alert—check it out!

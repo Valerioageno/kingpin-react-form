@@ -14,9 +14,10 @@ type CustomSelectProps = {
   updateState: (val: SingleValue<Option>) => void
   initialValue: SingleValue<Option>
   randomProp: number
+  className: string
 }
 
-function CustomSelect({ updateState, initialValue }: CustomSelectProps): JSX.Element {
+function CustomSelect({ updateState, initialValue, className }: CustomSelectProps): JSX.Element {
   const [selectedOption, setSelectedOption] = useState<SingleValue<Option>>(initialValue)
 
   return (
@@ -28,6 +29,7 @@ function CustomSelect({ updateState, initialValue }: CustomSelectProps): JSX.Ele
           updateState(val)
         }}
         options={options}
+        className={className}
       />
     </div>
   )

@@ -133,10 +133,8 @@ when the element doesn't satisfy its validation policy.
 The element `className` is updated during the form submit.
 :::
 
-
 <Tabs>
 <TabItem value="typescript" label="Typescript">
-
 
 ```tsx
 import { Form, Input } from 'kingpin-react-form'
@@ -147,17 +145,11 @@ const shouldBeAtLeast10Chars = (s: string): boolean => s.length > 10
 function App(): JSX.Element {
   return (
     <Form>
-      <Input 
-        name="email" 
-        type="email" 
-        validation={shouldNotBeEmpty} 
-        className="email" 
-        errorClassName="email-error" 
-      />
-      <Input 
-        name="password" 
-        type="password" 
-        validation={[shouldNotBeEmpty, shouldBeAtLeast10Chars]} 
+      <Input name="email" type="email" validation={shouldNotBeEmpty} className="email" errorClassName="email-error" />
+      <Input
+        name="password"
+        type="password"
+        validation={[shouldNotBeEmpty, shouldBeAtLeast10Chars]}
         className="password"
         errorClassName="password-error"
       />
@@ -179,17 +171,11 @@ const shouldBeAtLeast10Chars = (s) => s.length > 10
 function App() {
   return (
     <Form>
-      <Input 
-        name="email" 
-        type="email" 
-        validation={shouldNotBeEmpty} 
-        className="email" 
-        errorClassName="email-error" 
-      />
-      <Input 
-        name="password" 
-        type="password" 
-        validation={[shouldNotBeEmpty, shouldBeAtLeast10Chars]} 
+      <Input name="email" type="email" validation={shouldNotBeEmpty} className="email" errorClassName="email-error" />
+      <Input
+        name="password"
+        type="password"
+        validation={[shouldNotBeEmpty, shouldBeAtLeast10Chars]}
         className="password"
         errorClassName="password-error"
       />
