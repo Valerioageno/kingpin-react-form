@@ -29,6 +29,9 @@ export const iterateOverChildren = <T,>(
   })
 }
 
+export const purgeProps = <T,>(props: T): T =>
+  removeKeysFromObject(props, ['initialValue', 'updateState', 'isValid', 'validation', 'errorClassName'])
+
 /**
  * @description remove from the passed object all the keys set in the second argument.
  * @param obj the object which needs to remove some fields.

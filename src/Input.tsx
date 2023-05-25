@@ -1,4 +1,4 @@
-import { removeKeysFromObject } from './helpers'
+import { purgeProps } from './helpers'
 import withKingpin from './hoc/withKingpin'
 import type { WithKingpinProps, WithKingpinType } from './types'
 import React, { ChangeEvent, FunctionComponent, InputHTMLAttributes } from 'react'
@@ -32,7 +32,7 @@ const KingpinInput = withKingpin<Props, ReturnTypes>((props: Props): JSX.Element
   return (
     <input
       name="Kingpin-input"
-      {...removeKeysFromObject(props, ['initialValue', 'updateState', 'isValid', 'validation', 'errorClassName'])}
+      {...purgeProps(props)}
       value={props.value}
       checked={props.type === 'checkbox' ? Boolean(props.value) : undefined}
       onChange={onChange}
