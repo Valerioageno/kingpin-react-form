@@ -1,6 +1,6 @@
 {
   "name": "kingpin-react-form",
-  "version": "0.4.3",
+  "version": "0.5.0",
   "author": "Valerio Ageno <valerioageno@yahoo.it>",
   "module": "dist/kingpin-react-form.esm.js",
   "license": "MIT",

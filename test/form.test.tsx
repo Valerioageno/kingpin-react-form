@@ -220,4 +220,39 @@ describe('Form', () => {
     expect(screen.queryByTestId('global-error')).not.toBeInTheDocument()
     expect(screen.queryByTestId('email-error')).not.toBeInTheDocument()
   })
+
+  it('Reset errorClassName', async () => {
+    const submitFn = (e: React.FormEvent<HTMLFormElement>): void => {
+      e.preventDefault()
+    }
+
+    render(
+      <Form onSubmit={submitFn}>
+        <Input
+          name="email"
+          type="email"
+          validation={shouldBeAnEmail}
+          data-testid="email"
+          errorClassName="email-error"
+        />
+        <button type="button" name="reset" data-testid="reset">
+          Reset
+        </button>
+        <button type="submit" data-testid="submit">
+          Submit
+        </button>
+      </Form>,
+    )
+
+    expect(screen.getByTestId('email')?.className).toBe('')
+    fireEvent.click(screen.getByTestId('submit'))
+
+    expect(screen.getByTestId('email')?.className).toBe('email-error')
+    fireEvent.change(screen.getByTestId('email'), { target: { value: 'ciao@kingpin.com' } })
+
+    // Before reset they should still be invalid
+    expect(screen.getByTestId('email')?.className).toBe('email-error')
+    fireEvent.click(screen.getByTestId('reset'))
+    expect(screen.getByTestId('email')?.className).toBe('')
+  })
 })

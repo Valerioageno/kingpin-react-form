@@ -18,12 +18,13 @@ If you need a radio button take a look at the [Radio](./Radio.mdx) component.
 
 ## Props
 
-| Name             | Mandatory | Purpose                                                                                        |
-| ---------------- | --------- | ---------------------------------------------------------------------------------------------- |
-| name             | true      | A string which describe the element. Will be the element `key` in the submit payload           |
-| initialValue     | false     | The input initial value                                                                        |
-| validation       | false     | A single (or an array of) function(s) to validate the element. Check the [doc](../validation)  |
-| Input attributes | false     | All the React [input attributes](https://react.dev/reference/react-dom/components/input#props) |
+| Name             | Mandatory | Purpose                                                                                                         |
+| ---------------- | --------- | --------------------------------------------------------------------------------------------------------------- |
+| name             | true      | A string which describe the element. Will be the element `key` in the submit payload                            |
+| initialValue     | false     | The input initial value                                                                                         |
+| validation       | false     | A single (or an array of) function(s) to validate the element. Check the [doc](../validation)                   |
+| errorClassName   | false     | A className that is attached to the `className` on error. Check [here](../validation#error-classname) for more. |
+| Input attributes | false     | All the React [input attributes](https://react.dev/reference/react-dom/components/input#props)                  |
 
 ```tsx
 import { Form, FormResult, Input } from 'kingpin-react-form'

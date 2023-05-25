@@ -1,5 +1,5 @@
+import { Error, Form, FormResult, Input, Radio, RadioGroup, Select, Textarea } from '../../.'
 import WithHOCSelect from './select'
-import { Error, Form, FormResult, Input, Radio, RadioGroup, Select, Textarea } from 'kingpin-react-form'
 import { FormEvent, useRef } from 'react'
 
 function App(): JSX.Element {
@@ -32,7 +32,6 @@ function App(): JSX.Element {
             className="form-control"
             id="exampleInputEmail1"
             aria-describedby="emailHelp"
-            initialValue=""
           />
         </div>
         <div className="mb-3">
@@ -41,7 +40,14 @@ function App(): JSX.Element {
           </label>
           <Input name="password" type="password" className="form-control" id="exampleInputPassword1" initialValue="" />
         </div>
-        <WithHOCSelect name="with-kingpin-select" initialValue={null} randomProp={10} validation={shouldNotbeNull} />
+        <WithHOCSelect
+          name="with-kingpin-select"
+          className=""
+          initialValue={null}
+          randomProp={10}
+          validation={shouldNotbeNull}
+          errorClassName="error-class"
+        />
         <Error name="with-kingpin-select:error">
           <div className="alert alert-danger" role="alert">
             This is a danger alert—check it out!
@@ -56,6 +62,7 @@ function App(): JSX.Element {
             id="floatingTextarea"
             initialValue=""
             validation={[shouldBeAtLeast10Chars, shouldNotBeEmpty]}
+            errorClassName="alert-danger"
           />
           <label htmlFor="floatingTextarea">Comments</label>
           <Error name="comments:error">

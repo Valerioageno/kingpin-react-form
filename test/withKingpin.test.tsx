@@ -17,14 +17,15 @@ const options: Option[] = [
 type CustomSelectProps = {
   updateState: (val: SingleValue<Option>) => void
   initialValue: SingleValue<Option>
+  className?: string
 }
 
 const CustomSelect = withKingpin<CustomSelectProps, SingleValue<Option>>(
-  ({ updateState, initialValue }): JSX.Element => {
+  ({ updateState, initialValue, className }): JSX.Element => {
     const [selectedOption, setSelectedOption] = useState<SingleValue<Option>>(initialValue)
 
     return (
-      <div className="App">
+      <div className={className} data-testid="select-container">
         <Select
           defaultValue={selectedOption}
           placeholder="Select"
@@ -111,5 +112,35 @@ describe('withKingpin HOC', () => {
       isFormValid: true,
       payload: { 'custom-select': { value: 'strawberry', label: 'Strawberry' } },
     })
+  })
+
+  it('withKingpin errorClassName', () => {
+    const submitFn = (e: React.FormEvent<HTMLFormElement>): void => {
+      e.preventDefault()
+    }
+
+    const { container } = render(
+      <Form onSubmit={submitFn}>
+        <CustomSelect
+          name="custom-select"
+          initialValue={null}
+          data-testid="custom-select"
+          validation={shouldNotBeNull}
+          errorClassName="error-class"
+        />
+        <button type="submit" data-testid="submit">
+          Submit
+        </button>
+      </Form>,
+    )
+
+    expect(screen.getByTestId('select-container')?.className).toBe('')
+    fireEvent.click(screen.getByTestId('submit'))
+    expect(screen.getByTestId('select-container')?.className).toBe('error-class')
+    fireEvent.keyDown(container.querySelector('input')!, { key: 'ArrowDown', code: 40 })
+    fireEvent.click(screen.getByText('Strawberry'))
+    expect(screen.getByTestId('select-container')?.className).toBe('error-class')
+    fireEvent.click(screen.getByTestId('submit'))
+    expect(screen.getByTestId('select-container')?.className).toBe('')
   })
 })

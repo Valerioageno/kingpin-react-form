@@ -123,3 +123,67 @@ function App() {
 
 </TabItem>
 </Tabs>
+
+## Error className
+
+Each kingpin element accepts as prop `errorClassName` which is internally merged to the `className` prop
+when the element doesn't satisfy its validation policy.
+
+:::note
+The element `className` is updated during the form submit.
+:::
+
+<Tabs>
+<TabItem value="typescript" label="Typescript">
+
+```tsx
+import { Form, Input } from 'kingpin-react-form'
+
+const shouldNotBeEmpty = (s: string): boolean => s.length > 0
+const shouldBeAtLeast10Chars = (s: string): boolean => s.length > 10
+
+function App(): JSX.Element {
+  return (
+    <Form>
+      <Input name="email" type="email" validation={shouldNotBeEmpty} className="email" errorClassName="email-error" />
+      <Input
+        name="password"
+        type="password"
+        validation={[shouldNotBeEmpty, shouldBeAtLeast10Chars]}
+        className="password"
+        errorClassName="password-error"
+      />
+      <button type="submit">Submit</button>
+    </Form>
+  )
+}
+```
+
+</TabItem>
+<TabItem value="javascript" label="Javascript">
+
+```tsx
+import { Form, Input } from 'kingpin-react-form'
+
+const shouldNotBeEmpty = (s) => s.length > 0
+const shouldBeAtLeast10Chars = (s) => s.length > 10
+
+function App() {
+  return (
+    <Form>
+      <Input name="email" type="email" validation={shouldNotBeEmpty} className="email" errorClassName="email-error" />
+      <Input
+        name="password"
+        type="password"
+        validation={[shouldNotBeEmpty, shouldBeAtLeast10Chars]}
+        className="password"
+        errorClassName="password-error"
+      />
+      <button type="submit">Submit</button>
+    </Form>
+  )
+}
+```
+
+</TabItem>
+</Tabs>

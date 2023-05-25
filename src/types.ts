@@ -24,6 +24,8 @@ export type WithKingpinProps<T> = {
   name: string
   initialValue?: T
   validation?: ValidationFn<T> | ValidationFn<T>[]
+  errorClassName?: string
+  className?: string
 }
 
 export type WithKingpinType<T> = {

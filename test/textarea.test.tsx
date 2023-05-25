@@ -97,4 +97,41 @@ describe('Textarea', () => {
     expect(screen.queryByTestId('error-message')).toBeInTheDocument()
     expect(payload!).toStrictEqual({ isFormValid: false, payload: { textarea: 'ciao' } })
   })
+
+  it('Textarea errorClassName', () => {
+    const onSubmitFn = (e: React.FormEvent<HTMLFormElement>): void => {
+      e.preventDefault()
+    }
+    render(
+      <Form onSubmit={onSubmitFn}>
+        <Textarea data-testid="comment" name="comment" validation={shouldNotBeEmpty} errorClassName="comment-error" />
+        <Textarea
+          data-testid="author"
+          name="author"
+          validation={shouldNotBeEmpty}
+          className="author-class"
+          errorClassName="author-error"
+        />
+        <button type="submit" data-testid="submit">
+          Submit
+        </button>
+      </Form>,
+    )
+
+    expect(screen.getByTestId('comment')?.className).toBe('')
+    expect(screen.getByTestId('author')?.className).toBe('author-class')
+    fireEvent.click(screen.getByTestId('submit'))
+
+    expect(screen.getByTestId('comment')?.className).toBe('comment-error')
+    expect(screen.getByTestId('author')?.className).toBe('author-class author-error')
+    fireEvent.change(screen.getByTestId('comment'), { target: { value: 'ciao' } })
+    fireEvent.change(screen.getByTestId('author'), { target: { value: 'ciao' } })
+
+    // Before submit they should still be invalid
+    expect(screen.getByTestId('comment')?.className).toBe('comment-error')
+    expect(screen.getByTestId('author')?.className).toBe('author-class author-error')
+    fireEvent.click(screen.getByTestId('submit'))
+    expect(screen.getByTestId('comment')?.className).toBe('')
+    expect(screen.getByTestId('author')?.className).toBe('author-class')
+  })
 })
