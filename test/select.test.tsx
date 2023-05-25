@@ -105,4 +105,40 @@ describe('Select', () => {
     expect(screen.queryByTestId('error-message')).toBeInTheDocument()
     expect(payload!).toStrictEqual({ isFormValid: false, payload: { select: '2' } })
   })
+
+  it('Textarea errorClassName', () => {
+    const onSubmitFn = (e: React.FormEvent<HTMLFormElement>): void => {
+      e.preventDefault()
+    }
+    render(
+      <Form onSubmit={onSubmitFn}>
+        <Select
+          data-testid="select"
+          initialValue=""
+          name="select"
+          validation={[shouldBe3]}
+          errorClassName="select-error"
+        >
+          <option>1</option>
+          <option>2</option>
+          <option>3</option>
+        </Select>
+        ,
+        <button type="submit" data-testid="submit">
+          Submit
+        </button>
+      </Form>,
+    )
+
+    expect(screen.getByTestId('select')?.className).toBe('')
+    fireEvent.click(screen.getByTestId('submit'))
+
+    expect(screen.getByTestId('select')?.className).toBe('select-error')
+    fireEvent.change(screen.getByTestId('select'), { target: { value: '3' } })
+
+    // Before submit they should still be invalid
+    expect(screen.getByTestId('select')?.className).toBe('select-error')
+    fireEvent.click(screen.getByTestId('submit'))
+    expect(screen.getByTestId('select')?.className).toBe('')
+  })
 })
