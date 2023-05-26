@@ -49,7 +49,6 @@ const KingpinForm = (props: FormProps): JSX.Element => {
    */
   const submitFunction = (e: FormEvent<HTMLFormElement>): void => {
     const payload: Record<string, Value> = {}
-    let isFormValid = true
     errorsRef.current.clear()
 
     /**
@@ -60,10 +59,25 @@ const KingpinForm = (props: FormProps): JSX.Element => {
       const d = el?.sendData?.()
 
       if (d?.name) {
+        /**
+         * Handle muliple errors
+         */
+        if (typeof isElementValid !== 'boolean') {
+          isElementValid.forEach((error) => {
+            errorsRef.current.add(`${d.name}:${error}`)
+          })
+        }
+
+        /*
+         * Handle single error
+         */
         if (!isElementValid) {
           errorsRef.current.add(`${d.name}:error`)
-          isFormValid = false
         }
+
+        /*
+         * Set payload element
+         */
         payload[d.name] = d?.value
       }
     })
@@ -71,7 +85,7 @@ const KingpinForm = (props: FormProps): JSX.Element => {
     /**
      * Throw global error
      */
-    if (!isFormValid) errorsRef.current.add('error')
+    if (errorsRef.current.size > 0) errorsRef.current.add('error')
 
     /**
      * Iterate over all elements and display or clear errors.
@@ -79,7 +93,7 @@ const KingpinForm = (props: FormProps): JSX.Element => {
     childrenRef.current.forEach((el) => el.shouldShowError?.(errorsRef.current))
 
     // Return data to user function.
-    props?.onSubmit?.(e, { isFormValid, payload })
+    props?.onSubmit?.(e, { isFormValid: errorsRef.current.size === 0, payload })
   }
 
   /**

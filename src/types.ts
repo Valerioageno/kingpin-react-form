@@ -8,7 +8,7 @@ export type FormResult = {
 export type InputEffect<T> = {
   sendData?: () => Result<T | undefined>
   reset?: () => void
-  checkValidation?: () => boolean
+  checkValidation?: () => boolean | string[]
   shouldShowError?: (e: Set<string>) => void
 }
 export type KingpinComponent<T, State> = ForwardRefExoticComponent<
@@ -23,7 +23,7 @@ export type Value = string | number | boolean | readonly string[] | undefined
 export type WithKingpinProps<T> = {
   name: string
   initialValue?: T
-  validation?: ValidationFn<T> | ValidationFn<T>[]
+  validation?: ValidationFn<T> | ValidationFn<T>[] | Record<string, ValidationFn<T>>
   errorClassName?: string
   className?: string
 }
