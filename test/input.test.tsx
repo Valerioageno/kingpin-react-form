@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { Error, Form, FormResult, Input } from '../src'
-import { shouldNotBeEmpty } from './utils/validation'
+import { shouldBeAtLeast10Chars, shouldNotBeEmpty } from './utils/validation'
 import '@testing-library/jest-dom'
 import { fireEvent, render, screen } from '@testing-library/react'
 import * as React from 'react'
@@ -130,5 +130,48 @@ describe('Input', () => {
     fireEvent.click(screen.getByTestId('submit'))
     expect(screen.getByTestId('email')?.className).toBe('')
     expect(screen.getByTestId('password')?.className).toBe('password-class')
+  })
+
+  it('Multiple input error', () => {
+    const onSubmitFn = (e: React.FormEvent<HTMLFormElement>): void => {
+      e.preventDefault()
+    }
+
+    render(
+      <Form onSubmit={onSubmitFn}>
+        <Input
+          type="password"
+          name="password"
+          data-testid="password"
+          validation={{
+            tenChars: shouldBeAtLeast10Chars,
+            empty: shouldNotBeEmpty,
+          }}
+        />
+        <Error name="password:empty">
+          <p data-testid="empty-password">Password should not be empty</p>
+        </Error>
+        <Error name="password:tenChars">
+          <p data-testid="10chars-error">Password should be at least 10 characters</p>
+        </Error>
+        <button data-testid="submit">Submit</button>
+      </Form>,
+    )
+
+    expect(screen.queryByTestId('empty-password')).not.toBeInTheDocument()
+    expect(screen.queryByTestId('10chars-error')).not.toBeInTheDocument()
+    fireEvent.click(screen.getByTestId('submit'))
+    expect(screen.queryByTestId('empty-password')).toBeInTheDocument()
+    expect(screen.queryByTestId('10chars-error')).toBeInTheDocument()
+
+    fireEvent.change(screen.getByTestId('password'), { target: { value: 'ciao' } })
+    fireEvent.click(screen.getByTestId('submit'))
+    expect(screen.queryByTestId('empty-password')).not.toBeInTheDocument()
+    expect(screen.queryByTestId('10chars-error')).toBeInTheDocument()
+
+    fireEvent.change(screen.getByTestId('password'), { target: { value: 'ciaociaociao' } })
+    fireEvent.click(screen.getByTestId('submit'))
+    expect(screen.queryByTestId('empty-password')).not.toBeInTheDocument()
+    expect(screen.queryByTestId('10chars-error')).not.toBeInTheDocument()
   })
 })

@@ -4,9 +4,7 @@ import React, { ComponentType, forwardRef, useImperativeHandle, useMemo, useStat
 
 /**
  * @description Trasnform the passed WrappedComponent into an input usable by the Kingpin form component.
- * The new Component will have two new mandatory props:
- * - name: string
- * - initialValue: T
+ * The new Component will have the name prop mandatory.
  *
  * In order to make it usable with Kingpin it passes as props the updateState method which has
  * to be used as state setter.
@@ -31,7 +29,7 @@ export default function withKingpin<T, State>(
       )
 
       const [state, setState] = useState<State | undefined>(generateInitialVal)
-      const [isValid, setIsValid] = useState<boolean>(checkIsValid(state))
+      const [isValid, setIsValid] = useState<boolean | string[]>(checkIsValid(state))
       const [className, setClassName] = useState<string>(props.className || '')
 
       /**
@@ -47,13 +45,16 @@ export default function withKingpin<T, State>(
           setClassName(
             [props.className, isValid || props.errorClassName].filter((x) => typeof x === 'string').join(' '),
           )
+          /**
+           * Send data to Form component
+           */
           return { name: props?.name || 'Kingpin-element', value: state }
         },
         reset(): void {
           setClassName(props.className || '')
           setState(generateInitialVal)
         },
-        checkValidation(): boolean {
+        checkValidation(): boolean | string[] {
           return isValid
         },
       }))

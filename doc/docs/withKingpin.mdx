@@ -11,16 +11,17 @@ import Tabs from '@theme/Tabs'
 
 # withKingpin
 
+## Basics
+
 Modern forms require more than just `<input />` and `<textarea />` components.
 
 Kingpin plan is to add pluggable external components like `Typeaheads`, `Slider`, `Dropdown` ecc.
-specifically desinged and developed to work within a Kingpin `Form` that works without any
-configuration.
+specifically desinged and developed to work within a Kingpin `Form` out of the box.
 
 In order to make Kingpin extensible by anyone it's possible create custom
 components with the `withKingpin` HOC.
 
-Follow the next example to learn how to use the `withKingpin` HOC.
+Following an example to learn how to use the `withKingpin` HOC.
 
 ## Props
 
@@ -30,7 +31,7 @@ The created element will have the following props.
 | ----------------- | --------- | -------------------------------------------------------------------------------------------------------------------- |
 | name              | true      | A string which describe the element. Will be the element `key` in the submit payload                                 |
 | initialValue      | false     | The element initial value                                                                                            |
-| validation        | false     | A single (or an array of) function(s) to validate the element. Check the [doc](./validation)                         |
+| validation        | false     | A single (or an array/object of) function(s) to validate the element. Check the [doc](./validation)                  |
 | errorClassName    | false     | A className that is attached to the `className` on error. Check [validation](./validation#error-classname) for more. |
 | Custom attributes | false     | All your custom attributes                                                                                           |
 

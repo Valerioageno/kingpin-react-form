@@ -15,7 +15,7 @@ Super fast ReactJS forms with almost null overhead.
 
 ## Features
 
-- 🪶 Super light-weight - Zero dependencies
+- 🪶 Super light-weight - Zero dependencies (<2kb gzip)
 - 🌲 Tree shakable
 - 🎯 Top rendering performance
 - 😎 Declarative and easy to read
@@ -39,8 +39,6 @@ The main `<Form />` component is the **only** interface for managing user set da
 lead to a better forms develop and managing all the data in a single place (each state could be listened with the
 still available `onChange` element event).
 
-Read more in the [documentation](https://kingpin-react-form.vercel.app/docs/intro).
-
 ## Why a new form library?
 
 Current form libraries are too verbose causing a confusing development experience.
@@ -49,16 +47,16 @@ They are also frequently very heavy and this is bad under many perspectives.
 > The main Kingpin purpose is to create a production ready library with a great
 > development experience and a very little overhead.
 
-That's basically it but there is another thing that require a new form library.
+That's basically it but there is another thing that requires a new form library.
 
 Currently there are many ways to think about forms implementations:
 
 - Using `new FormData` with the plain HTML validation systems ([ref](https://react.dev/reference/react-dom/components/input#reading-the-input-values-when-submitting-a-form)) (Hard to manage)
 - Using `useRef` to handle the data on submit. (Easy to use but difficult to manage atomic errors)
-- Using `useState` on each field. (Super easy to use but causing very low performances)
+- Using `useState` on each field. (Super easy to use but very low performances)
 
 Kingpin wants to take the best from each of them ensuring a strong development experience
-but providing top performances and the most atomic level of interaction.
+and providing top performances and the most atomic level of interaction.
 
 ## How hard is writing Kingpin's forms?
 
@@ -163,6 +161,16 @@ Since its importance it's often very well engineer by truck companies with also 
 
 That's exactly what _kingpin-react-form_ is: a super simple component,
 good engineered that allows your website to get the right direction.
+
+## Contributing
+
+First off, thank you if you will consider to contribute to kingpin-react-form.
+
+There are many ways to contribute like implementing a new feature, fixing bugs, improving the test suite or refining the documentation with fixes or examples.
+
+The main kingpin's purpose is to be lightweight, full of functionalities and easy to work with. Be sure to follow this guidelines when you will do your implementation.
+
+Any contribution or help will be appreciated.
 
 ## License
 

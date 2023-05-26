@@ -7,13 +7,15 @@ tags:
 
 # Form
 
+## Basics
+
 Form is where the whole Kingpin logic is handled.
 
 In order to make the inputs working correctly they have to al
 be wrapped within a Kingpin `<Form />` element.
 
 :::note
-It accepts in the body whatever React element. By the way just Kinpin [components](../components/_category_.json)
+It accepts in the body whatever React element. By the way just Kinpin components
 or element wrapped by the [withKingpin](../withKingpin.mdx) HOC will be
 considered in the submit payload.
 :::
@@ -22,7 +24,7 @@ considered in the submit payload.
 
 The form is just a normal HTML `<form>` element with just two differences:
 
-1. The `onSubmit` event has two arguments: the "classic" event and the form payload.
+1. The `onSubmit` event has two arguments: the "classic" event and the [form payload](#formresult).
 2. It could also take the `onReset` event as prop in order to have a listener on the form
    reset.
 

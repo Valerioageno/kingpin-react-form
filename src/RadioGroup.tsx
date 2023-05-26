@@ -27,7 +27,7 @@ const RadioGroup = createContext<ContextType>({})
 const KingpinRadioGroup = forwardRef<InputEffect<string>, RadioGroupProps>((props, ref): JSX.Element => {
   const [selected, setSelected] = useState<string>(props.initialValue || '')
   const checkIsValid = useValidation(props.validation)
-  const [isValid, setIsValid] = useState<boolean>(checkIsValid(props.initialValue))
+  const [isValid, setIsValid] = useState<boolean | string[]>(checkIsValid(props.initialValue))
 
   useImperativeHandle(
     ref,
@@ -38,7 +38,7 @@ const KingpinRadioGroup = forwardRef<InputEffect<string>, RadioGroupProps>((prop
       reset(): void {
         setSelected(props.initialValue || '')
       },
-      checkValidation(): boolean {
+      checkValidation(): boolean | string[] {
         return isValid
       },
     }),
