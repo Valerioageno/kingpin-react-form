@@ -7,6 +7,8 @@ tags:
 
 # Select
 
+## Basics
+
 This is just a simple HTML select element which works within the Kingpin
 `<Form />` component out of the box.
 

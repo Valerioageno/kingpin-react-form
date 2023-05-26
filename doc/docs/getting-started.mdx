@@ -40,11 +40,13 @@ pnpm add kingpin-react-form
 ## Library basics
 
 Kingpin's focus is to don't change the ReactAPI making the integration itself as smooth as possible.
-To achieve this each component could be thougth as just a simple input element so **all the element attributes
+
+Each internal component (`<Input />`, `<Textarea />`) could be thought as just a simple input element so **all the element attributes
 are accessible** from the element itself.
 
 All the atomic states are kept by the `<Form />` component and they can be accessed globally using the
-`onSubmit` event which is extended with a further parameter which is an object containing all the states.
+`onSubmit` event which is extended with a further parameter which is an object containing all the states
+and the overall form validity (check [validation](./validation) for more).
 
 <Tabs>
 <TabItem value="typescript" label="Typescript">

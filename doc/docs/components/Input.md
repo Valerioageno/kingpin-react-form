@@ -7,6 +7,8 @@ tags:
 
 # Input
 
+## Basics
+
 This is just a simple HTML input element which works within the Kingpin
 `<Form />` component out of the box.
 

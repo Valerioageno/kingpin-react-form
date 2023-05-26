@@ -7,13 +7,15 @@ tags:
 
 # Form
 
+## Basics
+
 Form is where the whole Kingpin logic is handled.
 
 In order to make the inputs working correctly they have to al
 be wrapped within a Kingpin `<Form />` element.
 
 :::note
-It accepts in the body whatever React element. By the way just Kinpin [components](../components/_category_.json)
+It accepts in the body whatever React element. By the way just Kinpin components
 or element wrapped by the [withKingpin](../withKingpin.mdx) HOC will be
 considered in the submit payload.
 :::
