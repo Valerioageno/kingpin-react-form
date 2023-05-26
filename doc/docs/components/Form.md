@@ -22,7 +22,7 @@ considered in the submit payload.
 
 The form is just a normal HTML `<form>` element with just two differences:
 
-1. The `onSubmit` event has two arguments: the "classic" event and the form payload.
+1. The `onSubmit` event has two arguments: the "classic" event and the [form payload](#formresult).
 2. It could also take the `onReset` event as prop in order to have a listener on the form
    reset.
 
