@@ -16,8 +16,14 @@ by the single responsibility principle.
 > Each form element contains its validation
 > policy and validate itself.
 
-Each field can have the optional `validation` props which is a function or an array
-of functions.
+Each field can have the optional `validation` props which could be: 
+- a function 
+- an array of functions.
+- an object of functions
+
+:::note
+The function passed has to take as argument the element value and to return a boolean value.
+:::
 
 So basically to validate a simple input you can:
 
@@ -66,7 +72,7 @@ function App() {
 
 You can still use all the
 [native HTML validation attributes](https://developer.mozilla.org/en-US/docs/Learn/Forms/Form_validation#the_required_attribute)
-and even use them together with your custom functions.
+and also use them together with your custom functions.
 
 ## Error handling
 
@@ -123,6 +129,74 @@ function App() {
 
 </TabItem>
 </Tabs>
+
+## Multiple error
+
+Is quite usual have different messages for different invalid fields. That's exactly the reason why you can
+pass as validation prop an objects of functions.
+
+You can use the `key`s of your validation object to create more atomic error messages.
+
+<Tabs>
+<TabItem value="typescript" label="Typescript">
+
+```tsx
+import { Error, Form, Input } from 'kingpin-react-form'
+
+const shouldNotBeEmpty = (s: string): boolean => s.length > 0
+const shouldBeAtLeast10Chars = (s: string): boolean => s.length > 10
+
+function App(): JSX.Element {
+  return (
+    <Form>
+      <Input 
+        name="password" 
+        type="password" 
+        validation={{
+            empty: shouldNotBeEmpty,
+            tenChars: shouldBeAtLeast10Chars
+        }} 
+      />
+      <Error name="password:tenChars">Password should be at least 10 characters</Error>
+      <Error name="password:empty">Password shouldn't be emtpy.</Error>
+      <button type="submit">Submit</button>
+    </Form>
+  )
+}
+```
+
+</TabItem>
+<TabItem value="javascript" label="Javascript">
+
+```jsx
+import { Error, Form, Input } from 'kingpin-react-form'
+
+const shouldNotBeEmpty = (s) => s.length > 0
+const shouldBeAtLeast10Chars = (s) => s.length > 10
+
+function App() {
+  return (
+    <Form>
+      <Input 
+        name="password" 
+        type="password" 
+        validation={{
+            empty: shouldNotBeEmpty,
+            tenChars: shouldBeAtLeast10Chars
+        }} 
+      />
+      <Error name="password:tenChars">Password should be at least 10 characters</Error>
+      <Error name="password:empty">Password shouldn't be emtpy.</Error>
+      <button type="submit">Submit</button>
+    </Form>
+  )
+}
+```
+
+</TabItem>
+</Tabs>
+
+
 
 ## Error className
 

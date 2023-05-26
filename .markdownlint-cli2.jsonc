@@ -1,7 +1,7 @@
 {
   "config": {
     "line-length": {
-      "line_length": 140
+      "line_length": 160
     },
     "single-title": false,
     "ol-prefix": false

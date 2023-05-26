@@ -16,7 +16,7 @@ This is just a simple HTML select element which works within the Kingpin
 | ----------------- | --------- | --------------------------------------------------------------------------------------------------------------- |
 | name              | true      | A string which describe the element. Will be the element `key` in the submit payload                            |
 | initialValue      | false     | The select initial value                                                                                        |
-| validation        | false     | A single (or an array of) function(s) to validate the element. Check the [doc](../validation)                   |
+| validation        | false     | A single (or an array/object of) function(s) to validate the element. Check the [doc](../validation)            |
 | errorClassName    | false     | A className that is attached to the `className` on error. Check [here](../validation#error-classname) for more. |
 | Select attributes | false     | All the React [select attributes](https://react.dev/reference/react-dom/components/select#props)                |
 
