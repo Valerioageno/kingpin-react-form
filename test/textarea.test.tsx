@@ -134,4 +134,46 @@ describe('Textarea', () => {
     expect(screen.getByTestId('comment')?.className).toBe('')
     expect(screen.getByTestId('author')?.className).toBe('author-class')
   })
+
+  it('Textarea multiple errors', () => {
+    const onSubmitFn = (e: React.FormEvent<HTMLFormElement>): void => {
+      e.preventDefault()
+    }
+
+    render(
+      <Form onSubmit={onSubmitFn}>
+        <Textarea
+          name="comment"
+          data-testid="comment"
+          validation={{
+            tenChars: shouldBeAtLeast10Chars,
+            empty: shouldNotBeEmpty,
+          }}
+        />
+        <Error name="comment:empty">
+          <p data-testid="empty-comment">Comment should not be empty</p>
+        </Error>
+        <Error name="comment:tenChars">
+          <p data-testid="10chars-error">Comment should be at least 10 characters</p>
+        </Error>
+        <button data-testid="submit">Submit</button>
+      </Form>,
+    )
+
+    expect(screen.queryByTestId('empty-comment')).not.toBeInTheDocument()
+    expect(screen.queryByTestId('10chars-error')).not.toBeInTheDocument()
+    fireEvent.click(screen.getByTestId('submit'))
+    expect(screen.queryByTestId('empty-comment')).toBeInTheDocument()
+    expect(screen.queryByTestId('10chars-error')).toBeInTheDocument()
+
+    fireEvent.change(screen.getByTestId('comment'), { target: { value: 'ciao' } })
+    fireEvent.click(screen.getByTestId('submit'))
+    expect(screen.queryByTestId('empty-comment')).not.toBeInTheDocument()
+    expect(screen.queryByTestId('10chars-error')).toBeInTheDocument()
+
+    fireEvent.change(screen.getByTestId('comment'), { target: { value: 'ciaociaociao' } })
+    fireEvent.click(screen.getByTestId('submit'))
+    expect(screen.queryByTestId('empty-comment')).not.toBeInTheDocument()
+    expect(screen.queryByTestId('10chars-error')).not.toBeInTheDocument()
+  })
 })
