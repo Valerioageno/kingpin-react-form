@@ -112,7 +112,7 @@ specifically desinged and developed to work within a Kingpin `Form`.
 In order to make Kingpin extensible by anyone it's possible create custom
 components with the `withKingpin` HOC.
 
-To see how it works with a real example check the [documentation](https://kingpin-react-form.vercel.app/docs/withFormer).
+To see how it works with a real example check the [documentation](https://kingpin-react-form.vercel.app/docs/withKingpin).
 
 ## Contributing
 
